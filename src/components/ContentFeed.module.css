@@ -1,0 +1,64 @@
+.feed {
+    margin-top: var(--space-8);
+}
+
+.betaBanner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: linear-gradient(90deg, rgba(255, 184, 108, 0.1), rgba(0, 212, 255, 0.1));
+    border: 1px solid rgba(255, 184, 108, 0.2);
+    border-radius: var(--card-radius);
+    margin-bottom: var(--space-8);
+}
+
+.betaIcon {
+    font-size: var(--text-xl);
+}
+
+.betaText {
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+    color: var(--neon-amber);
+    letter-spacing: 0.05em;
+}
+
+.section {
+    margin-bottom: var(--space-12);
+}
+
+.sectionHeader {
+    margin-bottom: var(--space-6);
+}
+
+.headline {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--paper-white);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-2);
+}
+
+.concept {
+    font-size: var(--text-base);
+    color: var(--ghost-grey);
+    line-height: var(--leading-relaxed);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .headline {
+        font-size: var(--text-xl);
+    }
+}

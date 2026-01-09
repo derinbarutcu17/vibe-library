@@ -1,0 +1,192 @@
+.shop {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Filter Bar */
+.filterBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.categoryBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-narrative);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.categoryBtn:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.categoryBtn.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.categoryIcon {
+    font-size: 0.9rem;
+}
+
+.categoryLabel {
+    font-weight: 500;
+}
+
+.sortControls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sortLabel {
+    font-family: var(--font-narrative);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.sortSelect {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-narrative);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.sortSelect:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Results Bar */
+.resultsBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.resultsCount {
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.viewToggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.viewLabel {
+    font-family: var(--font-narrative);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-right: 0.5rem;
+}
+
+.viewBtn {
+    padding: 0.35rem 0.6rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-family: var(--font-narrative);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.viewBtn:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.viewBtnActive {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+/* Product Grid */
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .productGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .productGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .filterBar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .categories {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+}
+
+/* Load More */
+.loadMore {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+.loadMoreBtn {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.loadMoreBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}

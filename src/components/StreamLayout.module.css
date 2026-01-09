@@ -1,0 +1,17 @@
+.stream {
+    margin-left: var(--nav-rail-width);
+    min-height: 100vh;
+    padding: var(--space-12) var(--stream-padding);
+}
+
+.container {
+    max-width: var(--stream-max-width);
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .stream {
+        margin-left: 0;
+        padding: var(--space-6) var(--space-4);
+    }
+}

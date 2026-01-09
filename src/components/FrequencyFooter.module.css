@@ -1,0 +1,43 @@
+.footer {
+    position: relative;
+    padding: var(--space-20) 0 var(--space-12);
+    margin-top: var(--space-16);
+}
+
+.wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    pointer-events: none;
+}
+
+.content {
+    text-align: center;
+}
+
+.status {
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    color: var(--ghost-grey);
+    margin-bottom: var(--space-3);
+}
+
+.credit {
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+}
+
+.comment {
+    color: var(--ghost-grey);
+}
+
+.link {
+    color: var(--neon-blue);
+    transition: var(--transition-fast);
+}
+
+.link:hover {
+    text-shadow: var(--shadow-glow-blue);
+}

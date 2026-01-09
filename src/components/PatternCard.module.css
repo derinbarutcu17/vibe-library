@@ -1,0 +1,105 @@
+.card {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    position: relative;
+    overflow: hidden;
+}
+
+.card.warning {
+    border-color: rgba(255, 85, 85, 0.3);
+    background: linear-gradient(135deg, var(--obsidian) 0%, rgba(255, 85, 85, 0.05) 100%);
+}
+
+.flagBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--neon-red);
+    background: rgba(255, 85, 85, 0.1);
+    padding: var(--space-1) var(--space-2);
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.flagIcon {
+    font-size: 12px;
+}
+
+.title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--paper-white);
+    letter-spacing: -0.01em;
+}
+
+.context {
+    font-size: var(--text-lg);
+    font-family: var(--font-accent);
+    color: var(--neon-blue);
+    line-height: var(--leading-relaxed);
+    margin-top: -0.2em;
+}
+
+.content {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--paper-white-muted);
+    flex: 1;
+}
+
+.copyButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--obsidian-lighter);
+    border: 1px solid var(--hairline-border);
+    border-radius: 8px;
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+    color: var(--paper-white);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.copyButton:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+.copyButton.copied {
+    background: rgba(80, 250, 123, 0.1);
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+}
+
+.scanLine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    animation: scan 0.5s ease-out forwards;
+}
+
+@keyframes scan {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 100%;
+    }
+}

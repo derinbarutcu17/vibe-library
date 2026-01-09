@@ -1,0 +1,66 @@
+.divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: var(--space-16) 0;
+    scroll-margin-top: var(--space-8);
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            var(--hairline-border-strong) 30%,
+            var(--hairline-border-strong) 70%,
+            transparent);
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    background: var(--obsidian);
+    border: 1px solid var(--hairline-border);
+    border-radius: 20px;
+}
+
+.title {
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-white-muted);
+}
+
+/* Icons */
+.circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cat-foundation);
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid var(--cat-refactor);
+}
+
+.square {
+    width: 8px;
+    height: 8px;
+    background: var(--cat-ui);
+    border-radius: 2px;
+}
+
+.diamond {
+    width: 7px;
+    height: 7px;
+    background: var(--cat-logic);
+    transform: rotate(45deg);
+}

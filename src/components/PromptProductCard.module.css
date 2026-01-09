@@ -1,0 +1,223 @@
+.cardContainer {
+    perspective: 1000px;
+    cursor: pointer;
+    height: 380px;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.cardFront,
+.cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 8px;
+    background: rgba(20, 20, 25, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardFront {
+    background: linear-gradient(145deg, rgba(25, 25, 30, 0.95) 0%, rgba(15, 15, 20, 0.98) 100%);
+}
+
+.cardBack {
+    transform: rotateY(180deg);
+    background: linear-gradient(145deg, rgba(30, 25, 35, 0.95) 0%, rgba(20, 15, 25, 0.98) 100%);
+    overflow-y: auto;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.categoryInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.categoryIcon {
+    font-size: 1rem;
+}
+
+.category {
+    font-family: var(--font-narrative);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.saveBtn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.saveBtn:hover {
+    color: #3B82F6;
+}
+
+.cardContent {
+    flex: 1;
+}
+
+.title {
+    font-family: var(--font-narrative);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.preview {
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-family: var(--font-narrative);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.flipHint {
+    text-align: center;
+    margin-top: 0.75rem;
+    font-family: var(--font-narrative);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.25);
+    font-style: italic;
+}
+
+/* Back of card styles */
+.backHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.backTitle {
+    font-family: var(--font-accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #3B82F6;
+    font-style: italic;
+}
+
+.flipBackHint {
+    font-family: var(--font-narrative);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.explanation {
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.fullPromptSection {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    overflow-y: auto;
+}
+
+.fullPromptLabel {
+    font-family: var(--font-narrative);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.fullPrompt {
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.copyBtn {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copyBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Hover effect on front */
+.cardContainer:hover .cardFront {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,502 @@
+/* ============================================
+   THE VIBE LIBRARY - Digital Athenaeum
+   Design System & Global Styles
+   ============================================ */
+
+/* Import JetBrains Mono for code */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ========== THE SUBSTRATE ========== */
+  --void-black: #050505;
+  --obsidian: #0F0F12;
+  --obsidian-lighter: #15151A;
+  --hairline-border: rgba(255, 255, 255, 0.08);
+  --hairline-border-strong: rgba(255, 255, 255, 0.12);
+
+  /* ========== BRAND COLORS ========== */
+  --brand-black: #050505;
+  --brand-dark: #0a0a0f;
+  --brand-purple: #3B82F6;
+  /* Changed to Cool Blue */
+  --brand-blue: #1E40AF;
+  /* Darker Shade */
+
+  /* ========== TEXT COLORS ========== */
+  --paper-white: #EDEDED;
+  --paper-white-muted: rgba(237, 237, 237, 0.7);
+  --ghost-grey: #4A4A52;
+  --ghost-grey-light: rgba(74, 74, 82, 0.5);
+
+  /* ========== ACCENT COLORS ========== */
+  --neon-blue: #00D4FF;
+  --neon-blue-glow: rgba(0, 212, 255, 0.3);
+  --neon-green: #50FA7B;
+  --neon-green-glow: rgba(80, 250, 123, 0.2);
+  --neon-amber: #FFB86C;
+  --neon-red: #FF5555;
+  --neon-red-glow: rgba(255, 85, 85, 0.2);
+
+  /* ========== TYPOGRAPHY ========== */
+  --font-narrative: var(--font-lato), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: var(--font-newsreader), serif;
+  --font-code: 'JetBrains Mono', var(--font-geist-mono), monospace;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  /* 12px */
+  --text-sm: 0.8125rem;
+  /* 13px */
+  /* 15px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.5rem;
+  /* 24px */
+  --text-2xl: 2rem;
+  /* 32px */
+  --text-3xl: 3rem;
+  /* 48px */
+  --text-hero: 4rem;
+  /* 64px */
+
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.8;
+
+  /* ========== SPACING ========== */
+  --space-1: 0.25rem;
+  /* 4px */
+  --space-2: 0.5rem;
+  /* 8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-5: 1.25rem;
+  /* 20px */
+  --space-6: 1.5rem;
+  /* 24px */
+  --space-8: 2rem;
+  /* 32px */
+  --space-10: 2.5rem;
+  /* 40px */
+  --space-12: 3rem;
+  /* 48px */
+  --space-16: 4rem;
+  /* 64px */
+  --space-20: 5rem;
+  /* 80px */
+  --space-24: 6rem;
+  /* 96px */
+
+  /* ========== LAYOUT ========== */
+  --nav-rail-width: 50px;
+  --stream-max-width: 1200px;
+  --stream-padding: var(--space-8);
+  --card-radius: 12px;
+  --card-radius-lg: 16px;
+
+  /* Column widths */
+  --col-prompt: 35%;
+  --col-code: 65%;
+  --gutter-width: 48px;
+
+  /* ========== EFFECTS ========== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ========== SUBSTRATE GRID ========== */
+  --grid-color: rgba(255, 255, 255, 0.03);
+  --grid-size: 40px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 8px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow-blue: 0 0 20px var(--neon-blue-glow);
+  --shadow-glow-green: 0 0 20px var(--neon-green-glow);
+
+  /* Blur */
+  --blur-sm: 8px;
+  --blur-md: 16px;
+  --blur-lg: 32px;
+}
+
+/* ========== RESET & BASE ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-narrative);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--paper-white);
+  background: var(--void-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== TYPOGRAPHY UTILITIES ========== */
+.text-overline {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-white-muted);
+}
+
+.text-code {
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+}
+
+.text-hero {
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+/* ========== LINKS ========== */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--neon-blue);
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--void-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--obsidian-lighter);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ghost-grey);
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: var(--neon-blue);
+  color: var(--void-black);
+}
+
+/* ========== FOCUS STYLES ========== */
+:focus-visible {
+  outline: 2px solid var(--neon-blue);
+  outline-offset: 2px;
+}
+
+/* ========== OBSIDIAN CARD BASE ========== */
+.obsidian-card {
+  background: var(--obsidian);
+  border: 1px solid var(--hairline-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+}
+
+.obsidian-card-elevated {
+  background: var(--obsidian-lighter);
+  border: 1px solid var(--hairline-border-strong);
+  border-radius: var(--card-radius-lg);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* ========== MAGIC WORDS HIGHLIGHT ========== */
+.magic-word {
+  background: rgba(0, 212, 255, 0.15);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  color: var(--neon-blue);
+  font-weight: 500;
+}
+
+/* ========== DIFF HIGHLIGHTING ========== */
+.diff-added {
+  background: rgba(80, 250, 123, 0.15);
+  border-left: 3px solid var(--neon-green);
+}
+
+.diff-removed {
+  background: rgba(255, 85, 85, 0.1);
+  border-left: 3px solid var(--neon-red);
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* ========== SEMANTIC HIGHLIGHTING ========== */
+.semantic-added {
+  color: var(--neon-blue);
+  text-shadow: var(--shadow-glow-blue);
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.semantic-removed {
+  color: var(--ghost-grey);
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ========== CODE BLOCK STYLING ========== */
+pre,
+code {
+  font-family: var(--font-code);
+}
+
+pre {
+  background: var(--obsidian);
+  border-radius: var(--card-radius);
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+
+code {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+/* Syntax colors */
+.token-keyword {
+  color: var(--code-purple);
+}
+
+.token-string {
+  color: var(--code-green);
+}
+
+.token-function {
+  color: var(--code-teal);
+}
+
+.token-variable {
+  color: var(--code-snow);
+}
+
+.token-number {
+  color: var(--code-orange);
+}
+
+.token-comment {
+  color: var(--ghost-grey);
+  font-style: italic;
+}
+
+.token-operator {
+  color: var(--code-ice);
+}
+
+.token-class {
+  color: var(--code-frost);
+}
+
+.token-property {
+  color: var(--code-ice);
+}
+
+/* ========== HOLLOW PILL (Blueprint Variables) ========== */
+.hollow-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.6em;
+  border: 1px dashed var(--paper-white-muted);
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--paper-white-muted);
+  transition: var(--transition-fast);
+}
+
+.hollow-pill:hover {
+  border-color: var(--neon-blue);
+  color: var(--neon-blue);
+}
+
+/* ========== TOAST NOTIFICATION ========== */
+.toast {
+  position: fixed;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--obsidian-lighter);
+  border: 1px solid var(--hairline-border-strong);
+  border-radius: 8px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--neon-green);
+  box-shadow: var(--shadow-elevated);
+  animation: toast-enter 0.3s ease;
+  z-index: 1000;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ========== CATEGORY INDICATORS ========== */
+.cat-foundation {
+  color: var(--cat-foundation);
+}
+
+.cat-refactor {
+  color: var(--cat-refactor);
+}
+
+.cat-ui {
+  color: var(--cat-ui);
+}
+
+.cat-logic {
+  color: var(--cat-logic);
+}
+
+/* ========== HUD STYLING ========== */
+.hud-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(var(--blur-sm));
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--paper-white-muted);
+}
+
+.hud-metric {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hud-label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hud-value {
+  color: var(--paper-white);
+  font-weight: 500;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes scan-line {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.scan-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: scan-line 0.5s ease-out forwards;
+}
+
+.flash-effect {
+  position: relative;
+}
+
+.flash-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  animation: flash 0.3s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ========== MOBILE RESPONSIVENESS ========== */
+@media (max-width: 768px) {
+  :root {
+    --nav-rail-width: 0px;
+    --stream-padding: var(--space-4);
+    --text-hero: 2.5rem;
+  }
+
+  body {
+    font-size: var(--text-sm);
+  }
+}
+
+/* Accent Typography Utilities */
+.text-accent {
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-style: italic;
+}

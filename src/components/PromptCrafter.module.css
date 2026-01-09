@@ -1,0 +1,199 @@
+.crafter {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(15, 15, 20, 0.98) 0%, rgba(10, 10, 15, 0.99) 100%);
+    color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-family: var(--font-narrative);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(-4px);
+}
+
+.backIcon {
+    font-size: 1.1rem;
+}
+
+.logoBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logoText {
+    font-family: var(--font-narrative);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.section {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.75rem;
+}
+
+.categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.categoryBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.categoryBtn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.categoryBtn.active {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+    color: #93C5FD;
+}
+
+.categoryIcon {
+    font-size: 1rem;
+}
+
+.textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-family: var(--font-narrative);
+    font-size: 0.9rem;
+    color: white;
+    resize: none;
+    transition: border-color 0.2s ease;
+}
+
+.textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.generateBtn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-narrative);
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.generateBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.resultSection {
+    margin-top: 1.5rem;
+}
+
+.resultHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.resultLabel {
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.copyBtn {
+    padding: 0.4rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    font-family: var(--font-narrative);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copyBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.result {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
