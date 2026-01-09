@@ -47,15 +47,7 @@ export default function Home() {
     setMousePos({ x, y });
   };
 
-  useGSAP(() => {
-    // Parallax effect
-    gsap.to('.parallax-layer', {
-      x: (i, target) => mousePos.x * target.dataset.speed * 20,
-      y: (i, target) => mousePos.y * target.dataset.speed * 20,
-      duration: 1,
-      ease: 'power2.out'
-    });
-  }, { scope: heroRef, dependencies: [mousePos] });
+
 
   return (
     <>
