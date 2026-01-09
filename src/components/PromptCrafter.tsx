@@ -62,8 +62,10 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
 
                 {/* Goal Input */}
                 <div className={styles.section}>
-                    <label className={styles.label}>What do you want to achieve?</label>
+                    <label className={styles.label} htmlFor="prompt-goal">What do you want to achieve?</label>
                     <textarea
+                        id="prompt-goal"
+                        name="goal"
                         className={styles.textarea}
                         placeholder="e.g., Refactor my React component to use hooks..."
                         value={goal}
@@ -74,8 +76,10 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
 
                 {/* Context Input */}
                 <div className={styles.section}>
-                    <label className={styles.label}>Additional Context (optional)</label>
+                    <label className={styles.label} htmlFor="prompt-context">Additional Context (optional)</label>
                     <textarea
+                        id="prompt-context"
+                        name="context"
                         className={styles.textarea}
                         placeholder="Any specific requirements, constraints, or preferences..."
                         value={context}

@@ -96,6 +96,8 @@ export default function OmniSearch({ isOpen, onClose, onFilterSelect }: OmniSear
 
                 <input
                     ref={inputRef}
+                    id="omni-search-input"
+                    name="omni-search"
                     type="text"
                     className={styles.input}
                     value={query}
@@ -103,6 +105,7 @@ export default function OmniSearch({ isOpen, onClose, onFilterSelect }: OmniSear
                     onKeyDown={handleKeyDown}
                     placeholder="Search patterns..."
                     autoComplete="off"
+                    aria-label="Search patterns"
                 />
 
                 <div className={styles.chips}>
