@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import styles from './PromptCrafter.module.css';
 import { Icon } from '@iconify/react';
-import { CATEGORY_METADATA } from '@/data/prompt-products';
+import { CATEGORY_METADATA, promptProducts, PromptProduct } from '@/data/prompt-products';
 
 interface PromptCrafterProps {
     onClose: () => void;
@@ -20,10 +20,20 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
         ...meta
     }));
 
+    // Filter templates based on selected category
+    const categoryTemplates = useMemo(() => {
+        return promptProducts.filter(p => p.category === category);
+    }, [category]);
+
     const handleGenerate = () => {
         // Simple prompt generation logic
         const prompt = `Act as an expert in ${category}. ${goal ? `My goal is: ${goal}.` : ''} ${context ? `Context: ${context}` : ''} Provide a detailed, actionable response.`;
         setGeneratedPrompt(prompt);
+    };
+
+    const handleTemplateSelect = (template: PromptProduct) => {
+        setGeneratedPrompt(template.fullPrompt);
+        setGoal(`Based on template: ${template.title}`);
     };
 
     const handleCopy = () => {
@@ -59,6 +69,25 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                         ))}
                     </div>
                 </div>
+
+                {/* Template Selection */}
+                {categoryTemplates.length > 0 && (
+                    <div className={styles.section}>
+                        <label className={styles.label}>Quick Templates</label>
+                        <div className={styles.templateGrid}>
+                            {categoryTemplates.map((template) => (
+                                <button
+                                    key={template.id}
+                                    className={styles.templateBtn}
+                                    onClick={() => handleTemplateSelect(template)}
+                                >
+                                    <span className={styles.templateTitle}>{template.title}</span>
+                                    <Icon icon="mingcute:add-circle-line" className={styles.templateIcon} />
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 {/* Goal Input */}
                 <div className={styles.section}>
@@ -102,8 +131,13 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                                 Copy
                             </button>
                         </div>
-                        <div className={styles.result}>
-                            {generatedPrompt}
+                        <div className={styles.resultWrapper}>
+                            <textarea
+                                className={`${styles.textarea} ${styles.resultTextarea}`}
+                                value={generatedPrompt}
+                                onChange={(e) => setGeneratedPrompt(e.target.value)}
+                                rows={10}
+                            />
                         </div>
                     </div>
                 )}
