@@ -3,7 +3,7 @@
 export interface PromptProduct {
     id: string;
     title: string;
-    category: 'coding' | 'ui-ux' | 'image' | 'problem-solving' | 'creativity';
+    category: 'general' | 'coding' | 'ui-ux' | 'image' | 'problem-solving' | 'creativity';
     preview: string; // Short preview shown on front
     fullPrompt: string; // Full prompt to copy
     whyItWorks: string; // Explanation on back of card
@@ -161,6 +161,7 @@ export const promptProducts: PromptProduct[] = [
 ];
 
 export const CATEGORY_METADATA: Record<string, { label: string; icon: string; color: string }> = {
+    'general': { label: 'General', icon: 'mingcute:apps-line', color: '#64748B' },
     'coding': { label: 'Coding', icon: 'mingcute:code-line', color: '#00D4FF' },
     'ui-ux': { label: 'UI/UX', icon: 'mingcute:palette-line', color: '#A855F7' },
     'image': { label: 'Image', icon: 'mingcute:pic-line', color: '#22C55E' },

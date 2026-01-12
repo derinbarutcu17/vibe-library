@@ -497,6 +497,14 @@
 
 .crafterActive {
   overflow: hidden;
+  height: 100vh;
+  /* Prevent any interaction with the background content */
+  pointer-events: none;
+}
+
+/* Allow pointer events only on the crafter panel */
+.crafterActive .crafterPanel {
+  pointer-events: auto;
 }
 
 .statsGrid {

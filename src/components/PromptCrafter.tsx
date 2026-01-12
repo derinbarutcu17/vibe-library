@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import styles from './PromptCrafter.module.css';
 import { Icon } from '@iconify/react';
 import { CATEGORY_METADATA, promptProducts, PromptProduct } from '@/data/prompt-products';
@@ -11,9 +11,19 @@ interface PromptCrafterProps {
 
 export default function PromptCrafter({ onClose }: PromptCrafterProps) {
     const [category, setCategory] = useState('coding');
-    const [goal, setGoal] = useState('');
+    const [vision, setVision] = useState('');
     const [context, setContext] = useState('');
     const [generatedPrompt, setGeneratedPrompt] = useState('');
+    const [inspirationOpen, setInspirationOpen] = useState(true);
+
+    // Prevent body scroll when crafter is open
+    useEffect(() => {
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = originalOverflow;
+        };
+    }, []);
 
     const crafterCategories = Object.entries(CATEGORY_METADATA).map(([id, meta]) => ({
         id,
@@ -26,121 +36,142 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
     }, [category]);
 
     const handleGenerate = () => {
-        // Simple prompt generation logic
-        const prompt = `Act as an expert in ${category}. ${goal ? `My goal is: ${goal}.` : ''} ${context ? `Context: ${context}` : ''} Provide a detailed, actionable response.`;
+        const categoryLabel = CATEGORY_METADATA[category]?.label || category;
+        const prompt = `Act as an expert in ${categoryLabel}. ${vision ? `My goal is: ${vision}.` : ''} ${context ? `Context: ${context}` : ''} Provide a detailed, actionable response.`;
         setGeneratedPrompt(prompt);
     };
 
     const handleTemplateSelect = (template: PromptProduct) => {
-        setGeneratedPrompt(template.fullPrompt);
-        setGoal(`Based on template: ${template.title}`);
+        setVision(template.fullPrompt);
     };
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(generatedPrompt);
+        navigator.clipboard.writeText(generatedPrompt || vision);
     };
 
     return (
         <div className={styles.crafter}>
-            <div className={styles.header}>
+            {/* Header */}
+            <header className={styles.header}>
                 <button className={styles.backBtn} onClick={onClose}>
                     <Icon icon="mingcute:arrow-left-line" className={styles.backIcon} />
-                    <span>Back to Home</span>
+                    <span>Back to Vibe Library</span>
                 </button>
-                <div className={styles.logoBadge}>
-                    <span className={styles.logoText}>Prompt Crafter</span>
-                </div>
-            </div>
 
-            <div className={styles.content}>
-                {/* Category Selection */}
-                <div className={styles.section}>
-                    <label className={styles.label}>Category</label>
-                    <div className={styles.categoryGrid}>
-                        {crafterCategories.map((cat) => (
-                            <button
-                                key={cat.id}
-                                className={`${styles.categoryBtn} ${category === cat.id ? styles.active : ''}`}
-                                onClick={() => setCategory(cat.id)}
-                            >
-                                <Icon icon={cat.icon} className={styles.categoryIcon} />
-                                <span>{cat.label}</span>
-                            </button>
-                        ))}
+                <div className={styles.logoContainer}>
+                    <span className={styles.logoText}>Prompt </span>
+                    <span className={styles.logoAccent}>Crafter</span>
+                </div>
+
+                <div className={styles.headerRight}>
+                    <button
+                        className={styles.inspirationBtn}
+                        onClick={() => setInspirationOpen(!inspirationOpen)}
+                    >
+                        <Icon icon="mingcute:bulb-line" className={styles.inspirationIcon} />
+                        <span>Inspiration</span>
+                    </button>
+                </div>
+            </header>
+
+            {/* Category Tabs */}
+            <nav className={styles.categoryNav}>
+                {crafterCategories.map((cat) => (
+                    <button
+                        key={cat.id}
+                        className={`${styles.categoryTab} ${category === cat.id ? styles.activeTab : ''}`}
+                        onClick={() => setCategory(cat.id)}
+                    >
+                        {cat.label}
+                    </button>
+                ))}
+            </nav>
+
+            {/* Main Content Area */}
+            <div className={styles.mainWrapper}>
+                <main className={`${styles.mainCanvas} ${inspirationOpen ? styles.mainCanvasShifted : ''}`}>
+                    {/* Vision Textarea */}
+                    <textarea
+                        className={styles.visionInput}
+                        placeholder="Describe your vision here..."
+                        value={vision}
+                        onChange={(e) => setVision(e.target.value)}
+                        spellCheck={false}
+                    />
+
+                    {/* Context Input */}
+                    <div className={styles.contextSection}>
+                        <label className={styles.contextLabel}>Additional Context (Optional)</label>
+                        <input
+                            type="text"
+                            className={styles.contextInput}
+                            placeholder="Add constraints or specific requirements..."
+                            value={context}
+                            onChange={(e) => setContext(e.target.value)}
+                        />
                     </div>
-                </div>
 
-                {/* Template Selection */}
-                {categoryTemplates.length > 0 && (
-                    <div className={styles.section}>
-                        <label className={styles.label}>Quick Templates</label>
-                        <div className={styles.templateGrid}>
-                            {categoryTemplates.map((template) => (
-                                <button
-                                    key={template.id}
-                                    className={styles.templateBtn}
-                                    onClick={() => handleTemplateSelect(template)}
-                                >
-                                    <span className={styles.templateTitle}>{template.title}</span>
-                                    <Icon icon="mingcute:add-circle-line" className={styles.templateIcon} />
+                    {/* Generated Prompt Result */}
+                    {generatedPrompt && (
+                        <div className={styles.resultSection}>
+                            <div className={styles.resultHeader}>
+                                <span className={styles.resultLabel}>Your Crafted Prompt</span>
+                                <button className={styles.copyBtn} onClick={handleCopy}>
+                                    <Icon icon="mingcute:copy-line" />
+                                    Copy
                                 </button>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Goal Input */}
-                <div className={styles.section}>
-                    <label className={styles.label} htmlFor="prompt-goal">What do you want to achieve?</label>
-                    <textarea
-                        id="prompt-goal"
-                        name="goal"
-                        className={styles.textarea}
-                        placeholder="e.g., Refactor my React component to use hooks..."
-                        value={goal}
-                        onChange={(e) => setGoal(e.target.value)}
-                        rows={3}
-                    />
-                </div>
-
-                {/* Context Input */}
-                <div className={styles.section}>
-                    <label className={styles.label} htmlFor="prompt-context">Additional Context (optional)</label>
-                    <textarea
-                        id="prompt-context"
-                        name="context"
-                        className={styles.textarea}
-                        placeholder="Any specific requirements, constraints, or preferences..."
-                        value={context}
-                        onChange={(e) => setContext(e.target.value)}
-                        rows={2}
-                    />
-                </div>
-
-                {/* Generate Button */}
-                <button className={styles.generateBtn} onClick={handleGenerate}>
-                    Generate Prompt
-                </button>
-
-                {/* Generated Prompt */}
-                {generatedPrompt && (
-                    <div className={styles.resultSection}>
-                        <div className={styles.resultHeader}>
-                            <span className={styles.resultLabel}>Your Crafted Prompt</span>
-                            <button className={styles.copyBtn} onClick={handleCopy}>
-                                Copy
-                            </button>
-                        </div>
-                        <div className={styles.resultWrapper}>
+                            </div>
                             <textarea
-                                className={`${styles.textarea} ${styles.resultTextarea}`}
+                                className={styles.resultTextarea}
                                 value={generatedPrompt}
                                 onChange={(e) => setGeneratedPrompt(e.target.value)}
-                                rows={10}
+                                rows={8}
                             />
                         </div>
+                    )}
+                </main>
+
+                {/* Inspiration Sidebar */}
+                <aside className={`${styles.sidebar} ${inspirationOpen ? styles.sidebarOpen : ''}`}>
+                    <div className={styles.sidebarHeader}>
+                        <h3 className={styles.sidebarTitle}>Inspiration</h3>
+                        <button className={styles.sidebarClose} onClick={() => setInspirationOpen(false)}>
+                            <Icon icon="mingcute:close-line" />
+                        </button>
                     </div>
-                )}
+
+                    <div className={styles.sidebarContent}>
+                        {categoryTemplates.length > 0 ? (
+                            categoryTemplates.map((template) => (
+                                <button
+                                    key={template.id}
+                                    className={styles.templateCard}
+                                    onClick={() => handleTemplateSelect(template)}
+                                >
+                                    <span className={styles.templateTag}>
+                                        {template.tags[0]?.toUpperCase() || 'TEMPLATE'}
+                                    </span>
+                                    <h4 className={styles.templateTitle}>{template.title}</h4>
+                                    <p className={styles.templateDesc}>{template.whyItWorks.slice(0, 80)}...</p>
+                                </button>
+                            ))
+                        ) : (
+                            <p className={styles.noTemplates}>No templates for this category yet.</p>
+                        )}
+                    </div>
+
+                    <div className={styles.sidebarFooter}>
+                        <p>Choose a template to pre-fill the canvas</p>
+                    </div>
+                </aside>
+            </div>
+
+            {/* Floating Generate Button */}
+            <div className={`${styles.generateWrapper} ${inspirationOpen ? styles.generateWrapperShifted : ''}`}>
+                <button className={styles.generateBtn} onClick={handleGenerate}>
+                    <span>Generate Prompt</span>
+                    <Icon icon="mingcute:sparkles-2-line" className={styles.generateIcon} />
+                </button>
             </div>
         </div>
     );
