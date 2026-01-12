@@ -37,7 +37,7 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
 
     const handleGenerate = () => {
         const categoryLabel = CATEGORY_METADATA[category]?.label || category;
-        const prompt = `Act as an expert in ${categoryLabel}. ${vision ? `My goal is: ${vision}.` : ''} ${context ? `Context: ${context}` : ''} Provide a detailed, actionable response.`;
+        const prompt = `Act as an expert in ${categoryLabel}. ${vision ? `My goal is: ${vision}.` : ''} ${context ? `Context: ${context}` : ''}`.trim();
         setGeneratedPrompt(prompt);
     };
 

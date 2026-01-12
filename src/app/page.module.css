@@ -643,3 +643,98 @@
   background: var(--void-black);
   min-height: 100vh;
 }
+
+/* ========== TITLE CHARACTER ANIMATION ========== */
+.titleChar {
+  display: inline-block;
+  transform-origin: bottom center;
+}
+
+/* ========== STICKY NAV ========== */
+.stickyNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.stickyNavContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+}
+
+.stickyLogo {
+  font-family: var(--font-narrative);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+.stickyPills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stickyPill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  font-family: var(--font-narrative);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stickyPill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.stickyCta {
+  padding: 0.5rem 1.25rem;
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-narrative);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stickyCta:hover {
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ========== RESPONSIVE STICKY NAV ========== */
+@media (max-width: 768px) {
+  .stickyPills {
+    display: none;
+  }
+
+  .stickyNavContent {
+    padding: 0.75rem 1rem;
+  }
+}

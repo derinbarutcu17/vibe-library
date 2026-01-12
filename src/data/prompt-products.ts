@@ -158,10 +158,86 @@ export const promptProducts: PromptProduct[] = [
         successRate: 94,
         saves: 3456,
     },
+    {
+        id: 'prompt-optimizer-001',
+        title: 'The Prompt Optimizer',
+        category: 'general',
+        preview: 'Act as a Senior Prompt Engineer to refine a raw idea into a highly optimized prompt...',
+        fullPrompt: `Act as a Senior Prompt Engineer with expertise in Large Language Model logic. I need you to refine a raw idea into a highly optimized prompt.
+
+My Goal: [INSERT YOUR GOAL/ROUGH IDEA HERE]
+Target Audience for Output: [INSERT AUDIENCE, e.g., Beginner Coders, CEOs]
+
+Please write a comprehensive prompt that I can paste into an AI. The prompt must include:
+1. A distinct Persona (e.g., "Expert Copywriter").
+2. Clear Context and Constraints.
+3. A Step-by-Step reasoning requirement (Chain-of-Thought).
+4. Output formatting rules (e.g., Markdown, specific sections).
+
+Output ONLY the optimized prompt in a code block so I can copy it.`,
+        whyItWorks: 'The "Senior Prompt Engineer" persona activates best-practice knowledge. Requiring CoT and constraints prevents generic rewrites. Turns vague ideas into structured tasks.',
+        tags: ['meta-prompting', 'optimization', 'chain-of-thought'],
+        tokensUsed: 145,
+        successRate: 96,
+        saves: 4521,
+    },
+    {
+        id: 'logic-injector-001',
+        title: 'The Logic Injector',
+        category: 'general',
+        preview: 'Upgrade an existing prompt with Chain-of-Thought and verification logic...',
+        fullPrompt: `I have an existing prompt that needs a logic upgrade.
+
+My Current Prompt: "[INSERT YOUR CURRENT PROMPT HERE]"
+
+Rewrite this prompt to include the following advanced logic protocols:
+1. **Chain-of-Thought (CoT):** Add instructions for the model to "think silently" or "outline logic" before generating the final answer.
+2. **Chain-of-Verification:** Add a final step where the model must critique its own output for errors before finalizing.
+3. **Delimiters:** Use ### or --- to clearly separate instruction sections from data.
+
+Keep the original intent of the prompt exactly the same, but maximize its robustness and reasoning capability.`,
+        whyItWorks: 'Chain-of-Verification reduces hallucinations by forcing self-review. "Silent thought" triggers System 2 deliberate reasoning. Delimiters (###) prevent instruction/data confusion.',
+        tags: ['chain-of-thought', 'verification', 'anti-hallucination'],
+        tokensUsed: 132,
+        successRate: 93,
+        saves: 3892,
+    },
+    {
+        id: 'gold-standard-001',
+        title: 'The Gold Standard Optimizer',
+        category: 'general',
+        preview: 'The ultimate meta-prompt using CoT, System 2, Few-Shot, and verification techniques...',
+        fullPrompt: `Role:
+You are a Master Prompt Engineer and AI Logic Specialist. Your goal is to take raw, often vague user prompts and transform them into "Gold Standard" prompts optimized for Large Language Models (LLMs) like Gemini and GPT-4.
+
+Objective:
+Optimize the user's input to maximize reasoning capabilities, reduce hallucinations, and ensure high-quality coding or text outputs.
+
+Instructions:
+Analyze the user's raw prompt below for weaknesses (vague intent, lack of constraints, potential for hallucination). Apply the following advanced techniques where applicable:
+1. Persona Adoption: Assign a specific, expert role relevant to the task.
+2. Chain-of-Thought (CoT): Add instructions to "think step-by-step" or outline the logic before answering.
+3. System 2 Attention: Rewrite the core request to strip bias and irrelevant noise.
+4. Few-Shot Templating: If the task involves a pattern, insert placeholders for examples (e.g., "[Insert Example 1 here]").
+5. Chain-of-Verification: Add a final step asking the model to verify its own code/facts before finalizing.
+6. Delimiters & Formatting: Use clear markdown structures to separate instructions from data.
+
+Output two distinct sections:
+SECTION 1: The Improved Prompt: A ready-to-copy, highly optimized version of the request.
+SECTION 2: The "Under the Hood" Explanation: Bullet points explaining exactly which techniques you applied and why.
+
+User's Raw Prompt:
+"[INSERT YOUR RAW PROMPT HERE]"`,
+        whyItWorks: 'System 2 Attention forces deliberate thinking over reactive responses. Dual-output educates users on prompt improvements. Layers multiple safety nets (CoT, Verification, Formatting) to prevent hallucinations.',
+        tags: ['meta-prompting', 'system-2', 'few-shot', 'gold-standard'],
+        tokensUsed: 285,
+        successRate: 97,
+        saves: 5234,
+    },
 ];
 
 export const CATEGORY_METADATA: Record<string, { label: string; icon: string; color: string }> = {
-    'general': { label: 'General', icon: 'mingcute:apps-line', color: '#64748B' },
+    'general': { label: 'Prompt Engineering', icon: 'mingcute:tool-line', color: '#64748B' },
     'coding': { label: 'Coding', icon: 'mingcute:code-line', color: '#00D4FF' },
     'ui-ux': { label: 'UI/UX', icon: 'mingcute:palette-line', color: '#A855F7' },
     'image': { label: 'Image', icon: 'mingcute:pic-line', color: '#22C55E' },

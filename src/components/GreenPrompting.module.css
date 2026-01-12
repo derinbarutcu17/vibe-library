@@ -1,0 +1,387 @@
+/* ============ LEAF BADGE ============ */
+.leafBadge {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 90;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.leafBadge.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+.leafBadge:hover {
+    transform: scale(1.03);
+}
+
+.leafBadge:hover .leafIcon {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+.leafIcon {
+    width: 44px;
+    height: 44px;
+    /* Glassmorphism */
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.85) 0%, rgba(22, 163, 74, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow:
+        0 8px 32px rgba(34, 197, 94, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.arrow {
+    width: 80px;
+    height: 40px;
+    color: rgba(34, 197, 94, 0.7);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+.leafText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-top: 0.25rem;
+}
+
+.leafHeadline {
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.35;
+    margin: 0;
+}
+
+.leafHeadline span {
+    color: #22C55E;
+    font-weight: 700;
+}
+
+.learnMore {
+    background: none;
+    border: none;
+    font-family: var(--font-narrative);
+    font-size: 0.7rem;
+    color: rgba(34, 197, 94, 0.85);
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    transition: color 0.2s ease;
+}
+
+.learnMore:hover {
+    color: #22C55E;
+    text-decoration: underline;
+}
+
+/* ============ OVERLAY ============ */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.overlayContent {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    max-height: 94vh;
+    /* Glassmorphism */
+    background: linear-gradient(180deg, rgba(25, 40, 25, 0.9) 0%, rgba(15, 25, 15, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 20px;
+    padding: 2rem 2.25rem;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* ============ OVERLAY HEADER ============ */
+.overlayHeader {
+    text-align: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.overlayLeaf {
+    font-size: 2.75rem;
+    color: #22C55E;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 4px 12px rgba(34, 197, 94, 0.4));
+}
+
+.overlayHeader h2 {
+    font-family: var(--font-narrative);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-family: var(--font-narrative);
+    font-size: 0.95rem;
+    color: #22C55E;
+    margin: 0.3rem 0 0 0;
+    font-weight: 500;
+}
+
+/* ============ OVERLAY BODY ============ */
+.overlayBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.intro {
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.55;
+    margin: 0;
+    text-align: center;
+}
+
+.problemSection,
+.solutionSection {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+}
+
+.problemSection h3,
+.solutionSection h3,
+.statsSection h3 {
+    font-family: var(--font-narrative);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.problemSection h3 {
+    color: #F97316;
+}
+
+.solutionSection h3 {
+    color: #22C55E;
+}
+
+.statsSection h3 {
+    color: #3B82F6;
+}
+
+.problemSection p,
+.solutionSection p {
+    font-family: var(--font-narrative);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.problemSection strong,
+.solutionSection strong {
+    color: white;
+}
+
+/* ============ STATS GRID ============ */
+.statsSection {
+    margin-top: 0.5rem;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+    margin-top: 0.85rem;
+}
+
+.statCard {
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.15);
+    border-radius: 12px;
+    padding: 0.85rem 0.7rem;
+    text-align: center;
+}
+
+.statNumber {
+    display: block;
+    font-family: var(--font-narrative);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #22C55E;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.statLabel {
+    display: block;
+    font-family: var(--font-narrative);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+}
+
+.statCard p {
+    font-family: var(--font-narrative);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.4;
+    margin: 0 0 0.35rem 0;
+}
+
+.statCard cite {
+    display: block;
+    font-family: var(--font-narrative);
+    font-size: 0.58rem;
+    font-style: italic;
+    color: rgba(34, 197, 94, 0.65);
+}
+
+/* ============ OVERLAY FOOTER ============ */
+.overlayFooter {
+    text-align: center;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.overlayFooter p {
+    font-family: var(--font-narrative);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.overlayFooter span {
+    font-size: 1.1rem;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .leafBadge {
+        top: 1.25rem;
+        left: 1.25rem;
+    }
+
+    .arrow {
+        width: 50px;
+        height: 25px;
+    }
+
+    .leafText {
+        max-width: 140px;
+    }
+
+    .leafHeadline {
+        font-size: 0.7rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .overlayContent {
+        padding: 1.5rem;
+        max-height: 90vh;
+    }
+
+    .overlay {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .arrow {
+        display: none;
+    }
+
+    .leafText {
+        display: none;
+    }
+
+    .leafIcon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+}
