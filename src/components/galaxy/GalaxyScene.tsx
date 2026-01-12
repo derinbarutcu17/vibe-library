@@ -65,7 +65,7 @@ export default function GalaxyScene({ warpMode = false }: { warpMode?: boolean }
                     <Nebula />
 
                     {/* Background filler stars for infinite depth */}
-                    <Stars radius={100} depth={50} count={3000} factor={2} saturation={1} fade speed={1} />
+                    <Stars radius={100} depth={50} count={3000} factor={2} saturation={1} fade speed={2} />
 
                     <CameraController mousePos={mousePos} warpMode={warpMode} />
                 </Suspense>

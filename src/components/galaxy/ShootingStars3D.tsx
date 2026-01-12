@@ -91,7 +91,7 @@ export default function ShootingStars3D() {
             // Should we spawn?
             if (data[i6 + 3] === 0) {
                 // Random spawn chance (very low to prevent spam)
-                if (Math.random() < 0.005) {
+                if (Math.random() < 0.008) {
                     const isBolide = Math.random() < 0.05; // 5% chance
 
                     data[i6 + 3] = isBolide ? 30 : 60 + Math.random() * 40; // Speed

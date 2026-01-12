@@ -58,6 +58,12 @@ export default function Nebula() {
         if (ref.current) {
             // Very slow drift
             ref.current.rotation.y += delta * 0.02;
+
+            // Subtle "breathing" effect
+            // Sine wave between 0.05 and 0.08 opacity
+            const time = state.clock.getElapsedTime();
+            // Cast to any to bypass strict material type checking for bespoke logic
+            (ref.current.material as any).opacity = 0.06 + Math.sin(time * 0.5) * 0.015;
         }
     });
 
