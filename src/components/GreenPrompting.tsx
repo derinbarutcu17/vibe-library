@@ -103,107 +103,105 @@ export default function GreenPrompting({ onOpenCrafter }: GreenPromptingProps) {
                             <Icon icon="mingcute:close-line" />
                         </button>
 
-                        {/* Two Column Layout */}
-                        <div className={styles.twoColumn}>
-                            {/* Left Column */}
-                            <div className={styles.leftColumn}>
-                                <div className={styles.leftTop}>
+                        {/* Content Grid */}
+                        <div className={styles.contentGrid}>
+                            {/* Left Main Section */}
+                            <div className={styles.leftMain}>
+                                <div className={styles.mainContent}>
                                     {/* Title */}
                                     <h1 className={styles.overlayTitle}>
-                                        {t('greenPrompting.overlay.title').split(' ')[0]}<br />
-                                        <span>{t('greenPrompting.overlay.title').split(' ')[1] || 'Prompting'}</span>
+                                        <span className={styles.greenText}>Green</span> Prompting
                                     </h1>
-                                    <p className={styles.overlaySubtitle}>{t('greenPrompting.overlay.subtitle')}</p>
+                                    <p className={styles.overlaySubtitle}>Efficiency is Eco-Friendly</p>
 
                                     {/* Intro */}
                                     <p className={styles.introText}>
-                                        {t('greenPrompting.overlay.intro')}
+                                        We often forget that "the cloud" runs on physical, power-hungry hardware. Every prompt triggers massive computations on energy-intensive GPUs.
                                     </p>
                                 </div>
 
-                                {/* Stats Grid */}
+                                {/* Hero Stats */}
                                 <div className={styles.statsArea}>
-                                    <span className={styles.statsLabel}>HERO STATS</span>
-
-                                    <div className={styles.mainStat}>
-                                        <div className={styles.statLeft}>
-                                            <span className={styles.statBigNumber}>{t('greenPrompting.overlay.stat1Number')}</span>
-                                            <span className={styles.statSmallLabel}>{t('greenPrompting.overlay.stat1Label')}</span>
+                                    <span className={styles.statsLabel}>Hero Stats</span>
+                                    <div className={styles.statsGrid}>
+                                        {/* Stat 1: Energy */}
+                                        <div className={styles.statCard}>
+                                            <div className={`${styles.statIcon} ${styles.energy}`}>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect x="4" y="14" width="3" height="6" fill="currentColor" opacity="0.4" />
+                                                    <rect x="9" y="10" width="3" height="10" fill="currentColor" opacity="0.6" />
+                                                    <rect x="14" y="6" width="3" height="14" fill="currentColor" opacity="0.8" />
+                                                    <rect x="19" y="2" width="3" height="18" fill="currentColor" />
+                                                </svg>
+                                            </div>
+                                            <div className={styles.statNumber}>10-50x</div>
+                                            <div className={styles.statLabel}>MORE ENERGY</div>
+                                            <p className={styles.statExplanation}>
+                                                {t('greenPrompting.overlay.stat1Text')}
+                                            </p>
                                         </div>
-                                        <span className={styles.statNote}>{t('greenPrompting.overlay.stat1Text').substring(0, 40)}...</span>
-                                    </div>
 
-                                    <div className={styles.smallStats}>
-                                        <div className={styles.smallStat}>
-                                            <span className={styles.statMedNumber}>{t('greenPrompting.overlay.stat2Number')}</span>
-                                            <span className={styles.statSmallLabel}>{t('greenPrompting.overlay.stat2Label')}</span>
+                                        {/* Stat 2: Smartphone */}
+                                        <div className={styles.statCard}>
+                                            <div className={`${styles.statIcon} ${styles.phone}`}>
+                                                <Icon icon="mingcute:phone-line" />
+                                            </div>
+                                            <div className={styles.statNumber}>1</div>
+                                            <div className={styles.statLabel}>SMARTPHONE CHARGE</div>
+                                            <p className={styles.statExplanation}>
+                                                {t('greenPrompting.overlay.stat2Text')}
+                                            </p>
                                         </div>
-                                        <div className={styles.smallStat}>
-                                            <span className={styles.statMedNumber}>{t('greenPrompting.overlay.stat3Number')}</span>
-                                            <span className={styles.statSmallLabel}>{t('greenPrompting.overlay.stat3Label')}</span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                {/* Sources */}
-                                <div className={styles.sourcesArea}>
-                                    <span className={styles.sourcesLabel}>Sources:</span>
-                                    <div className={styles.sourceLinks}>
-                                        <span>{SOURCES.frontiers.name}</span>
-                                        <span className={styles.sourceDot}>•</span>
-                                        <span>{SOURCES.huggingface.name}</span>
-                                        <span className={styles.sourceDot}>•</span>
-                                        <span>{SOURCES.arxiv.name}</span>
-                                        <span className={styles.sourceDot}>•</span>
-                                        <span>{SOURCES.google.name}</span>
+                                        {/* Stat 3: Carbon */}
+                                        <div className={styles.statCard}>
+                                            <div className={`${styles.statIcon} ${styles.carbon}`}>
+                                                <Icon icon="mingcute:leaf-line" />
+                                            </div>
+                                            <div className={styles.statNumber}>32x</div>
+                                            <div className={styles.statLabel}>CARBON FOOTPRINT</div>
+                                            <p className={styles.statExplanation}>
+                                                {t('greenPrompting.overlay.stat3Text')}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Right Column */}
-                            <div className={styles.rightColumn}>
-                                {/* Problem Card */}
+                            {/* Right Cards Section */}
+                            <div className={styles.rightCards}>
+                                {/* Challenge Card */}
                                 <div className={styles.challengeCard}>
-                                    <div className={styles.cardIconBg}>
+                                    <div className={styles.cardBadge}>
                                         <Icon icon="mingcute:warning-fill" />
+                                        THE CHALLENGE
                                     </div>
-                                    <span className={styles.cardLabel}>THE CHALLENGE</span>
-                                    <div className={styles.cardContent}>
-                                        <div className={styles.cardIconSmall}>
-                                            <Icon icon="mingcute:forbid-circle-line" />
-                                        </div>
-                                        <div>
-                                            <h3>{t('greenPrompting.overlay.problemTitle')}</h3>
-                                            <p>{t('greenPrompting.overlay.problemText')}</p>
-                                        </div>
-                                    </div>
+                                    <h3 className={styles.cardTitle}>The 'Lazy Prompt' Problem</h3>
+                                    <p className={styles.cardText}>
+                                        {t('greenPrompting.overlay.problemText')}
+                                    </p>
                                 </div>
 
                                 {/* Solution Card */}
                                 <div className={styles.solutionCard}>
-                                    <div className={styles.cardIconBg}>
+                                    <div className={styles.cardBadge}>
                                         <Icon icon="mingcute:check-circle-fill" />
+                                        THE SOLUTION
                                     </div>
-                                    <span className={styles.cardLabel}>THE SOLUTION</span>
-                                    <div className={styles.cardContent}>
-                                        <div className={styles.cardIconSmall}>
-                                            <Icon icon="mingcute:brain-line" />
-                                        </div>
-                                        <div>
-                                            <h3>{t('greenPrompting.overlay.solutionTitle')}</h3>
-                                            <p>{t('greenPrompting.overlay.solutionText')}</p>
-                                        </div>
-                                    </div>
+                                    <h3 className={styles.cardTitle}>The Solution</h3>
+                                    <p className={styles.cardText}>
+                                        {t('greenPrompting.overlay.solutionText')}
+                                    </p>
                                 </div>
-
-                                {/* CTA Button */}
-                                <button className={styles.ctaButton} onClick={handleCtaClick}>
-                                    <span>{t('greenPrompting.overlay.footer')}</span>
-                                    <span className={styles.ctaEmoji}>🌱</span>
-                                    <Icon icon="mingcute:arrow-right-line" />
-                                </button>
                             </div>
                         </div>
+
+                        {/* Full Width CTA */}
+                        <button className={styles.fullWidthCta} onClick={handleCtaClick}>
+                            <span>USE OPTIMIZED PROMPTS. SAVE ENERGY.</span>
+                            <span className={styles.ctaEmoji}>🌱</span>
+                            <Icon icon="mingcute:arrow-right-line" />
+                        </button>
                     </div>
                 </div>
             )}
