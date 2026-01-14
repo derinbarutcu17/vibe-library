@@ -58,8 +58,7 @@ export default function GalaxyScene({ warpMode = false }: { warpMode?: boolean }
                     {/* Core Stars - Customized for realism */}
                     <StarField mousePos={mousePos} />
 
-                    {/* Simplified Meteors */}
-                    <ShootingStars3D />
+
 
                     {/* Static Universe Background (Replaces heavy nebula) */}
                     <Nebula />
