@@ -6,6 +6,7 @@ import PromptShop from '@/components/PromptShop';
 import PromptCrafter from '@/components/PromptCrafter';
 import ShootingStars from '@/components/ShootingStars';
 import GreenPrompting from '@/components/GreenPrompting';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import GalaxyScene from '@/components/galaxy/GalaxyScene';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,6 +14,7 @@ import { useGSAP } from '@gsap/react';
 import styles from './page.module.css';
 import { Icon } from '@iconify/react';
 import { CATEGORY_METADATA } from '@/data/prompt-products';
+import { useTranslation } from '@/i18n';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,6 +24,8 @@ export default function Home() {
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const stickyNavRef = useRef<HTMLDivElement>(null);
+
+  const { t } = useTranslation();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isCrafterOpen, setIsCrafterOpen] = useState(false);
@@ -161,7 +165,9 @@ export default function Home() {
   return (
     <>
       {/* ============ GREEN PROMPTING BADGE ============ */}
-      <GreenPrompting />
+      <GreenPrompting onOpenCrafter={handleCraftPrompt} />
+
+
 
       {/* ============ STICKY NAV (appears on scroll) ============ */}
       <nav ref={stickyNavRef} className={styles.stickyNav}>
@@ -193,15 +199,20 @@ export default function Home() {
 
               {/* Hero Section */}
               <section className={styles.heroSection} ref={heroRef}>
+                {/* Language Switcher */}
+                <div style={{ position: 'absolute', top: 0, right: 0 }}>
+                  <LanguageSwitcher />
+                </div>
+
                 {/* Announcement Pill */}
                 <div className={styles.announcementPill}>
                   <span className={styles.announcementDot}></span>
-                  <span>Prompt Crafter is now live</span>
+                  <span>{t('hero.announcement')}</span>
                 </div>
 
-                <h1 className={styles.mainTitle} ref={titleRef}>Vibe Library</h1>
+                <h1 className={styles.mainTitle} ref={titleRef}>{t('hero.title')}</h1>
                 <p className={styles.tagline} ref={taglineRef}>
-                  Master
+                  {t('hero.tagline.master')}
                   <button
                     onClick={() => handleCategoryClick('general')}
                     className={styles.navPill}
@@ -209,9 +220,9 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['general'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['general'].color }} />
-                    Prompt Engineering
+                    {t('categories.general')}
                   </button>
-                  unlock AI-powered
+                  {t('hero.tagline.comma1')}
                   <button
                     onClick={() => handleCategoryClick('coding')}
                     className={styles.navPill}
@@ -219,9 +230,9 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['coding'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['coding'].color }} />
-                    Coding
+                    {t('categories.coding')}
                   </button>
-                  patterns, elevate your
+                  {t('hero.tagline.comma2')}
                   <button
                     onClick={() => handleCategoryClick('ui-ux')}
                     className={styles.navPill}
@@ -229,9 +240,9 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['ui-ux'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['ui-ux'].color }} />
-                    UI/UX
+                    {t('categories.ui-ux')}
                   </button>
-                  designs, generate stunning
+                  {t('hero.tagline.comma3')}
                   <button
                     onClick={() => handleCategoryClick('image')}
                     className={styles.navPill}
@@ -239,19 +250,9 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['image'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['image'].color }} />
-                    Image
+                    {t('categories.image')}
                   </button>
-                  assets, master
-                  <button
-                    onClick={() => handleCategoryClick('problem-solving')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['problem-solving'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['problem-solving'].color }} />
-                    Problem Solving
-                  </button>
-                  and fuel your
+                  {t('hero.tagline.assets')}
                   <button
                     onClick={() => handleCategoryClick('creativity')}
                     className={styles.navPill}
@@ -259,18 +260,18 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['creativity'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['creativity'].color }} />
-                    Creativity
+                    {t('categories.creativity')}
                   </button>
                 </p>
 
                 {/* CTA Buttons */}
                 <div className={styles.ctaButtons} ref={ctaRef}>
                   <button className={styles.primaryCta} onClick={handleCraftPrompt}>
-                    Craft a Prompt
+                    {t('hero.ctaPrimary')}
                     <span className={styles.ctaArrow}>→</span>
                   </button>
                   <button className={styles.secondaryCta} onClick={handleViewGallery}>
-                    View Gallery
+                    {t('hero.ctaSecondary')}
                   </button>
                 </div>
 

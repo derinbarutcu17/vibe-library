@@ -92,53 +92,44 @@
     transition: transform 0.2s ease;
 }
 
-/* ============ CATEGORY TABS ============ */
+/* ============ CATEGORY PILLS ============ */
 .categoryNav {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 0.75rem;
     padding: 1rem 2rem;
     flex-shrink: 0;
 }
 
-.categoryTab {
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.875rem;
+.categoryPill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
-    padding: 0.5rem 0;
-    position: relative;
-    transition: color 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    transition: all 0.2s ease;
 }
 
-.categoryTab::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    background-color: currentColor;
-    transition: width 0.3s ease;
+.categoryPill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.categoryTab:hover {
-    color: rgba(255, 255, 255, 0.8);
+.categoryPill.activePill {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3B82F6;
 }
 
-.categoryTab:hover::after {
-    width: 100%;
-}
-
-.categoryTab.activeTab {
-    color: #2563eb;
-}
-
-.categoryTab.activeTab::after {
-    width: 100%;
-    background-color: #2563eb;
+.pillIcon {
+    font-size: 1rem;
 }
 
 /* ============ MAIN WRAPPER ============ */

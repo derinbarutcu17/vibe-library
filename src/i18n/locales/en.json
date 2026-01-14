@@ -1,0 +1,94 @@
+{
+    "common": {
+        "backToLibrary": "Back to Vibe Library",
+        "generatePrompt": "Generate Prompt",
+        "copyPrompt": "Copy Prompt",
+        "copied": "Copied!",
+        "loading": "Loading...",
+        "learnMore": "Click to learn more →",
+        "close": "Close"
+    },
+    "hero": {
+        "announcement": "Prompt Crafter is now live",
+        "title": "Vibe Library",
+        "tagline": {
+            "master": "Master",
+            "comma1": ", unlock AI-powered",
+            "comma2": ", elevate",
+            "comma3": ", generate stunning",
+            "assets": "assets, and fuel your"
+        },
+        "ctaPrimary": "Craft a Prompt",
+        "ctaSecondary": "View Gallery"
+    },
+    "categories": {
+        "all": "All Prompts",
+        "general": "Prompt Engineering",
+        "coding": "Coding",
+        "ui-ux": "UI/UX",
+        "image": "Image",
+        "problem-solving": "Problem Solving",
+        "creativity": "Creativity"
+    },
+    "promptCrafter": {
+        "title": "Prompt Crafter",
+        "inspiration": "Inspiration",
+        "visionPlaceholder": "Describe your vision here...",
+        "contextLabel": "Additional Context (Optional)",
+        "contextPlaceholder": "Add constraints or specific requirements...",
+        "resultLabel": "Your Crafted Prompt",
+        "copy": "Copy",
+        "noTemplates": "No templates for this category yet.",
+        "chooseTemplate": "Choose a template to pre-fill the canvas"
+    },
+    "promptShop": {
+        "title": "Prompt Gallery",
+        "subtitle": "Browse our collection of optimized prompts",
+        "found": "prompts found",
+        "loadMore": "Load More Prompts",
+        "whyItWorks": "Why It Works",
+        "flipBack": "← flip back",
+        "flipHint": "Click to see why it works →",
+        "fullPrompt": "Full Prompt:"
+    },
+    "greenPrompting": {
+        "badge": {
+            "headline": "Vibe Library is a more",
+            "highlight": "Eco-friendly",
+            "suffix": "way to use AI!"
+        },
+        "overlay": {
+            "title": "Green Prompting",
+            "subtitle": "Efficiency is Eco-Friendly",
+            "intro": "We often forget that \"the cloud\" runs on physical, power-hungry hardware. Every prompt triggers massive computations on energy-intensive GPUs.",
+            "problemTitle": "The \"Lazy Prompt\" Problem",
+            "problemText": "Typing a vague prompt and spending 10 turns asking the AI to \"fix it\" isn't just frustrating—it's wasteful. This trial-and-error loop multiplies the energy cost of a single task by 10x.",
+            "solutionTitle": "The Solution",
+            "solutionText": "The Vibe Library focuses on \"One-Shot\" success. By using optimized templates (with context and logic built-in), you get the right result on the first try, reducing \"inference churn\" and saving energy.",
+            "scienceTitle": "The Science",
+            "stat1Number": "10-50x",
+            "stat1Label": "More Energy",
+            "stat1Text": "A single LLM query consumes 10 to 50 times more energy than a standard Google search.",
+            "stat1Cite": "Frontiers in Communication",
+            "stat2Number": "1 📱",
+            "stat2Label": "Smartphone Charge",
+            "stat2Text": "Generating one image or complex response can consume as much energy as charging a smartphone.",
+            "stat2Cite": "Carnegie Mellon / Hugging Face",
+            "stat3Number": "32x",
+            "stat3Label": "Carbon Footprint",
+            "stat3Text": "Inefficient workflows that rely on constant re-prompting can increase the carbon footprint of a task by 32x.",
+            "stat3Cite": "LLM-Assisted Code Study",
+            "footer": "Use optimized prompts. Save energy."
+        }
+    },
+    "footer": {
+        "status": "System Operational. Archive Updated",
+        "designedBy": "// Designed by"
+    },
+    "languageSwitcher": {
+        "label": "Language",
+        "en": "English",
+        "tr": "Türkçe",
+        "de": "Deutsch"
+    }
+}

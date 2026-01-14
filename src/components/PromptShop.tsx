@@ -72,8 +72,8 @@ export default function PromptShop({ initialCategory = 'all' }: PromptShopProps)
                 className={styles.productGrid}
                 style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
             >
-                {filteredProducts.map((prompt) => (
-                    <PromptProductCard key={prompt.id} prompt={prompt} />
+                {filteredProducts.map((prompt, index) => (
+                    <PromptProductCard key={prompt.id} prompt={prompt} index={index} />
                 ))}
             </div>
 

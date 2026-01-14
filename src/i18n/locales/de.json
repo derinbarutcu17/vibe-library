@@ -1,0 +1,94 @@
+{
+    "common": {
+        "backToLibrary": "Zurück zur Vibe Bibliothek",
+        "generatePrompt": "Prompt generieren",
+        "copyPrompt": "Prompt kopieren",
+        "copied": "Kopiert!",
+        "loading": "Laden...",
+        "learnMore": "Klicken Sie für mehr Info →",
+        "close": "Schließen"
+    },
+    "hero": {
+        "announcement": "Prompt Crafter ist jetzt live",
+        "title": "Vibe Bibliothek",
+        "tagline": {
+            "master": "Meistern Sie",
+            "comma1": ", entdecken Sie die Welt des KI-gestützten",
+            "comma2": ", heben Sie",
+            "comma3": "auf das nächste Level, kreieren Sie beeindruckende",
+            "assets": "und öffnen Sie Ihrer"
+        },
+        "ctaPrimary": "Prompt erstellen",
+        "ctaSecondary": "Galerie ansehen"
+    },
+    "categories": {
+        "all": "Alle Prompts",
+        "general": "Prompt Engineering",
+        "coding": "Coding",
+        "ui-ux": "UI/UX",
+        "image": "Visuals",
+        "problem-solving": "Problemlösung",
+        "creativity": "Kreativität neue Türen"
+    },
+    "promptCrafter": {
+        "title": "Prompt Crafter",
+        "inspiration": "Inspiration",
+        "visionPlaceholder": "Beschreiben Sie Ihre Vision hier...",
+        "contextLabel": "Zusätzlicher Kontext (Optional)",
+        "contextPlaceholder": "Fügen Sie Einschränkungen oder spezifische Anforderungen hinzu...",
+        "resultLabel": "Ihr erstellter Prompt",
+        "copy": "Kopieren",
+        "noTemplates": "Noch keine Vorlagen für diese Kategorie.",
+        "chooseTemplate": "Wählen Sie eine Vorlage zum Vorab-Ausfüllen"
+    },
+    "promptShop": {
+        "title": "Prompt Galerie",
+        "subtitle": "Durchsuchen Sie unsere Sammlung optimierter Prompts",
+        "found": "Prompts gefunden",
+        "loadMore": "Mehr Prompts laden",
+        "whyItWorks": "Warum es funktioniert",
+        "flipBack": "← zurück drehen",
+        "flipHint": "Klicken um zu sehen warum es funktioniert →",
+        "fullPrompt": "Vollständiger Prompt:"
+    },
+    "greenPrompting": {
+        "badge": {
+            "headline": "Vibe Bibliothek ist eine",
+            "highlight": "Umweltfreundlichere",
+            "suffix": "Art KI zu nutzen!"
+        },
+        "overlay": {
+            "title": "Grünes Prompting",
+            "subtitle": "Effizienz ist Umweltfreundlich",
+            "intro": "Wir vergessen oft, dass die \"Cloud\" auf physischer, stromhungriger Hardware läuft. Jeder Prompt löst massive Berechnungen auf energieintensiven GPUs aus.",
+            "problemTitle": "Das \"Fauler Prompt\" Problem",
+            "problemText": "Einen vagen Prompt einzugeben und 10 Runden \"fix it\" zu sagen ist nicht nur frustrierend—es ist verschwenderisch. Diese Trial-and-Error-Schleife vervielfacht die Energiekosten einer einzelnen Aufgabe um das 10-fache.",
+            "solutionTitle": "Die Lösung",
+            "solutionText": "Die Vibe Bibliothek konzentriert sich auf \"One-Shot\" Erfolg. Durch die Verwendung optimierter Vorlagen (mit eingebautem Kontext und Logik) erhalten Sie beim ersten Versuch das richtige Ergebnis, reduzieren \"Inferenz-Churn\" und sparen Energie.",
+            "scienceTitle": "Die Wissenschaft",
+            "stat1Number": "10-50x",
+            "stat1Label": "Mehr Energie",
+            "stat1Text": "Eine einzelne LLM-Abfrage verbraucht 10 bis 50 mal mehr Energie als eine Standard-Google-Suche.",
+            "stat1Cite": "Frontiers in Communication",
+            "stat2Number": "1 📱",
+            "stat2Label": "Smartphone-Ladung",
+            "stat2Text": "Das Generieren eines Bildes oder einer komplexen Antwort kann so viel Energie verbrauchen wie das Aufladen eines Smartphones.",
+            "stat2Cite": "Carnegie Mellon / Hugging Face",
+            "stat3Number": "32x",
+            "stat3Label": "CO₂-Fußabdruck",
+            "stat3Text": "Ineffiziente Workflows, die auf ständiges Re-Prompting angewiesen sind, können den CO₂-Fußabdruck einer Aufgabe um das 32-fache erhöhen.",
+            "stat3Cite": "LLM-Assisted Code Study",
+            "footer": "Nutzen Sie optimierte Prompts. Sparen Sie Energie."
+        }
+    },
+    "footer": {
+        "status": "System betriebsbereit. Archiv aktualisiert",
+        "designedBy": "// Entworfen von"
+    },
+    "languageSwitcher": {
+        "label": "Sprache",
+        "en": "English",
+        "tr": "Türkçe",
+        "de": "Deutsch"
+    }
+}

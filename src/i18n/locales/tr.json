@@ -1,0 +1,94 @@
+{
+    "common": {
+        "backToLibrary": "Vibe Kütüphanesi'ne Dön",
+        "generatePrompt": "Prompt Oluştur",
+        "copyPrompt": "Promptu Kopyala",
+        "copied": "Kopyalandı!",
+        "loading": "Yükleniyor...",
+        "learnMore": "Daha fazla bilgi için tıkla →",
+        "close": "Kapat"
+    },
+    "hero": {
+        "announcement": "Prompt Crafter artık yayında",
+        "title": "Vibe Kütüphanesi",
+        "tagline": {
+            "master": "",
+            "comma1": "'de ustalaşın, yapay zeka destekli",
+            "comma2": "dünyasını keşfedin,",
+            "comma3": "deneyiminizi bir üst seviyeye taşıyın, etkileyici",
+            "assets": "oluşturun ve"
+        },
+        "ctaPrimary": "Prompt Oluştur",
+        "ctaSecondary": "Galeriyi Görüntüle"
+    },
+    "categories": {
+        "all": "Tüm Promptlar",
+        "general": "Prompt Engineering",
+        "coding": "Kodlama",
+        "ui-ux": "UI/UX",
+        "image": "Görseller",
+        "problem-solving": "Problem Çözme",
+        "creativity": "Yaratıcılığınıza yeni kapılar açın"
+    },
+    "promptCrafter": {
+        "title": "Prompt Crafter",
+        "inspiration": "İlham",
+        "visionPlaceholder": "Vizyonunuzu burada tanımlayın...",
+        "contextLabel": "Ek Bağlam (İsteğe bağlı)",
+        "contextPlaceholder": "Kısıtlamalar veya belirli gereksinimler ekleyin...",
+        "resultLabel": "Oluşturulan Promptunuz",
+        "copy": "Kopyala",
+        "noTemplates": "Bu kategori için henüz şablon yok.",
+        "chooseTemplate": "Tuvali önceden doldurmak için bir şablon seçin"
+    },
+    "promptShop": {
+        "title": "Prompt Galerisi",
+        "subtitle": "Optimize edilmiş prompt koleksiyonumuza göz atın",
+        "found": "prompt bulundu",
+        "loadMore": "Daha Fazla Prompt Yükle",
+        "whyItWorks": "Neden Çalışıyor",
+        "flipBack": "← geri çevir",
+        "flipHint": "Neden çalıştığını görmek için tıkla →",
+        "fullPrompt": "Tam Prompt:"
+    },
+    "greenPrompting": {
+        "badge": {
+            "headline": "Vibe Kütüphanesi daha",
+            "highlight": "Çevre dostu",
+            "suffix": "bir yapay zeka kullanımı!"
+        },
+        "overlay": {
+            "title": "Yeşil Prompting",
+            "subtitle": "Verimlilik Çevre Dostudur",
+            "intro": "\"Bulut\"un fiziksel, enerji tüketen donanımlarda çalıştığını sıklıkla unutuyoruz. Her prompt, enerji yoğun GPU'larda büyük hesaplamaları tetikler.",
+            "problemTitle": "\"Tembel Prompt\" Problemi",
+            "problemText": "Belirsiz bir prompt yazıp 10 tur \"düzelt\" demek sadece sinir bozucu değil—israftır. Bu deneme-yanılma döngüsü, tek bir görevin enerji maliyetini 10 kat artırır.",
+            "solutionTitle": "Çözüm",
+            "solutionText": "Vibe Kütüphanesi \"Tek Seferde\" başarıya odaklanır. Optimize edilmiş şablonlar kullanarak (bağlam ve mantık yerleşik), ilk denemede doğru sonucu alır, \"çıkarım karmaşasını\" azaltır ve enerji tasarrufu sağlarsınız.",
+            "scienceTitle": "Bilim",
+            "stat1Number": "10-50x",
+            "stat1Label": "Daha Fazla Enerji",
+            "stat1Text": "Tek bir LLM sorgusu, standart bir Google aramasından 10 ila 50 kat daha fazla enerji tüketir.",
+            "stat1Cite": "Frontiers in Communication",
+            "stat2Number": "1 📱",
+            "stat2Label": "Telefon Şarjı",
+            "stat2Text": "Bir görsel veya karmaşık yanıt oluşturmak, bir akıllı telefonu şarj etmek kadar enerji tüketebilir.",
+            "stat2Cite": "Carnegie Mellon / Hugging Face",
+            "stat3Number": "32x",
+            "stat3Label": "Karbon Ayak İzi",
+            "stat3Text": "Sürekli yeniden prompting'e dayanan verimsiz iş akışları, bir görevin karbon ayak izini 32 kat artırabilir.",
+            "stat3Cite": "LLM Destekli Kod Çalışması",
+            "footer": "Optimize promptlar kullan. Enerji tasarrufu yap."
+        }
+    },
+    "footer": {
+        "status": "Sistem Çalışıyor. Arşiv Güncellendi",
+        "designedBy": "// Tasarlayan"
+    },
+    "languageSwitcher": {
+        "label": "Dil",
+        "en": "English",
+        "tr": "Türkçe",
+        "de": "Deutsch"
+    }
+}

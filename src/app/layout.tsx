@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Newsreader, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -40,8 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${lato.variable} ${newsreader.variable} ${geistMono.variable}`}>
       <body>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
 }
+

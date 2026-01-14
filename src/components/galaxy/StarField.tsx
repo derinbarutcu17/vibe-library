@@ -5,10 +5,21 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import * as random from 'maath/random/dist/maath-random.esm';
 
+interface StarLayerProps {
+    count: number;
+    radius: number;
+    depth: number;
+    rotationSpeed: number;
+    parallaxFactor: number;
+    flickerIntensity: number;
+    sizeRange: [number, number];
+    mousePos: { x: number; y: number };
+}
+
 const StarShader = {
     uniforms: {
         uTime: { value: 0 },
-        uPixelRatio: { value: 1 } // Will be set in component
+        uPixelRatio: { value: 1 }
     },
     vertexShader: `
     uniform float uTime;
@@ -28,20 +39,13 @@ const StarShader = {
       vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
       gl_Position = projectionMatrix * mvPosition;
       
-      // Twinkle Logic
-      // Sine wave based on time + random offset, scaled by random speed
       float twinkle = sin(uTime * aSpeed + aOffset);
-      
-      // Remap from [-1, 1] to [0.3, 1.0] so they don't fully disappear
       twinkle = 0.5 + 0.5 * twinkle; 
       
-      // Use twinkle to adjust opacity or brightness
       vAlpha = twinkle;
       
-      // Size Attenuation
-      // Scale based on distance to camera (z-depth)
       gl_PointSize = aScale * uPixelRatio;
-      gl_PointSize *= (1.0 / -mvPosition.z) * 30.0; // 30.0 is a scaling factor
+      gl_PointSize *= (1.0 / -mvPosition.z) * 30.0;
     }
   `,
     fragmentShader: `
@@ -49,24 +53,29 @@ const StarShader = {
     varying float vAlpha;
     
     void main() {
-      // Create soft circular particle
       float r = distance(gl_PointCoord, vec2(0.5));
       if (r > 0.5) discard;
       
-      // Soft edge glow
       float glow = 1.0 - (r * 2.0);
-      glow = pow(glow, 1.5); // Sharpen the glow slightly
+      glow = pow(glow, 1.5);
       
       gl_FragColor = vec4(vColor, vAlpha * glow);
     }
   `
 };
 
-export default function StarField() {
+function StarLayer({
+    count,
+    radius,
+    depth,
+    rotationSpeed,
+    parallaxFactor,
+    flickerIntensity,
+    sizeRange,
+    mousePos
+}: StarLayerProps) {
     const ref = useRef<THREE.Points>(null);
     const materialRef = useRef<THREE.ShaderMaterial>(null);
-
-    const count = 8000; // Increased back to 8000 for liveliness
 
     const [positions, data] = useMemo(() => {
         const pos = new Float32Array(count * 3);
@@ -75,55 +84,45 @@ export default function StarField() {
         const speeds = new Float32Array(count);
         const offsets = new Float32Array(count);
 
-        // Generate positions in sphere
-        random.inSphere(pos, { radius: 60 });
+        random.inSphere(pos, { radius });
 
         const colorChoices = [
-            new THREE.Color('#9bb0ff'), // Blue giant
-            new THREE.Color('#aabfff'), // Blue-white
-            new THREE.Color('#cad7ff'), // White
-            new THREE.Color('#f8f7ff'), // Pure white
-            new THREE.Color('#fff4ea'), // Yellow-white
-            new THREE.Color('#ffd2a1'), // Gold/Orange
-            // new THREE.Color('#ffcc6f')  // Red excluded to keep it "fresh" and not too busy
+            new THREE.Color('#9bb0ff'),
+            new THREE.Color('#aabfff'),
+            new THREE.Color('#cad7ff'),
+            new THREE.Color('#f8f7ff'),
+            new THREE.Color('#fff4ea'),
+            new THREE.Color('#ffd2a1')
         ];
 
         for (let i = 0; i < count; i++) {
-            // SAFE VOID LOGIC
             const x = pos[i * 3];
             const y = pos[i * 3 + 1];
             const z = pos[i * 3 + 2];
             const d = Math.sqrt(x * x + y * y + z * z);
 
-            // Push close stars away to avoid "giant dots"
-            if (d < 15) {
-                const scaleFactor = (20 + Math.random() * 10) / d;
+            if (d < depth) {
+                const scaleFactor = (depth + Math.random() * 10) / d;
                 pos[i * 3] *= scaleFactor;
                 pos[i * 3 + 1] *= scaleFactor;
                 pos[i * 3 + 2] *= scaleFactor;
             }
 
-            // ATTRIBUTES
-
-            // Color
             const color = colorChoices[Math.floor(Math.random() * colorChoices.length)];
             colorAttr[i * 3] = color.r;
             colorAttr[i * 3 + 1] = color.g;
             colorAttr[i * 3 + 2] = color.b;
 
-            // Size (Scale)
-            // Varied sizes for liveliness. Base size around 1.5 - 3.0 (pixels world-scale)
-            scales[i] = Math.random() < 0.1 ? 4.0 : 1.5 + Math.random() * 2.0;
+            scales[i] = Math.random() < 0.1
+                ? sizeRange[1]
+                : sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]);
 
-            // Twinkle Speed
-            speeds[i] = 1.0 + Math.random() * 3.0; // Range 1x to 4x speed
-
-            // Twinkle Offset (Phase)
+            speeds[i] = flickerIntensity * (1.0 + Math.random() * 3.0);
             offsets[i] = Math.random() * Math.PI * 2;
         }
 
         return [pos, { colorAttr, scales, speeds, offsets }];
-    }, []);
+    }, [count, radius, depth, flickerIntensity, sizeRange]);
 
     useFrame((state) => {
         if (materialRef.current) {
@@ -131,8 +130,9 @@ export default function StarField() {
             materialRef.current.uniforms.uPixelRatio.value = state.viewport.dpr;
         }
         if (ref.current) {
-            // Slow cosmic rotation
-            ref.current.rotation.y = state.clock.getElapsedTime() * 0.02;
+            ref.current.rotation.y = state.clock.getElapsedTime() * rotationSpeed;
+            ref.current.position.x = mousePos.x * parallaxFactor;
+            ref.current.position.y = mousePos.y * parallaxFactor;
         }
     });
 
@@ -173,5 +173,42 @@ export default function StarField() {
                 blending={THREE.AdditiveBlending}
             />
         </points>
+    );
+}
+
+export default function StarField({ mousePos = { x: 0, y: 0 } }: { mousePos?: { x: number; y: number } }) {
+    return (
+        <>
+            <StarLayer
+                count={3000}
+                radius={80}
+                depth={20}
+                rotationSpeed={0}
+                parallaxFactor={0.05}
+                flickerIntensity={0.3}
+                sizeRange={[1.0, 2.5]}
+                mousePos={mousePos}
+            />
+            <StarLayer
+                count={2500}
+                radius={60}
+                depth={15}
+                rotationSpeed={0.01}
+                parallaxFactor={0.15}
+                flickerIntensity={0.5}
+                sizeRange={[1.5, 3.5]}
+                mousePos={mousePos}
+            />
+            <StarLayer
+                count={2000}
+                radius={40}
+                depth={10}
+                rotationSpeed={0.02}
+                parallaxFactor={0.3}
+                flickerIntensity={0.7}
+                sizeRange={[2.0, 4.5]}
+                mousePos={mousePos}
+            />
+        </>
     );
 }

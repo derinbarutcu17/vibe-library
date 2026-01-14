@@ -74,14 +74,15 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                 </div>
             </header>
 
-            {/* Category Tabs */}
+            {/* Category Pills */}
             <nav className={styles.categoryNav}>
                 {crafterCategories.map((cat) => (
                     <button
                         key={cat.id}
-                        className={`${styles.categoryTab} ${category === cat.id ? styles.activeTab : ''}`}
+                        className={`${styles.categoryPill} ${category === cat.id ? styles.activePill : ''}`}
                         onClick={() => setCategory(cat.id)}
                     >
+                        <Icon icon={cat.icon} className={styles.pillIcon} style={{ color: cat.color }} />
                         {cat.label}
                     </button>
                 ))}

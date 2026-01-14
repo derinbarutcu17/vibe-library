@@ -3,11 +3,37 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './GreenPrompting.module.css';
 import { Icon } from '@iconify/react';
+import { useTranslation } from '@/i18n';
 
-export default function GreenPrompting() {
+interface GreenPromptingProps {
+    onOpenCrafter?: () => void;
+}
+
+// Source links for citations
+const SOURCES = {
+    frontiers: {
+        name: 'Frontiers in Communication',
+        url: 'https://www.frontiersin.org/journals/communication/articles/10.3389/fcomm.2025.1478657/full'
+    },
+    huggingface: {
+        name: 'Hugging Face & CMU',
+        url: 'https://huggingface.co/blog/power-hungry-processing'
+    },
+    arxiv: {
+        name: 'arXiv (2025)',
+        url: 'https://arxiv.org/abs/2501.10468'
+    },
+    google: {
+        name: 'Google Cloud Blog',
+        url: 'https://cloud.google.com/blog/topics/sustainability/measuring-the-environmental-impact-of-ai-inference'
+    }
+};
+
+export default function GreenPrompting({ onOpenCrafter }: GreenPromptingProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
     const badgeRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
 
     // Hide badge on scroll (but keep overlay open if it's open)
     useEffect(() => {
@@ -22,6 +48,11 @@ export default function GreenPrompting() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleCtaClick = () => {
+        setIsOpen(false);
+        onOpenCrafter?.();
+    };
 
     return (
         <>
@@ -56,8 +87,11 @@ export default function GreenPrompting() {
                 </svg>
 
                 <div className={styles.leafText}>
-                    <p className={styles.leafHeadline}>Vibe Library is a more<br /><span>Eco-friendly</span> way to use AI!</p>
-                    <button className={styles.learnMore}>Click to learn more →</button>
+                    <p className={styles.leafHeadline}>
+                        {t('greenPrompting.badge.headline')}<br />
+                        <span>{t('greenPrompting.badge.highlight')}</span> {t('greenPrompting.badge.suffix')}
+                    </p>
+                    <button className={styles.learnMore}>{t('common.learnMore')}</button>
                 </div>
             </div>
 
@@ -69,62 +103,106 @@ export default function GreenPrompting() {
                             <Icon icon="mingcute:close-line" />
                         </button>
 
-                        <div className={styles.overlayHeader}>
-                            <Icon icon="mingcute:leaf-fill" className={styles.overlayLeaf} />
-                            <h2>Green Prompting</h2>
-                            <p className={styles.subtitle}>Efficiency is Eco-Friendly</p>
-                        </div>
+                        {/* Two Column Layout */}
+                        <div className={styles.twoColumn}>
+                            {/* Left Column */}
+                            <div className={styles.leftColumn}>
+                                <div className={styles.leftTop}>
+                                    {/* Title */}
+                                    <h1 className={styles.overlayTitle}>
+                                        {t('greenPrompting.overlay.title').split(' ')[0]}<br />
+                                        <span>{t('greenPrompting.overlay.title').split(' ')[1] || 'Prompting'}</span>
+                                    </h1>
+                                    <p className={styles.overlaySubtitle}>{t('greenPrompting.overlay.subtitle')}</p>
 
-                        <div className={styles.overlayBody}>
-                            <p className={styles.intro}>
-                                We often forget that "the cloud" runs on physical, power-hungry hardware.
-                                Every prompt triggers massive computations on energy-intensive GPUs.
-                            </p>
+                                    {/* Intro */}
+                                    <p className={styles.introText}>
+                                        {t('greenPrompting.overlay.intro')}
+                                    </p>
+                                </div>
 
-                            <div className={styles.problemSection}>
-                                <h3><Icon icon="mingcute:alert-line" /> The "Lazy Prompt" Problem</h3>
-                                <p>
-                                    Typing a vague prompt and spending 10 turns asking the AI to "fix it" isn't just frustrating—it's <strong>wasteful</strong>.
-                                    This trial-and-error loop multiplies the energy cost of a single task by 10x.
-                                </p>
-                            </div>
+                                {/* Stats Grid */}
+                                <div className={styles.statsArea}>
+                                    <span className={styles.statsLabel}>HERO STATS</span>
 
-                            <div className={styles.solutionSection}>
-                                <h3><Icon icon="mingcute:check-circle-line" /> The Solution</h3>
-                                <p>
-                                    The Vibe Library focuses on <strong>"One-Shot" success</strong>. By using optimized templates
-                                    (with context and logic built-in), you get the right result on the first try,
-                                    reducing "inference churn" and saving energy.
-                                </p>
-                            </div>
-
-                            <div className={styles.statsSection}>
-                                <h3><Icon icon="mingcute:chart-bar-line" /> The Science</h3>
-                                <div className={styles.statsGrid}>
-                                    <div className={styles.statCard}>
-                                        <span className={styles.statNumber}>10-50x</span>
-                                        <span className={styles.statLabel}>More Energy</span>
-                                        <p>A single LLM query consumes 10 to 50 times more energy than a standard Google search.</p>
-                                        <cite>Frontiers in Communication</cite>
+                                    <div className={styles.mainStat}>
+                                        <div className={styles.statLeft}>
+                                            <span className={styles.statBigNumber}>{t('greenPrompting.overlay.stat1Number')}</span>
+                                            <span className={styles.statSmallLabel}>{t('greenPrompting.overlay.stat1Label')}</span>
+                                        </div>
+                                        <span className={styles.statNote}>{t('greenPrompting.overlay.stat1Text').substring(0, 40)}...</span>
                                     </div>
-                                    <div className={styles.statCard}>
-                                        <span className={styles.statNumber}>1 📱</span>
-                                        <span className={styles.statLabel}>Smartphone Charge</span>
-                                        <p>Generating one image or complex response can consume as much energy as charging a smartphone.</p>
-                                        <cite>Carnegie Mellon / Hugging Face</cite>
+
+                                    <div className={styles.smallStats}>
+                                        <div className={styles.smallStat}>
+                                            <span className={styles.statMedNumber}>{t('greenPrompting.overlay.stat2Number')}</span>
+                                            <span className={styles.statSmallLabel}>{t('greenPrompting.overlay.stat2Label')}</span>
+                                        </div>
+                                        <div className={styles.smallStat}>
+                                            <span className={styles.statMedNumber}>{t('greenPrompting.overlay.stat3Number')}</span>
+                                            <span className={styles.statSmallLabel}>{t('greenPrompting.overlay.stat3Label')}</span>
+                                        </div>
                                     </div>
-                                    <div className={styles.statCard}>
-                                        <span className={styles.statNumber}>32x</span>
-                                        <span className={styles.statLabel}>Carbon Footprint</span>
-                                        <p>Inefficient workflows that rely on constant re-prompting can increase the carbon footprint of a task by 32x.</p>
-                                        <cite>LLM-Assisted Code Study</cite>
+                                </div>
+
+                                {/* Sources */}
+                                <div className={styles.sourcesArea}>
+                                    <span className={styles.sourcesLabel}>Sources:</span>
+                                    <div className={styles.sourceLinks}>
+                                        <span>{SOURCES.frontiers.name}</span>
+                                        <span className={styles.sourceDot}>•</span>
+                                        <span>{SOURCES.huggingface.name}</span>
+                                        <span className={styles.sourceDot}>•</span>
+                                        <span>{SOURCES.arxiv.name}</span>
+                                        <span className={styles.sourceDot}>•</span>
+                                        <span>{SOURCES.google.name}</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className={styles.overlayFooter}>
-                            <p>Use optimized prompts. Save energy. <span>🌱</span></p>
+                            {/* Right Column */}
+                            <div className={styles.rightColumn}>
+                                {/* Problem Card */}
+                                <div className={styles.challengeCard}>
+                                    <div className={styles.cardIconBg}>
+                                        <Icon icon="mingcute:warning-fill" />
+                                    </div>
+                                    <span className={styles.cardLabel}>THE CHALLENGE</span>
+                                    <div className={styles.cardContent}>
+                                        <div className={styles.cardIconSmall}>
+                                            <Icon icon="mingcute:forbid-circle-line" />
+                                        </div>
+                                        <div>
+                                            <h3>{t('greenPrompting.overlay.problemTitle')}</h3>
+                                            <p>{t('greenPrompting.overlay.problemText')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Solution Card */}
+                                <div className={styles.solutionCard}>
+                                    <div className={styles.cardIconBg}>
+                                        <Icon icon="mingcute:check-circle-fill" />
+                                    </div>
+                                    <span className={styles.cardLabel}>THE SOLUTION</span>
+                                    <div className={styles.cardContent}>
+                                        <div className={styles.cardIconSmall}>
+                                            <Icon icon="mingcute:brain-line" />
+                                        </div>
+                                        <div>
+                                            <h3>{t('greenPrompting.overlay.solutionTitle')}</h3>
+                                            <p>{t('greenPrompting.overlay.solutionText')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* CTA Button */}
+                                <button className={styles.ctaButton} onClick={handleCtaClick}>
+                                    <span>{t('greenPrompting.overlay.footer')}</span>
+                                    <span className={styles.ctaEmoji}>🌱</span>
+                                    <Icon icon="mingcute:arrow-right-line" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
