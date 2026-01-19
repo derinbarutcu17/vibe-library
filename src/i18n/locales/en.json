@@ -14,8 +14,9 @@
         "tagline": {
             "master": "Master",
             "comma1": ", unlock AI-powered",
-            "comma2": ", elevate",
-            "comma3": ", generate stunning",
+            "comma2": ", optimize your",
+            "comma3": ", elevate",
+            "comma4": ", generate stunning",
             "assets": "assets, and fuel your"
         },
         "ctaPrimary": "Craft a Prompt",
@@ -28,7 +29,8 @@
         "ui-ux": "UI/UX",
         "image": "Image",
         "problem-solving": "Problem Solving",
-        "creativity": "Creativity"
+        "creativity": "Creativity",
+        "finance": "Finance"
     },
     "promptCrafter": {
         "title": "Prompt Crafter",

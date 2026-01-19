@@ -3,7 +3,7 @@
 export interface PromptProduct {
     id: string;
     title: string;
-    category: 'general' | 'coding' | 'ui-ux' | 'image' | 'problem-solving' | 'creativity';
+    category: 'general' | 'coding' | 'finance' | 'ui-ux' | 'image' | 'problem-solving' | 'creativity';
     preview: string; // Short preview shown on front
     fullPrompt: string; // Full prompt to copy
     whyItWorks: string; // Explanation on back of card
@@ -187,11 +187,72 @@ Instead, act as a "Universal Expert." You must silently upgrade the raw request 
         successRate: 98,
         saves: 6123,
     },
+    {
+        id: 'finance-budget-001',
+        title: 'The Budget Architect',
+        category: 'finance',
+        preview: 'Create detailed monthly budgets using the 50/30/20 rule with expense categorization, savings goals, and emergency fund calculations.',
+        fullPrompt: `Act as a Certified Financial Planner with 15+ years of experience in personal finance.
+
+I need help creating a comprehensive monthly budget.
+
+**My Financial Situation:**
+- Monthly Income (after tax): [INSERT INCOME]
+- Current Expenses: [LIST MAJOR EXPENSES]
+- Financial Goals: [INSERT GOALS - e.g., save for house, pay off debt]
+
+**Create a budget using the 50/30/20 framework:**
+1. **Needs (50%):** Housing, utilities, groceries, insurance, minimum debt payments
+2. **Wants (30%):** Entertainment, dining out, subscriptions, hobbies
+3. **Savings/Debt (20%):** Emergency fund, investments, extra debt payments
+
+**Output Format:**
+- Detailed category breakdown with specific dollar amounts
+- Prioritized savings allocation
+- 3 actionable tips to optimize spending
+- Warning flags if budget is unbalanced`,
+        whyItWorks: 'The 50/30/20 framework provides structure. Requiring specific dollar amounts prevents vague advice. Warning flags catch budget issues proactively.',
+        tags: ['budgeting', 'personal-finance', 'planning'],
+        tokensUsed: 180,
+        successRate: 94,
+        saves: 4521,
+    },
+    {
+        id: 'finance-invest-002',
+        title: 'The Investment Analyzer',
+        category: 'finance',
+        preview: 'Analyze investment opportunities with risk assessment, expected returns, and portfolio diversification recommendations.',
+        fullPrompt: `Act as a Senior Investment Analyst at a top wealth management firm.
+
+I'm considering an investment and need a thorough analysis.
+
+**Investment Details:**
+- Asset Type: [INSERT TYPE - stock, ETF, crypto, real estate, etc.]
+- Investment Amount: [INSERT AMOUNT]
+- Time Horizon: [INSERT YEARS]
+- Risk Tolerance: [Low/Medium/High]
+
+**Provide Analysis Including:**
+1. **Risk Assessment:** Volatility, market correlation, downside scenarios
+2. **Expected Returns:** Historical performance, realistic projections
+3. **Portfolio Fit:** How this fits with standard diversification
+4. **Red Flags:** Any concerns or due diligence items
+5. **Recommendation:** Buy/Hold/Avoid with reasoning
+
+Be specific and use data where applicable. Include disclaimers about market uncertainty.`,
+        whyItWorks: 'Structured analysis prevents emotional investing. Risk-first approach catches problems early. Portfolio context prevents over-concentration.',
+        tags: ['investing', 'analysis', 'portfolio'],
+        tokensUsed: 195,
+        successRate: 91,
+        saves: 3892,
+    },
+
 ];
 
 export const CATEGORY_METADATA: Record<string, { label: string; icon: string; color: string }> = {
     'general': { label: 'Prompt Engineering', icon: 'mingcute:tool-line', color: '#EAB308' },
     'coding': { label: 'Coding', icon: 'mingcute:code-line', color: '#00D4FF' },
+    'finance': { label: 'Finance', icon: 'mingcute:wallet-line', color: '#6366F1' },
     'ui-ux': { label: 'UI/UX', icon: 'mingcute:palette-line', color: '#A855F7' },
     'image': { label: 'Image', icon: 'mingcute:pic-line', color: '#22C55E' },
     'problem-solving': { label: 'Problem Solving', icon: 'mingcute:bulb-line', color: '#F97316' },

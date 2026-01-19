@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import FrequencyFooter from '@/components/FrequencyFooter';
 import PromptShop from '@/components/PromptShop';
 import PromptCrafter from '@/components/PromptCrafter';
@@ -86,7 +86,6 @@ export default function Home() {
 
     const ctx = gsap.context(() => {
       // ============ 1. TEXT REVEAL ANIMATION ============
-      // Split title into characters
       if (titleRef.current) {
         const titleText = titleRef.current.textContent || '';
         titleRef.current.innerHTML = titleText
@@ -105,16 +104,14 @@ export default function Home() {
         });
       }
 
-      // Animate tagline - use set + to pattern for reliability
       if (taglineRef.current) {
-        gsap.set(taglineRef.current, { opacity: 1 }); // Ensure visible
+        gsap.set(taglineRef.current, { opacity: 1 });
         gsap.fromTo(taglineRef.current,
           { y: 40, opacity: 0 },
           { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.6 }
         );
       }
 
-      // Animate CTA buttons
       if (ctaRef.current) {
         gsap.fromTo(ctaRef.current.children,
           { y: 30, opacity: 0 },
@@ -124,7 +121,6 @@ export default function Home() {
 
       // ============ 5. SCROLL-TRIGGERED STICKY NAV ============
       if (heroRef.current && stickyNavRef.current) {
-        // Create sticky nav on scroll
         ScrollTrigger.create({
           trigger: heroRef.current,
           start: 'bottom top+=100',
@@ -152,7 +148,6 @@ export default function Home() {
     return () => ctx.revert();
   }, [isCrafterOpen]);
 
-  // Category pills with magnetic effect
   const categoryPills = [
     { id: 'general', text: 'Prompt Engineering' },
     { id: 'coding', text: 'Coding' },
@@ -164,12 +159,6 @@ export default function Home() {
 
   return (
     <>
-      {/* ============ GREEN PROMPTING BADGE ============ */}
-      <GreenPrompting onOpenCrafter={handleCraftPrompt} />
-
-
-
-      {/* ============ STICKY NAV (appears on scroll) ============ */}
       <nav ref={stickyNavRef} className={styles.stickyNav}>
         <div className={styles.stickyNavContent}>
           <span className={styles.stickyLogo}>Vibe Library</span>
@@ -180,7 +169,7 @@ export default function Home() {
                 onClick={() => handleCategoryClick(cat.id)}
                 className={styles.stickyPill}
               >
-                <Icon icon={CATEGORY_METADATA[cat.id].icon} style={{ color: CATEGORY_METADATA[cat.id].color }} />
+                <Icon icon={CATEGORY_METADATA[cat.id]?.icon} style={{ color: CATEGORY_METADATA[cat.id]?.color }} />
                 {cat.text}
               </button>
             ))}
@@ -197,14 +186,14 @@ export default function Home() {
             <div className={styles.mainContainer}>
               <GalaxyScene warpMode={isCrafterOpen} />
 
-              {/* Hero Section */}
               <section className={styles.heroSection} ref={heroRef}>
-                {/* Language Switcher */}
-                <div style={{ position: 'absolute', top: 0, right: 0 }}>
+                {/* Header elements move with hero */}
+                <GreenPrompting onOpenCrafter={handleCraftPrompt} />
+
+                <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100 }}>
                   <LanguageSwitcher />
                 </div>
 
-                {/* Announcement Pill */}
                 <div className={styles.announcementPill}>
                   <span className={styles.announcementDot}></span>
                   <span>{t('hero.announcement')}</span>
@@ -219,7 +208,7 @@ export default function Home() {
                     onMouseMove={handlePillMouseMove}
                     onMouseLeave={handlePillMouseLeave}
                   >
-                    <Icon icon={CATEGORY_METADATA['general'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['general'].color }} />
+                    <Icon icon={CATEGORY_METADATA['general']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['general']?.color }} />
                     {t('categories.general')}
                   </button>
                   {t('hero.tagline.comma1')}
@@ -229,27 +218,37 @@ export default function Home() {
                     onMouseMove={handlePillMouseMove}
                     onMouseLeave={handlePillMouseLeave}
                   >
-                    <Icon icon={CATEGORY_METADATA['coding'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['coding'].color }} />
+                    <Icon icon={CATEGORY_METADATA['coding']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['coding']?.color }} />
                     {t('categories.coding')}
                   </button>
                   {t('hero.tagline.comma2')}
+                  <button
+                    onClick={() => handleCategoryClick('finance')}
+                    className={styles.navPill}
+                    onMouseMove={handlePillMouseMove}
+                    onMouseLeave={handlePillMouseLeave}
+                  >
+                    <Icon icon={CATEGORY_METADATA['finance']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['finance']?.color }} />
+                    {t('categories.finance')}
+                  </button>
+                  {t('hero.tagline.comma3')}
                   <button
                     onClick={() => handleCategoryClick('ui-ux')}
                     className={styles.navPill}
                     onMouseMove={handlePillMouseMove}
                     onMouseLeave={handlePillMouseLeave}
                   >
-                    <Icon icon={CATEGORY_METADATA['ui-ux'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['ui-ux'].color }} />
+                    <Icon icon={CATEGORY_METADATA['ui-ux']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['ui-ux']?.color }} />
                     {t('categories.ui-ux')}
                   </button>
-                  {t('hero.tagline.comma3')}
+                  {t('hero.tagline.comma4')}
                   <button
                     onClick={() => handleCategoryClick('image')}
                     className={styles.navPill}
                     onMouseMove={handlePillMouseMove}
                     onMouseLeave={handlePillMouseLeave}
                   >
-                    <Icon icon={CATEGORY_METADATA['image'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['image'].color }} />
+                    <Icon icon={CATEGORY_METADATA['image']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['image']?.color }} />
                     {t('categories.image')}
                   </button>
                   {t('hero.tagline.assets')}
@@ -259,12 +258,11 @@ export default function Home() {
                     onMouseMove={handlePillMouseMove}
                     onMouseLeave={handlePillMouseLeave}
                   >
-                    <Icon icon={CATEGORY_METADATA['creativity'].icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['creativity'].color }} />
+                    <Icon icon={CATEGORY_METADATA['creativity']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['creativity']?.color }} />
                     {t('categories.creativity')}
                   </button>
                 </p>
 
-                {/* CTA Buttons */}
                 <div className={styles.ctaButtons} ref={ctaRef}>
                   <button className={styles.primaryCta} onClick={handleCraftPrompt}>
                     {t('hero.ctaPrimary')}
@@ -274,12 +272,10 @@ export default function Home() {
                     {t('hero.ctaSecondary')}
                   </button>
                 </div>
-
               </section>
             </div>
           </div>
 
-          {/* Prompt Shop Section */}
           <section className={styles.shopSection} id="shop">
             <PromptShop initialCategory={selectedCategory} />
           </section>
@@ -287,7 +283,6 @@ export default function Home() {
           <FrequencyFooter />
         </div>
 
-        {/* Prompt Crafter Panel */}
         <div className={`${styles.crafterPanel} ${isCrafterOpen ? styles.crafterVisible : ''}`}>
           <PromptCrafter onClose={handleCloseCrafter} />
         </div>

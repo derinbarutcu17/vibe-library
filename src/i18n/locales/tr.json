@@ -14,8 +14,9 @@
         "tagline": {
             "master": "",
             "comma1": "'de ustalaşın, yapay zeka destekli",
-            "comma2": "dünyasını keşfedin,",
-            "comma3": "deneyiminizi bir üst seviyeye taşıyın, etkileyici",
+            "comma2": "dünyasını keşfedin, ",
+            "comma3": "hedeflerinizi yönetin, ",
+            "comma4": "deneyiminizi bir üst seviyeye taşıyın, etkileyici",
             "assets": "oluşturun ve"
         },
         "ctaPrimary": "Prompt Oluştur",
@@ -28,7 +29,8 @@
         "ui-ux": "UI/UX",
         "image": "Görseller",
         "problem-solving": "Problem Çözme",
-        "creativity": "Yaratıcılığınıza yeni kapılar açın"
+        "creativity": "Yaratıcılığınıza yeni kapılar açın",
+        "finance": "Finans"
     },
     "promptCrafter": {
         "title": "Prompt Crafter",

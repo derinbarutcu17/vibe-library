@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './GreenPrompting.module.css';
 import { Icon } from '@iconify/react';
 import { useTranslation } from '@/i18n';
@@ -32,8 +33,13 @@ const SOURCES = {
 export default function GreenPrompting({ onOpenCrafter }: GreenPromptingProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
+    const [mounted, setMounted] = useState(false);
     const badgeRef = useRef<HTMLDivElement>(null);
     const { t } = useTranslation();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // Hide badge on scroll (but keep overlay open if it's open)
     useEffect(() => {
@@ -66,25 +72,7 @@ export default function GreenPrompting({ onOpenCrafter }: GreenPromptingProps) {
                     <Icon icon="mingcute:leaf-line" />
                 </div>
 
-                {/* Hand-drawn arrow */}
-                <svg className={styles.arrow} viewBox="0 0 100 50" fill="none">
-                    <path
-                        d="M8 40 C 25 10, 55 5, 85 20"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        fill="none"
-                        strokeDasharray="6 4"
-                    />
-                    <path
-                        d="M78 12 L88 20 L80 26"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        fill="none"
-                    />
-                </svg>
+
 
                 <div className={styles.leafText}>
                     <p className={styles.leafHeadline}>
@@ -96,7 +84,7 @@ export default function GreenPrompting({ onOpenCrafter }: GreenPromptingProps) {
             </div>
 
             {/* Overlay */}
-            {isOpen && (
+            {isOpen && mounted && createPortal(
                 <div className={styles.overlay} onClick={() => setIsOpen(false)}>
                     <div className={styles.overlayContent} onClick={(e) => e.stopPropagation()}>
                         <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
@@ -203,7 +191,8 @@ export default function GreenPrompting({ onOpenCrafter }: GreenPromptingProps) {
                             <Icon icon="mingcute:arrow-right-line" />
                         </button>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     );

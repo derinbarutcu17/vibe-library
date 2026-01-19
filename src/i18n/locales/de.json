@@ -14,9 +14,10 @@
         "tagline": {
             "master": "Meistern Sie",
             "comma1": ", entdecken Sie die Welt des KI-gestützten",
-            "comma2": ", heben Sie",
-            "comma3": "auf das nächste Level, kreieren Sie beeindruckende",
-            "assets": "und öffnen Sie Ihrer"
+            "comma2": ", optimieren Sie Ihre",
+            "comma3": ", heben Sie",
+            "comma4": " auf das nächste Level, kreieren Sie beeindruckende",
+            "assets": " und öffnen Sie Ihrer"
         },
         "ctaPrimary": "Prompt erstellen",
         "ctaSecondary": "Galerie ansehen"
@@ -28,7 +29,8 @@
         "ui-ux": "UI/UX",
         "image": "Visuals",
         "problem-solving": "Problemlösung",
-        "creativity": "Kreativität neue Türen"
+        "creativity": "Kreativität",
+        "finance": "Finanzen"
     },
     "promptCrafter": {
         "title": "Prompt Crafter",
