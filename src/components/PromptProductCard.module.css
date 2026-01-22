@@ -5,6 +5,13 @@
     height: 340px;
 }
 
+@media (max-width: 768px) {
+    .cardContainer {
+        height: auto;
+        min-height: 280px;
+    }
+}
+
 .card {
     position: relative;
     width: 100%;
@@ -38,6 +45,29 @@
     box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.15),
         0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+
+    .cardFront,
+    .cardBack {
+        position: relative;
+        /* layout flow */
+        height: auto;
+        min-height: 100%;
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .description {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 6;
+        /* Show more text if needed since height is auto */
+        line-clamp: 6;
+    }
 }
 
 .cardFront {

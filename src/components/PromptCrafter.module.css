@@ -451,6 +451,81 @@
     transition: transform 0.2s ease;
 }
 
-.generateBtn:hover .generateIcon {
-    transform: translateX(2px);
+/* ============ RESPONSIVE MOBILE ============ */
+@media (max-width: 768px) {
+
+    /* Header */
+    .header {
+        padding: 1rem;
+    }
+
+    .logoContainer {
+        font-size: 1rem;
+    }
+
+    .headerRight {
+        gap: 0.5rem;
+    }
+
+    .inspirationBtn span {
+        display: none;
+        /* Icon only */
+    }
+
+    /* Category Pills */
+    .categoryNav {
+        padding: 0.5rem 1rem;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .categoryPill {
+        flex-shrink: 0;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    /* Main Layout */
+    .mainCanvas {
+        padding: 1.5rem 1rem;
+        padding-bottom: 8rem;
+        /* Space for FAB */
+        margin-right: 0 !important;
+        /* Disable shift */
+    }
+
+    .visionInput {
+        font-size: 1.2rem;
+        min-height: 20vh;
+    }
+
+    .contextSection {
+        margin-top: 2rem;
+    }
+
+    /* Sidebar as Full Screen Overlay */
+    .sidebar {
+        width: 100%;
+        z-index: 200;
+        /* Above everything */
+        border-left: none;
+    }
+
+    /* Generate Button */
+    .generateWrapper {
+        bottom: 1.5rem;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        left: 50% !important;
+        /* Disable shift */
+        transform: translateX(-50%);
+    }
+
+    .generateBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+    }
 }

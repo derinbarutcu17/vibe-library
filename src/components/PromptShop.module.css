@@ -150,7 +150,8 @@
 
 @media (max-width: 640px) {
     .productGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        /* Force 1 column */
     }
 
     .filterBar {
@@ -162,6 +163,18 @@
         width: 100%;
         overflow-x: auto;
         padding-bottom: 0.5rem;
+        flex-wrap: nowrap;
+        /* horizontal scroll */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .categoryBtn {
+        flex-shrink: 0;
+    }
+
+    .viewToggle {
+        display: none;
+        /* Hide view toggle on mobile */
     }
 }
 

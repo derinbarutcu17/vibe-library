@@ -84,6 +84,23 @@
     text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+    .leafText {
+        display: none;
+    }
+
+    .leafBadge {
+        top: 1.5rem;
+        left: 1.5rem;
+    }
+
+    .leafIcon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+}
+
 /* ============ OVERLAY ============ */
 .overlay {
     position: fixed;

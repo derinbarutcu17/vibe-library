@@ -609,6 +609,35 @@
   .mainContainer {
     aspect-ratio: auto;
     min-height: 100vh;
+    height: auto;
+  }
+
+  .heroSection {
+    padding: 0 1.5rem;
+    padding-top: 6rem;
+    /* Space for mobile header elements */
+    padding-bottom: 4rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    line-height: 2.4;
+    /* More breathing room for pills */
+    margin-bottom: 2rem;
+  }
+
+  /* CTA Buttons Stack on Mobile? Or just smaller? */
+  .ctaButtons {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .primaryCta,
+  .secondaryCta {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
   }
 
   .statsGrid {
@@ -619,6 +648,7 @@
   .statsColumn {
     align-items: center;
     text-align: center;
+    padding: 1rem 0;
   }
 
   .statItem {
@@ -737,4 +767,18 @@
   .stickyNavContent {
     padding: 0.75rem 1rem;
   }
+}
+/* Liquid Glass Pills - Mobile Tweaks */
+@media (max-width: 768px) {
+    .navPill {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9em;
+        margin: 0.2rem 0.2rem;
+        white-space: nowrap;
+        display: inline-flex;
+    }
+
+    .pillIcon {
+        font-size: 1.1em;
+    }
 }
