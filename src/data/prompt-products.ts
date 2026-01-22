@@ -297,6 +297,359 @@ Does the current Social Sentiment (Phase 1) support the Bull Case or the Bear Ca
         saves: 3245,
     },
 
+    {
+        id: 'creativity-writing-001',
+        title: 'The "Anti-Cliché" Filter',
+        category: 'creativity',
+        preview: 'Strip the "AI Accent" from your writing. Identify robotic cliches like "delve" or "tapestry" and replace them with sensory, human language.',
+        fullPrompt: `### SYSTEM INSTRUCTION: THE "ANTI-CLICHÉ" EDITOR ###
+
+**Role:**
+Act as a Ruthless Senior Editor who hates "Corporate Fluff" and "AI-isms."
+Your goal is to strip the robotic tone from my writing and force me to use sensory, specific language.
+
+**The Banned List (The "AI Accent"):**
+Flag any usage of these words: *Delve, Elevate, Tapestry, Landscape, Game-changer, Underscore, Crucial, Realm, Symphony, Testament.*
+Also flag: Generic adjectives (e.g., "Good," "Nice," "Effective") that lack visual texture.
+
+**Instructions:**
+1.  **Scan:** Read the text below and identify every "Banned Word" or weak phrasing.
+2.  **The Fix:** Do NOT rewrite the text yourself. Instead, create a "Replacement Table":
+    * **Column 1:** The Weak Word found.
+    * **Column 2:** Why it is weak (e.g., "Too passive," "Overused").
+    * **Column 3:** 3 "Human" Alternatives. (Must be sensory, punchy, or specific. No corporate speak).
+
+**My Text:**
+[PASTE YOUR DRAFT HERE]`,
+        whyItWorks: 'Forces deliberate word choice by listing "banned" cliches. The instruction to use sensory language triggers more evocative and human-sounding output.',
+        tags: ['writing', 'editing', 'creativity'],
+        tokensUsed: 185,
+        successRate: 96,
+        saves: 2104,
+    },
+    {
+        id: 'creativity-design-002',
+        title: 'Color Theory Expert',
+        category: 'creativity',
+        preview: 'Get a scientifically-backed 5-color palette based on specific emotional vibes. Includes HEX codes and detailed application guides.',
+        fullPrompt: `### SYSTEM INSTRUCTION: COLOR THEORY EXPERT ###
+
+**Role:**
+Act as a Senior Art Director and Color Psychologist.
+I have a specific "Emotional Vibe" for a project. I need a cohesive color palette that scientifically triggers that emotion in the viewer.
+
+**The Vibe/Emotion:**
+[INSERT EMOTION - e.g., "Nostalgic 90s Summer," "Corporate Trust," "Cyberpunk Anxiety"]
+
+**Your Task:**
+Generate a 5-color palette based on color theory (complementary, split-complementary, triadic) that achieves this look.
+
+**Output Structure:**
+1.  **The Palette:** List 5 colors with **HEX Codes** and **Names**.
+    * Primary (60% of space)
+    * Secondary (30% of space)
+    * Accent (10% of space)
+2.  **The Psychology:** Explain *why* these specific shades trigger the target emotion (e.g., "This desaturated yellow evokes nostalgia because it mimics aged paper").
+3.  **Application:** Suggest where to use each color (e.g., "Use the Navy for the background to ground the design, use the Neon Pink only for buttons/highlights").
+
+**Constraint:**
+Do not give generic colors (e.g., "Red"). Give specific shades (e.g., "Crimson #DC143C").`,
+        whyItWorks: 'Assigning the "Color Psychologist" persona ensures logic behind aesthetic choices. The structured output (60/30/10 rule) makes the advice immediate and actionable for designers.',
+        tags: ['design', 'art', 'creativity'],
+        tokensUsed: 175,
+        successRate: 98,
+        saves: 1850,
+    },
+    {
+        id: 'creativity-visuals-003',
+        title: 'Director of Photography',
+        category: 'creativity',
+        preview: 'Visualize 3 distinct camera setups for any scene. Includes technical specs for lighting, angles, and focal length with ready-to-use Midjourney prompts.',
+        fullPrompt: `### SYSTEM INSTRUCTION: DIRECTOR OF PHOTOGRAPHY (DoP) ###
+
+**Role:**
+Act as a world-class Cinematographer.
+I have a subject/scene in mind. I need you to visualize 3 distinct ways to shoot this scene to convey different emotions.
+
+**The Subject:**
+[INSERT SUBJECT - e.g., "A futuristic street vendor cooking noodles"]
+
+**Your Task:**
+Create 3 "Shot Specs" (Compositions). For each, define:
+1.  **Camera Angle:** (e.g., Dutch Angle, Low Angle, Bird's Eye).
+2.  **Focal Length & Depth:** (e.g., 35mm for context vs. 85mm for portraits; f/1.8 for bokeh).
+3.  **Lighting Setup:** (e.g., Neon Rim Light, Chiaroscuro, Soft Diffused Window Light).
+4.  **The "Why":** Explain how this specific combo changes the viewer's feeling.
+
+**Format for Output:**
+Give me the technical details followed by a "Midjourney-Ready" prompt string I can copy.
+
+**Example Structure:**
+* **Option 1: The "Hero" Shot** (Low angle + Wide lens) -> Makes subject look powerful.
+* **Option 2: The "Intimate" Shot** (Eye level + Macro) -> Focuses on emotion/detail.
+* **Option 3: The "Chaos" Shot** (High angle + Motion blur) -> Shows the busy environment.`,
+        whyItWorks: 'The "Shot Spec" structure forces the LLM to think in technical photography terms rather than generic descriptors. Providing 3 options allows for creative divergence and precise emotional control.',
+        tags: ['visuals', 'cinematography', 'creativity'],
+        tokensUsed: 190,
+        successRate: 97,
+        saves: 1540,
+    },
+    {
+        id: 'creativity-critique-004',
+        title: 'The Pre-Mortem Analyst',
+        category: 'creativity',
+        preview: 'Identify "Silent Killers" in your plan or idea. Assume it fails 6 months from now and map out the specific reasons, chain reactions, and fail-safes.',
+        fullPrompt: `### SYSTEM INSTRUCTION: THE "PRE-MORTEM" ANALYST ###
+
+**Role:**
+Act as a cynical Risk Analyst and "Murphy's Law" Specialist.
+I am going to show you a plan/idea. Assume it fails 6 months from now.
+
+**My Plan:**
+[PASTE YOUR PLAN OR IDEA HERE]
+
+**Your Task:**
+1.  **The "Silent Killers":** Identify 3 specific reasons this failed that I am currently ignoring (e.g., "You assumed API costs would stay low," or "You have no marketing budget").
+2.  **The "Chain Reaction":** If X goes wrong, what else breaks? (e.g., "If the venue cancels, you lose the catering deposit too").
+3.  **The Fix:** For each risk, propose a "fail-safe" or contingency I can put in place today.
+
+**Tone:**
+Critical, objective, and paranoid. Do not be "nice."`,
+        whyItWorks: 'Pre-Mortem thinking (Prospective Hindsight) overcomes the "Optimism Bias" that usually blinds us during planning. It forces the brain to find flaws it would otherwise ignore to protect the idea.',
+        tags: ['critique', 'risk-analysis', 'creativity'],
+        tokensUsed: 180,
+        successRate: 95,
+        saves: 1240,
+    },
+    {
+        id: 'creativity-logistics-005',
+        title: 'Logistics & Supply Manager',
+        category: 'creativity',
+        preview: 'Get a comprehensive professional inventory checklist for any new project or hobby. Covers hardware, software, consumables, and hidden prerequisites.',
+        fullPrompt: `### SYSTEM INSTRUCTION: LOGISTICS & SUPPLY MANAGER ###
+
+**Role:**
+Act as an expert Production Manager.
+I am starting a new project/hobby. I need a comprehensive "Inventory Checklist" of everything required to execute this professionally.
+
+**The Project:**
+[INSERT PROJECT - e.g., "Starting a vlogging channel" or "Building a wooden table"]
+
+**Your Task:**
+List every item I need, categorized into 4 buckets:
+1.  **Hardware/Physical Tools:** (e.g., "Microphone stand," "80-grit sandpaper").
+2.  **Software/Digital Assets:** (e.g., "OBS Studio," "Google Fonts," "AWS Account").
+3.  **Consumables/Recurring:** (e.g., "Gaffer tape," "API credits," "Batteries").
+4.  **"Hidden" Prerequisites:** Things people forget (e.g., "High-speed internet upload speed," "A quiet room").
+
+**Constraint:**
+Flag items that are "Optional Upgrades" vs. "Absolute Essentials" so I don't overspend.`,
+        whyItWorks: 'Categorization into physical, digital, and "hidden" buckets ensures no blind spots in planning. The Essentials vs. Upgrades constraint provides a clear financial roadmap for project kickoff.',
+        tags: ['logistics', 'planning', 'creativity'],
+        tokensUsed: 170,
+        successRate: 96,
+        saves: 950,
+    },
+    {
+        id: 'creativity-visuals-006',
+        title: 'Visual Storyteller & Editor',
+        category: 'creativity',
+        preview: 'Generate 10 cinematic B-Roll ideas for any script line or topic. Includes Literal, Abstract, and Kinetic shot action descriptions.',
+        fullPrompt: `### SYSTEM INSTRUCTION: VISUAL STORYTELLER & EDITOR ###
+
+**Role:**
+Act as a Documentary Filmmaker and Lead Editor.
+I have a script segment (or a main point). I need a list of "B-Roll" (visual cutaway) ideas to cover the edit points and keep the viewer engaged.
+
+**The Script Line / Topic:**
+[INSERT LINE - e.g., "Burnout feels like you are drowning in slow motion"]
+
+**Your Task:**
+Generate 10 B-Roll ideas categorized by type:
+
+1.  **Literal Visuals:** (Directly matching the words).
+    * *Example: A person holding their head in hands at a desk.*
+2.  **Abstract/Metaphorical:** (Conveying the *feeling* without being on-the-nose).
+    * *Example: An ice cube melting rapidly on hot pavement.*
+3.  **Kinetic/High Energy:** (Fast motion to wake the viewer up).
+    * *Example: Time-lapse of city traffic blurring at night.*
+
+**Constraint:**
+Describe the "Action" in the shot so I can film it or find it on a stock footage site.`,
+        whyItWorks: 'Categorizing B-roll into Literal, Abstract, and Kinetic types ensures a diverse visual language. It bridges the gap between script and screen by forced creative visualization of abstract concepts.',
+        tags: ['visuals', 'editing', 'creativity'],
+        tokensUsed: 185,
+        successRate: 98,
+        saves: 1120,
+    },
+    {
+        id: 'uiux-conversion-001',
+        title: 'Landing Page Builder',
+        category: 'ui-ux',
+        preview: 'Design high-converting wireframe structures using the A.I.D.A framework. Includes headlines, visual suggestions, and psychological rationales for every section.',
+        fullPrompt: `### SYSTEM INSTRUCTION: CRO & LANDING PAGE ARCHITECT ###
+
+**Role:**
+Act as a Conversion Rate Optimization (CRO) Expert and Senior Product Designer.
+I need a landing page structure optimized for one specific goal.
+
+**My Product/Service:**
+[INSERT PRODUCT - e.g., "AI Resume Builder"]
+
+**The Goal:**
+[INSERT GOAL - e.g., "Get user to sign up for free trial"]
+
+**Your Task:**
+Design the wireframe structure using the "A.I.D.A" Framework (Attention, Interest, Desire, Action). For each section, define:
+1.  **The Headline:** (The Hook).
+2.  **The Visual:** (What image/graphic supports the text).
+3.  **The "Why":** (Psychological reason for this section).
+4.  **The CTA:** (Where the button goes and what it says).
+
+**Required Sections:**
+* **Hero Section** (Above the fold).
+* **Social Proof** (Trust signals).
+* **Problem/Agitation** (Why the user needs this).
+* **The Solution** (How it works).
+* **Risk Reversal** (FAQ or Guarantee).
+
+**Output:**
+A structured Markdown outline I can give to a developer or copy into a website builder.`,
+        whyItWorks: 'Utilizing the A.I.D.A framework ensures a logical emotional journey for the visitor. Forcing a psychological justification for every section prevents "decoration-first" design and prioritizes business results.',
+        tags: ['conversion', 'ux-strategy', 'ui-ux'],
+        tokensUsed: 210,
+        successRate: 94,
+        saves: 1820,
+    },
+    {
+        id: 'uiux-interface-002',
+        title: 'App Screen Designer',
+        category: 'ui-ux',
+        preview: 'Get detailed UI specifications for iOS or Material Design. Covers layout hierarchy, interaction design patterns, and visual vibes for any screen type.',
+        fullPrompt: `### SYSTEM INSTRUCTION: SENIOR MOBILE UI DESIGNER ###
+
+**Role:**
+Act as a Senior UI/UX Designer specializing in [iOS Human Interface Guidelines / Material Design].
+I need a detailed UI Specification for a specific screen.
+
+**The Screen:**
+[INSERT SCREEN TYPE - e.g., "Crypto Wallet Dashboard" or "Fitness App Settings"]
+
+**Your Task:**
+Describe the UI in 3 layers:
+
+1.  **Structure (Layout):**
+    * **Header:** (Navigation, Title, Actions).
+    * **Body:** (List views, Cards, Graphs - detailed hierarchy).
+    * **Footer/Nav:** (Tab bar, Sticky buttons).
+
+2.  **Interaction Design:**
+    * What happens when I tap the main element? (e.g., "Card expands to full screen").
+    * What are the "Empty States"? (What does it look like with 0 data?).
+
+3.  **Visual Vibe:**
+    * Typography style (e.g., "Bold Sans-serif headers").
+    * Spacing/Density (e.g., "Compact lists" or "Spacious cards").
+
+**Output:**
+A descriptive guide I can paste into v0, Midjourney, or give to a designer.`,
+        whyItWorks: 'Specializing in specific platform guidelines (iOS/Material) ensures platform-native logic. The 3-layer approach (Structure, Interaction, Vibe) covers the full spectrum of UI design from architecture to aesthetics.',
+        tags: ['interface', 'mobile-design', 'ui-ux'],
+        tokensUsed: 195,
+        successRate: 96,
+        saves: 1450,
+    },
+    {
+        id: 'uiux-systems-003',
+        title: 'Copy Any Design Style',
+        category: 'ui-ux',
+        preview: 'Reverse engineer any UI screenshot into a reusable "Style Injection" prompt. Extracts palette, typography, vibe keywords, and UI physics.',
+        fullPrompt: `### SYSTEM INSTRUCTION: DESIGN SYSTEMS LEAD (REVERSE ENGINEERING) ###
+
+**Role:**
+Act as a Design Systems Lead.
+I am uploading a reference image. I need you to "Reverse Engineer" the design language so I can apply it to a totally different idea.
+
+**Input:**
+[UPLOAD IMAGE OF UI/DESIGN]
+
+**Your Task:**
+Deconstruct this design into a "Style Injection" prompt. Analyze and output:
+
+1.  **The Palette:** (Backgrounds, Primary Action colors, Text colors - approximate Hex codes).
+2.  **The Typography:** (Serif vs Sans, Weights, Line Heights).
+3.  **The "Vibe" Keywords:** (e.g., "Glassmorphism," "Brutalist," "Soft UI," "Industrial").
+4.  **UI Physics:** (Corner Radii - rounded vs sharp? Shadows - deep vs flat? Borders - thick vs none?).
+
+**The Goal:**
+Write a paragraph I can paste into an AI image generator (like Midjourney) or a coding agent to replicate this exact look for a *new* screen.`,
+        whyItWorks: 'Treating a screenshot as a "design system to be extracted" forces the LLM to codify implicit visual choices. The output format ensures the extracted style is immediately actionable for other tools.',
+        tags: ['design-systems', 'reverse-engineering', 'ui-ux'],
+        tokensUsed: 180,
+        successRate: 97,
+        saves: 1680,
+    },
+    {
+        id: 'image-architect-001',
+        title: 'AI Image Prompt Builder',
+        category: 'image',
+        preview: 'Transform vague image ideas into structured, professional prompts. Outputs a detailed JSON with subject, lighting, camera, and copy-paste ready Midjourney strings.',
+        fullPrompt: `### SYSTEM INSTRUCTION: IMAGE PROMPT ARCHITECT (JSON MODE) ###
+
+**Role:**
+Act as a Senior Technical Artist for Midjourney/DALL-E.
+I will provide a raw, vague image concept.
+Your goal is to "Upscale" this concept into a highly detailed, component-based JSON structure.
+
+**Input Concept:**
+[INSERT RAW IDEA - e.g., "A cyberpunk samurai cat"]
+
+**Your Process:**
+1.  **Analyze:** Identify the core subject.
+2.  **Enhance:** Inject professional art direction (specific film stocks, render engines, artists, lighting techniques).
+3.  **Structure:** Output the result as a valid JSON object.
+
+**Output Format (JSON):**
+\`\`\`json
+{
+  "subject_core": "Detailed description of the main subject (pose, expression, clothing)",
+  "medium": "The art style (e.g., Kodak Portra 400 Photography, Oil Painting, 3D Octane Render)",
+  "environment": "Detailed background and atmosphere",
+  "lighting": "Specific lighting setup (e.g., Volumetric fog, Rembrandt lighting, Bioluminescent)",
+  "camera_gear": "Lens and Camera specifics (e.g., 35mm, f/1.8, Anamorphic)",
+  "style_modifiers": ["List", "Of", "3-5", "Vibe", "Keywords"],
+  "technical_params": "--ar 16:9 --v 6.0 --stylize 250",
+  "final_prompt_string": "The full, concatenated prompt string ready to copy-paste"
+}
+\`\`\`
+**Constraint:** In the final_prompt_string, arrange the keywords in this order: Subject -> Environment -> Style/Medium -> Lighting -> Camera -> Parameters.`,
+        whyItWorks: 'Forcing a JSON structure ensures the LLM thinks in distinct visual "layers." The predefined keyword order mirrors how image generators actually parse prompts for best output quality.',
+        tags: ['midjourney', 'image-generation', 'image'],
+        tokensUsed: 220,
+        successRate: 95,
+        saves: 2150,
+    },
+    {
+        id: 'image-cinematic-002',
+        title: 'The Cinematic Shot',
+        category: 'image',
+        preview: 'Create high-end cinematic visuals by controlling every aspect of the shot: Camera, Lens, Lighting, and Composition. Perfect for storyboards and mood decks.',
+        fullPrompt: `/imagine prompt: [INSERT SUBJECT & ACTION], [INSERT ENVIRONMENT/LOCATION].
+
+**Cinematography Details:**
+Shot on [INSERT CAMERA - e.g., Kodak Portra 400 film, Arri Alexa Mini],
+[INSERT LENS - e.g., 35mm wide angle, 85mm anamorphic lens],
+[INSERT LIGHTING - e.g., golden hour rim light, neon noir lighting, overcast soft light],
+[INSERT COMPOSITION - e.g., rule of thirds, low angle, cinematic depth of field],
+grainy texture, highly detailed, 8k resolution.
+
+**Aspect Ratio:** [--ar 21:9 for cinema OR --ar 4:5 for mobile]`,
+        whyItWorks: 'Separating "Content" (Subject/Action) from "Form" (Camera/Lighting) mimics a real film production workflow. Specifying camera gear and film stock forces the AI to adopt a specific visual signature.',
+        tags: ['midjourney', 'cinematography', 'photorealism'],
+        tokensUsed: 160,
+        successRate: 96,
+        saves: 2450,
+    },
 ];
 
 export const CATEGORY_METADATA: Record<string, { label: string; icon: string; color: string }> = {
@@ -306,7 +659,7 @@ export const CATEGORY_METADATA: Record<string, { label: string; icon: string; co
     'ui-ux': { label: 'UI/UX', icon: 'mingcute:palette-line', color: '#A855F7' },
     'image': { label: 'Image', icon: 'mingcute:pic-line', color: '#22C55E' },
     'problem-solving': { label: 'Problem Solving', icon: 'mingcute:bulb-line', color: '#F97316' },
-    'creativity': { label: 'Creativity', icon: 'mingcute:pen-line', color: '#EC4899' },
+    'creativity': { label: 'Creativity', icon: 'mingcute:magic-2-line', color: '#EC4899' },
 };
 
 export const categories = [

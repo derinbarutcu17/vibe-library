@@ -41,12 +41,49 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
             <div className={`${styles.card} ${isFlipped ? styles.flipped : ''}`}>
                 {/* Front of card */}
                 <div className={styles.cardFront}>
-                    {/* Category Pill Badge */}
-                    <div className={styles.categoryPill}>
-                        <Icon icon={meta.icon} className={styles.categoryIcon} style={{ color: meta.color }} />
-                        <span className={styles.category} style={{ color: meta.color }}>
-                            {meta.label}
-                        </span>
+                    {/* Header with Category and Specialized Tag */}
+                    <div className={styles.cardHeader}>
+                        <div className={styles.categoryPill}>
+                            <Icon icon={meta.icon} className={styles.categoryIcon} style={{ color: meta.color }} />
+                            <span className={styles.category} style={{ color: meta.color }}>
+                                {meta.label}
+                            </span>
+                        </div>
+
+                        {prompt.category === 'creativity' && (
+                            <>
+                                {prompt.tags.includes('writing') && (
+                                    <div className={styles.writingTag}>
+                                        <Icon icon="mingcute:pen-line" />
+                                        <span>Writing</span>
+                                    </div>
+                                )}
+                                {prompt.tags.includes('design') && (
+                                    <div className={styles.designTag}>
+                                        <Icon icon="mingcute:palette-line" />
+                                        <span>Design</span>
+                                    </div>
+                                )}
+                                {prompt.tags.includes('visuals') && (
+                                    <div className={styles.visualsTag}>
+                                        <Icon icon="mingcute:video-line" />
+                                        <span>Visuals</span>
+                                    </div>
+                                )}
+                                {prompt.tags.includes('critique') && (
+                                    <div className={styles.critiqueTag}>
+                                        <Icon icon="mingcute:alert-line" />
+                                        <span>Critique</span>
+                                    </div>
+                                )}
+                                {prompt.tags.includes('logistics') && (
+                                    <div className={styles.logisticsTag}>
+                                        <Icon icon="mingcute:box-line" />
+                                        <span>Logistics</span>
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </div>
 
                     {/* Content */}
