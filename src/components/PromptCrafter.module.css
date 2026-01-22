@@ -468,9 +468,17 @@
         gap: 0.5rem;
     }
 
+    /* Inspiration Button - Keep text visible if space permits, or make icon larger */
+    .inspirationBtn {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.35rem 0.6rem;
+        border-radius: 99px;
+    }
+
     .inspirationBtn span {
-        display: none;
-        /* Icon only */
+        display: inline-block;
+        /* Restore text */
+        font-size: 0.75rem;
     }
 
     /* Category Pills */
@@ -535,24 +543,23 @@
         position: fixed;
         bottom: 0;
         left: 0 !important;
-        /* Fix horizontal centering */
-        padding: 1rem;
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        /* More bottom padding for safe area */
         width: 100%;
-        background: linear-gradient(to top, rgba(10, 10, 10, 1) 50%, transparent);
-        /* Fade bg for visibility */
+        background: rgba(10, 10, 10, 0.95);
+        /* Solid background to prevent see-through */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
         transform: none;
-        /* No shifting */
         display: flex;
         justify-content: center;
-        z-index: 150;
+        z-index: 1000;
+        /* SUPER HIGH Z-INDEX */
     }
 
     .generateBtn {
         width: 100%;
-        max-width: 400px;
         justify-content: center;
         padding: 0.9rem;
-        font-size: 1rem;
-        box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+        margin-bottom: 0;
     }
 }

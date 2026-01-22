@@ -67,24 +67,29 @@
     }
 
     .cardContainer {
-        height: 280px;
-        /* Force fixed height on mobile for stable flip */
+        height: 250px;
+        /* Reduced from 280px for better compaction */
+        min-height: 0;
     }
 
     .cardFront,
     .cardBack {
-        padding: 0.85rem;
-        /* Compact padding */
+        padding: 0.75rem;
+        /* Tighter padding */
     }
 
     .title {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        /* Smaller title */
+        margin-bottom: 0.25rem;
     }
 
     .description {
-        font-size: 0.8rem;
-        -webkit-line-clamp: 5;
-        line-clamp: 5;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        -webkit-line-clamp: 4;
+        /* Show less text */
+        line-clamp: 4;
     }
 
     .cardFooter {
