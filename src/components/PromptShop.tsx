@@ -77,14 +77,7 @@ export default function PromptShop({ initialCategory = 'all' }: PromptShopProps)
                 ))}
             </div>
 
-            {/* Load More */}
-            {filteredProducts.length > 0 && (
-                <div className={styles.loadMore}>
-                    <button className={styles.loadMoreBtn}>
-                        Load More Prompts
-                    </button>
-                </div>
-            )}
+            {/* Load More Removed per optimization request */}
         </div>
     );
 }

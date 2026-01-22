@@ -407,20 +407,77 @@
 }
 
 /* ============ RESPONSIVE ============ */
+/* ============ RESPONSIVE ============ */
 @media (max-width: 768px) {
     .contentGrid {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .statsGrid {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
 
+    /* Reduce Overlay Size */
+    .overlay {
+        padding: 0;
+        align-items: flex-end;
+        /* Bottom sheet feeling or just full cover */
+    }
+
+    .overlayContent {
+        height: 100%;
+        max-height: 100%;
+        border-radius: 0;
+        padding: 1.5rem;
+        padding-top: 4rem;
+        /* Space for close button */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .closeBtn {
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Typography fixes */
     .overlayTitle {
         font-size: 2rem;
+        line-height: 1;
     }
 
     .overlaySubtitle {
         font-size: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .leftMain {
+        padding: 1.25rem;
+        gap: 1.5rem;
+    }
+
+    .introText {
+        font-size: 0.95rem;
+    }
+
+    .statNumber {
+        font-size: 1.75rem;
+    }
+
+    /* Stack cards */
+    .rightCards {
+        gap: 0.75rem;
+    }
+
+    .challengeCard,
+    .solutionCard {
+        padding: 1.25rem;
+    }
+
+    .cardTitle {
+        font-size: 1.25rem;
     }
 }

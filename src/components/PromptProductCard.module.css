@@ -49,24 +49,46 @@
 
 @media (max-width: 768px) {
 
+    /* Fix disappearing flip: Ensure preserver-3d and explicit z-indexes */
+    .card {
+        transform-style: preserve-3d;
+    }
+
     .cardFront,
     .cardBack {
         position: relative;
-        /* layout flow */
-        height: auto;
-        min-height: 100%;
-        padding: 1rem;
+        /* Maintain flow for auto-height? No, absolute is needed for flip */
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+        /* Critical for Safari/Mobile */
+        -webkit-backface-visibility: hidden;
+    }
+
+    .cardContainer {
+        height: 280px;
+        /* Force fixed height on mobile for stable flip */
+    }
+
+    .cardFront,
+    .cardBack {
+        padding: 0.85rem;
+        /* Compact padding */
     }
 
     .title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .description {
-        font-size: 0.85rem;
-        -webkit-line-clamp: 6;
-        /* Show more text if needed since height is auto */
-        line-clamp: 6;
+        font-size: 0.8rem;
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+    }
+
+    .cardFooter {
+        padding-top: 0.75rem;
     }
 }
 

@@ -452,6 +452,7 @@
 }
 
 /* ============ RESPONSIVE MOBILE ============ */
+/* ============ RESPONSIVE MOBILE ============ */
 @media (max-width: 768px) {
 
     /* Header */
@@ -475,57 +476,83 @@
     /* Category Pills */
     .categoryNav {
         padding: 0.5rem 1rem;
-        justify-content: flex-start;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        justify-content: center;
+        flex-wrap: wrap;
+        /* WRAP TAGS */
+        gap: 0.5rem;
+        height: auto;
     }
 
     .categoryPill {
         flex-shrink: 0;
-        padding: 0.4rem 0.8rem;
+        padding: 0.35rem 0.75rem;
         font-size: 0.75rem;
+        margin: 0;
     }
 
     /* Main Layout */
     .mainCanvas {
-        padding: 1.5rem 1rem;
-        padding-bottom: 8rem;
+        padding: 1rem 1rem;
+        padding-bottom: 7rem;
         /* Space for FAB */
         margin-right: 0 !important;
         /* Disable shift */
     }
 
     .visionInput {
-        font-size: 1.2rem;
-        min-height: 20vh;
+        font-size: 1.1rem;
+        min-height: 15vh;
     }
 
     .contextSection {
-        margin-top: 2rem;
+        margin-top: 1.5rem;
     }
 
-    /* Sidebar as Full Screen Overlay */
+    /* Sidebar as Bottom Sheet / Overlay (Not full screen default) */
     .sidebar {
         width: 100%;
+        top: 20%;
+        /* Top gap so it feels like a sheet */
+        border-radius: 20px 20px 0 0;
         z-index: 200;
-        /* Above everything */
         border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .sidebarOpen::before {
+        /* Backdrop */
+        content: '';
+        position: fixed;
+        inset: 0;
+        top: -25%;
+        /* Covers header too */
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
     }
 
     /* Generate Button */
     .generateWrapper {
-        bottom: 1.5rem;
-        width: 90%;
+        position: fixed;
+        bottom: 0;
+        left: 0 !important;
+        /* Fix horizontal centering */
+        padding: 1rem;
+        width: 100%;
+        background: linear-gradient(to top, rgba(10, 10, 10, 1) 50%, transparent);
+        /* Fade bg for visibility */
+        transform: none;
+        /* No shifting */
         display: flex;
         justify-content: center;
-        left: 50% !important;
-        /* Disable shift */
-        transform: translateX(-50%);
+        z-index: 150;
     }
 
     .generateBtn {
         width: 100%;
+        max-width: 400px;
         justify-content: center;
-        padding: 1rem;
+        padding: 0.9rem;
+        font-size: 1rem;
+        box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
     }
 }

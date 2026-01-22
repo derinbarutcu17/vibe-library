@@ -14,7 +14,7 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
     const [vision, setVision] = useState('');
     const [context, setContext] = useState('');
     const [generatedPrompt, setGeneratedPrompt] = useState('');
-    const [inspirationOpen, setInspirationOpen] = useState(true);
+    const [inspirationOpen, setInspirationOpen] = useState(false);
 
     // Prevent body scroll when crafter is open
     useEffect(() => {
