@@ -536,28 +536,29 @@
         flex-shrink: 0;
     }
 
-    /* Sidebar as Bottom Sheet / Overlay (Not full screen default) */
+    /* Sidebar as Full-Screen Overlay on Mobile with slide-up animation */
     .sidebar {
         width: 100%;
-        top: 20%;
-        /* Top gap so it feels like a sheet */
-        border-radius: 20px 20px 0 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 0;
         z-index: 200;
         border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-top: none;
+        /* Slide up from bottom animation */
+        transform: translateY(100%);
+        transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .sidebar.sidebarOpen {
+        transform: translateY(0);
     }
 
     .sidebarOpen::before {
-        /* Backdrop */
-        content: '';
-        position: fixed;
-        inset: 0;
-        top: -25%;
-        /* Covers header too */
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        /* Allow clicks to pass through to elements behind */
-        pointer-events: none;
+        /* No backdrop needed since it's full screen */
+        display: none;
     }
 
     /* Generate Button - Positioned higher to avoid mobile browser UI */
