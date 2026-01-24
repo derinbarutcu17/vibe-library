@@ -8,8 +8,12 @@
     color: #f1f5f9;
     font-family: var(--font-narrative);
     z-index: 100;
-    /* Prevent ANY scrolling - this container handles its own scroll */
+    /* Prevent ANY scrolling */
     overflow: hidden;
+    /* Use dynamic viewport height for proper mobile sizing */
+    height: 100dvh;
+    height: 100vh;
+    /* Fallback for older browsers */
 }
 
 /* ============ HEADER ============ */
@@ -498,22 +502,38 @@
         margin: 0;
     }
 
-    /* Main Layout */
+    /* Main Layout - Non-scrollable on mobile */
+    .mainWrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        /* Account for generate button at bottom */
+        padding-bottom: 5.5rem;
+    }
+
     .mainCanvas {
-        padding: 1rem 1rem;
-        padding-bottom: 7rem;
-        /* Space for FAB */
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        padding-bottom: 0;
         margin-right: 0 !important;
-        /* Disable shift */
+        /* Disable scrolling - content must fit */
+        overflow: hidden;
     }
 
     .visionInput {
-        font-size: 1.1rem;
-        min-height: 15vh;
+        font-size: 1rem;
+        /* Use flex to fill available space instead of fixed height */
+        flex: 1;
+        min-height: 80px;
+        max-height: none;
     }
 
     .contextSection {
-        margin-top: 1.5rem;
+        margin-top: 1rem;
+        flex-shrink: 0;
     }
 
     /* Sidebar as Bottom Sheet / Overlay (Not full screen default) */
@@ -540,30 +560,31 @@
         pointer-events: none;
     }
 
-    /* Generate Button */
+    /* Generate Button - Positioned higher to avoid mobile browser UI */
     .generateWrapper {
         position: fixed;
-        bottom: 0;
-        left: 0 !important;
-        right: 0;
-        /* Use padding-bottom with safe-area-inset for iPhone notch/home indicator */
-        padding: 1rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
-        width: 100%;
-        background: rgba(10, 10, 10, 0.98);
-        /* Slightly more opaque for better visibility */
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        /* Higher from bottom to avoid Safari toolbar and home indicator */
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+        left: 1rem !important;
+        right: 1rem;
+        width: auto;
+        /* No background bar - just floating button */
+        background: transparent;
+        border-top: none;
         transform: none !important;
         display: flex;
         justify-content: center;
         z-index: 1000;
-        /* Ensure button is always clickable */
-        pointer-events: auto;
+        pointer-events: none;
     }
 
     .generateBtn {
         width: 100%;
         justify-content: center;
-        padding: 0.9rem;
+        padding: 1rem;
         margin-bottom: 0;
+        /* Add shadow for floating effect */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(37, 99, 235, 0.3);
+        pointer-events: auto;
     }
 }
