@@ -536,6 +536,8 @@
         /* Covers header too */
         background: rgba(0, 0, 0, 0.5);
         z-index: -1;
+        /* Allow clicks to pass through to elements behind */
+        pointer-events: none;
     }
 
     /* Generate Button */
@@ -543,17 +545,19 @@
         position: fixed;
         bottom: 0;
         left: 0 !important;
-        padding: 1rem 1.5rem 1.5rem 1.5rem;
-        /* More bottom padding for safe area */
+        right: 0;
+        /* Use padding-bottom with safe-area-inset for iPhone notch/home indicator */
+        padding: 1rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
         width: 100%;
-        background: rgba(10, 10, 10, 0.95);
-        /* Solid background to prevent see-through */
+        background: rgba(10, 10, 10, 0.98);
+        /* Slightly more opaque for better visibility */
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-        transform: none;
+        transform: none !important;
         display: flex;
         justify-content: center;
         z-index: 1000;
-        /* SUPER HIGH Z-INDEX */
+        /* Ensure button is always clickable */
+        pointer-events: auto;
     }
 
     .generateBtn {
