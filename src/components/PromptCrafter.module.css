@@ -455,6 +455,29 @@
     transition: transform 0.2s ease;
 }
 
+/* ============ FOOTER CREDIT ============ */
+.crafterFooter {
+    position: fixed;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.3);
+    z-index: 50;
+    white-space: nowrap;
+}
+
+.footerLink {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+    color: #EC4899;
+}
+
 /* ============ RESPONSIVE MOBILE ============ */
 /* ============ RESPONSIVE MOBILE ============ */
 @media (max-width: 768px) {
@@ -587,5 +610,10 @@
         /* Add shadow for floating effect */
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(37, 99, 235, 0.3);
         pointer-events: auto;
+    }
+
+    /* Footer on mobile - hide to avoid clutter */
+    .crafterFooter {
+        display: none;
     }
 }

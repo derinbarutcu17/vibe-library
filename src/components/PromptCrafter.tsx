@@ -61,7 +61,7 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                 <div className={styles.logoContainer}>
                     <span className={styles.logoText}>Prompt </span>
                     <span className={styles.logoAccent}>Crafter</span>
-                    <span style={{ marginLeft: '0.5rem', opacity: 0.4, fontSize: '0.6rem' }}>v1.2</span>
+                    <span style={{ marginLeft: '0.5rem', opacity: 0.4, fontSize: '0.6rem' }}>v1.3</span>
                 </div>
 
                 <div className={styles.headerRight}>
@@ -81,7 +81,10 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                     <button
                         key={cat.id}
                         className={`${styles.categoryPill} ${category === cat.id ? styles.activePill : ''}`}
-                        onClick={() => setCategory(cat.id)}
+                        onClick={() => {
+                            setCategory(cat.id);
+                            setInspirationOpen(true); // Auto-open inspiration when category is clicked
+                        }}
                     >
                         <Icon icon={cat.icon} className={styles.pillIcon} style={{ color: cat.color }} />
                         {cat.label}
@@ -150,7 +153,10 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                                     className={styles.templateCard}
                                     onClick={() => handleTemplateSelect(template)}
                                 >
-                                    <span className={styles.templateTag}>
+                                    <span
+                                        className={styles.templateTag}
+                                        style={{ color: CATEGORY_METADATA[category]?.color || '#2563eb' }}
+                                    >
                                         {template.tags[0]?.toUpperCase() || 'TEMPLATE'}
                                     </span>
                                     <h4 className={styles.templateTitle}>{template.title}</h4>
@@ -174,6 +180,20 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                     <span>Generate Prompt</span>
                     <Icon icon="mingcute:sparkles-2-line" className={styles.generateIcon} />
                 </button>
+            </div>
+
+            {/* Footer Credit */}
+            <div className={styles.crafterFooter}>
+                <span>Designed by </span>
+                <a
+                    href="https://www.instagram.com/derinbarutcu17/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.footerLink}
+                >
+                    Derin
+                </a>
+                <span> with ❤️</span>
             </div>
         </div>
     );

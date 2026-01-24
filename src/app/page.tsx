@@ -216,7 +216,7 @@ export default function Home() {
                 <div className={styles.announcementPill}>
                   <span className={styles.announcementDot}></span>
                   <span>{t('hero.announcement')}</span>
-                  <span style={{ marginLeft: '0.5rem', opacity: 0.5, fontSize: '0.7rem' }}>v1.2</span>
+                  <span style={{ marginLeft: '0.5rem', opacity: 0.5, fontSize: '0.7rem' }}>v1.3</span>
                 </div>
 
                 <h1 className={styles.mainTitle} ref={titleRef}>{t('hero.title')}</h1>
