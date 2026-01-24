@@ -61,6 +61,7 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
                 <div className={styles.logoContainer}>
                     <span className={styles.logoText}>Prompt </span>
                     <span className={styles.logoAccent}>Crafter</span>
+                    <span style={{ marginLeft: '0.5rem', opacity: 0.4, fontSize: '0.6rem' }}>v1.1</span>
                 </div>
 
                 <div className={styles.headerRight}>

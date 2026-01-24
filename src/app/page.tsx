@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import FrequencyFooter from '@/components/FrequencyFooter';
 import PromptShop from '@/components/PromptShop';
 import PromptCrafter from '@/components/PromptCrafter';
@@ -24,12 +25,24 @@ export default function Home() {
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const stickyNavRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const { t } = useTranslation();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isCrafterOpen, setIsCrafterOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
@@ -41,7 +54,13 @@ export default function Home() {
   };
 
   const handleCraftPrompt = () => {
-    setIsCrafterOpen(true);
+    // On mobile, navigate to dedicated crafter page
+    if (isMobile) {
+      router.push('/crafter');
+    } else {
+      // On desktop, open sliding panel
+      setIsCrafterOpen(true);
+    }
   };
 
   const handleCloseCrafter = () => {
@@ -197,6 +216,7 @@ export default function Home() {
                 <div className={styles.announcementPill}>
                   <span className={styles.announcementDot}></span>
                   <span>{t('hero.announcement')}</span>
+                  <span style={{ marginLeft: '0.5rem', opacity: 0.5, fontSize: '0.7rem' }}>v1.1</span>
                 </div>
 
                 <h1 className={styles.mainTitle} ref={titleRef}>{t('hero.title')}</h1>
