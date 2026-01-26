@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { GoldenStandard } from '@/data/types';
 import styles from './GoldenCard.module.css';
+import { useI18n } from '@/i18n';
 
 interface GoldenCardProps {
     standard: GoldenStandard;
@@ -11,6 +12,7 @@ interface GoldenCardProps {
 export default function GoldenCard({ standard }: GoldenCardProps) {
     const [isHovered, setIsHovered] = useState(false);
     const [copied, setCopied] = useState(false);
+    const { t } = useI18n();
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(standard.pattern);
@@ -43,13 +45,13 @@ export default function GoldenCard({ standard }: GoldenCardProps) {
                             />
                         </div>
                         <span className={styles.usageLabel}>
-                            {standard.usagePercentage}% usage
+                            {standard.usagePercentage}% {t('promptShop.usage') || 'usage'}
                         </span>
                     </div>
 
                     <div className={styles.tags}>
                         {standard.tags.map(tag => (
-                            <span key={tag} className={styles.tag}>#{tag}</span>
+                            <span key={tag} className={styles.tag}>#{t(`tags.${tag}`) || tag}</span>
                         ))}
                     </div>
                 </div>
@@ -62,12 +64,12 @@ export default function GoldenCard({ standard }: GoldenCardProps) {
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                     </svg>
                 </div>
-                <span className={styles.copyLabel}>COPY PATTERN</span>
+                <span className={styles.copyLabel}>{t('common.copyPrompt')}</span>
             </div>
 
             {copied && (
                 <div className={styles.toast}>
-                    Pattern Acquired
+                    {t('common.copied')}
                 </div>
             )}
         </div>

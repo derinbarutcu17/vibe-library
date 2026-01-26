@@ -5,6 +5,7 @@ import styles from './PromptProductCard.module.css';
 import type { PromptProduct } from '@/data/prompt-products';
 import { Icon } from '@iconify/react';
 import { CATEGORY_METADATA } from '@/data/prompt-products';
+import { useI18n } from '@/i18n';
 
 interface PromptProductCardProps {
     prompt: PromptProduct;
@@ -20,6 +21,7 @@ function truncateWords(text: string, maxWords: number): string {
 export default function PromptProductCard({ prompt }: PromptProductCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [copied, setCopied] = useState(false);
+    const { locale, t } = useI18n();
 
     const handleCopy = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -30,8 +32,9 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
 
     const meta = CATEGORY_METADATA[prompt.category];
 
-    // Use the curated preview text which now contains the merged summary
-    const combinedText = prompt.preview;
+    // Get localized content
+    const displayTitle = locale === 'tr' && prompt.titleTr ? prompt.titleTr : (locale === 'de' && prompt.titleDe ? prompt.titleDe : prompt.title);
+    const combinedText = locale === 'tr' && prompt.previewTr ? prompt.previewTr : (locale === 'de' && prompt.previewDe ? prompt.previewDe : prompt.preview);
 
     return (
         <div
@@ -46,7 +49,7 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
                         <div className={styles.categoryPill}>
                             <Icon icon={meta.icon} className={styles.categoryIcon} style={{ color: meta.color }} />
                             <span className={styles.category} style={{ color: meta.color }}>
-                                {meta.label}
+                                {t(`categories.${prompt.category}`)}
                             </span>
                         </div>
 
@@ -55,31 +58,31 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
                                 {prompt.tags.includes('writing') && (
                                     <div className={styles.writingTag}>
                                         <Icon icon="mingcute:pen-line" />
-                                        <span>Writing</span>
+                                        <span>{t('tags.writing')}</span>
                                     </div>
                                 )}
                                 {prompt.tags.includes('design') && (
                                     <div className={styles.designTag}>
                                         <Icon icon="mingcute:palette-line" />
-                                        <span>Design</span>
+                                        <span>{t('tags.design')}</span>
                                     </div>
                                 )}
                                 {prompt.tags.includes('visuals') && (
                                     <div className={styles.visualsTag}>
                                         <Icon icon="mingcute:video-line" />
-                                        <span>Visuals</span>
+                                        <span>{t('tags.visuals')}</span>
                                     </div>
                                 )}
                                 {prompt.tags.includes('critique') && (
                                     <div className={styles.critiqueTag}>
                                         <Icon icon="mingcute:alert-line" />
-                                        <span>Critique</span>
+                                        <span>{t('tags.critique')}</span>
                                     </div>
                                 )}
                                 {prompt.tags.includes('logistics') && (
                                     <div className={styles.logisticsTag}>
                                         <Icon icon="mingcute:box-line" />
-                                        <span>Logistics</span>
+                                        <span>{t('tags.logistics')}</span>
                                     </div>
                                 )}
                             </>
@@ -88,7 +91,7 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
 
                     {/* Content */}
                     <div className={styles.cardContent}>
-                        <h3 className={styles.title}>{prompt.title}</h3>
+                        <h3 className={styles.title}>{displayTitle}</h3>
                         <p className={styles.description}>{combinedText}</p>
                     </div>
 
@@ -96,11 +99,11 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
                     <div className={styles.cardFooter}>
                         <button className={styles.copyBtnFront} onClick={handleCopy}>
                             <Icon icon={copied ? "mingcute:check-line" : "mingcute:copy-2-line"} />
-                            {copied ? 'Copied!' : 'Copy'}
+                            {copied ? t('common.copied') : t('common.copy')}
                         </button>
                         <span className={styles.flipHint}>
                             <Icon icon="mingcute:arrow-right-circle-line" />
-                            View full prompt
+                            {t('common.viewFullPrompt')}
                         </span>
                     </div>
                 </div>
@@ -108,8 +111,8 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
                 {/* Back of card - Just the full prompt */}
                 <div className={styles.cardBack}>
                     <div className={styles.backHeader}>
-                        <span className={styles.backTitle}>Full Prompt</span>
-                        <span className={styles.flipBackHint}>← tap to flip</span>
+                        <span className={styles.backTitle}>{t('promptShop.fullPrompt')}</span>
+                        <span className={styles.flipBackHint}>{t('promptShop.flipBack')}</span>
                     </div>
 
                     <div className={styles.fullPromptSection}>
@@ -118,7 +121,7 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
 
                     <button className={styles.copyBtn} onClick={handleCopy}>
                         <Icon icon={copied ? "mingcute:check-line" : "mingcute:copy-2-line"} />
-                        {copied ? 'Copied!' : 'Copy Prompt'}
+                        {copied ? t('common.copied') : t('common.copyPromptShort')}
                     </button>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import styles from './PromptShop.module.css';
 import PromptProductCard from './PromptProductCard';
 import { promptProducts, categories } from '@/data/prompt-products';
 import { Icon } from '@iconify/react';
+import { useI18n } from '@/i18n';
 
 interface PromptShopProps {
     initialCategory?: string;
@@ -13,7 +14,8 @@ interface PromptShopProps {
 export default function PromptShop({ initialCategory = 'all' }: PromptShopProps) {
     const [activeCategory, setActiveCategory] = useState(initialCategory);
     const [sortBy, setSortBy] = useState<'saves' | 'successRate' | 'tokensUsed'>('saves');
-    const [gridCols, setGridCols] = useState<2 | 3 | 4>(3);
+    const [gridCols, setGridCols] = useState<3 | 4>(3);
+    const { t } = useI18n();
 
     // Sync with parent when initialCategory changes
     useEffect(() => {
@@ -40,7 +42,7 @@ export default function PromptShop({ initialCategory = 'all' }: PromptShopProps)
                             onClick={() => setActiveCategory(cat.id)}
                         >
                             <Icon icon={cat.icon} className={styles.categoryIcon} />
-                            <span className={styles.categoryLabel}>{cat.label}</span>
+                            <span className={styles.categoryLabel}>{t(`categories.${cat.id}`)}</span>
                         </button>
                     ))}
                 </div>
@@ -51,15 +53,15 @@ export default function PromptShop({ initialCategory = 'all' }: PromptShopProps)
             {/* Results count */}
             <div className={styles.resultsBar}>
                 <span className={styles.resultsCount}>
-                    {filteredProducts.length} prompt{filteredProducts.length !== 1 ? 's' : ''} found
+                    {filteredProducts.length} {t('promptShop.found')}
                 </span>
                 <div className={styles.viewToggle}>
-                    <span className={styles.viewLabel}>VIEW</span>
-                    {[2, 3, 4].map((cols) => (
+                    <span className={styles.viewLabel}>{t('promptShop.view') || 'VIEW'}</span>
+                    {[3, 4].map((cols) => (
                         <button
                             key={cols}
                             className={`${styles.viewBtn} ${gridCols === cols ? styles.viewBtnActive : ''}`}
-                            onClick={() => setGridCols(cols as 2 | 3 | 4)}
+                            onClick={() => setGridCols(cols as 3 | 4)}
                         >
                             {cols}
                         </button>

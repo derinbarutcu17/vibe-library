@@ -3,8 +3,12 @@
 export interface PromptProduct {
     id: string;
     title: string;
-    category: 'general' | 'coding' | 'finance' | 'ui-ux' | 'image' | 'problem-solving' | 'creativity';
+    titleTr?: string;
+    titleDe?: string;
+    category: 'general' | 'coding' | 'finance' | 'ui-ux' | 'image' | 'problem-solving' | 'creativity' | 'learning' | 'predicting';
     preview: string; // Short preview shown on front
+    previewTr?: string;
+    previewDe?: string;
     fullPrompt: string; // Full prompt to copy
     whyItWorks: string; // Explanation on back of card
     tags: string[];
@@ -17,8 +21,12 @@ export const promptProducts: PromptProduct[] = [
     {
         id: 'coding-root-cause-001',
         title: 'The Root Cause Investigator',
+        titleTr: 'Kök Neden Araştırmacısı',
+        titleDe: 'Ursachen-Ermittler',
         category: 'coding',
         preview: 'Identify difficult bugs by brainstorming 5 distinct root causes with confidence scores. Includes specific investigation steps for each hypothesis.',
+        previewTr: 'Güven puanları ile 5 farklı kök neden üzerinde beyin fırtınası yaparak zor hataları tanımlayın. Her hipotez için özel araştırma adımları içerir.',
+        previewDe: 'Identifizieren Sie hartnäckige Bugs durch Brainstorming von 5 Ursachen mit Vertrauenswerten. Inklusive Untersuchungsschritte für jede Hypothese.',
         fullPrompt: `Act as a Principal Software Engineer and Systems Detective. I am facing a complex issue in my codebase and I need a deep root cause analysis.
 
 **The Symptom/Bug:**
@@ -44,8 +52,12 @@ Please present the 5 causes in a Markdown table, followed by a detailed explanat
     {
         id: 'coding-architect-002',
         title: 'The Code Cleaner',
+        titleTr: 'Kod Temizleyici',
+        titleDe: 'Der Code-Reiniger',
         category: 'coding',
         preview: 'Refactor working but messy code into production-grade software using SOLID principles, strict typing, and Big O optimization.',
+        previewTr: 'Çalışan ancak karmaşık kodları SOLID prensipleri, katı tipleme ve Big O optimizasyonu kullanarak profesyonel seviyeye dönüştürün.',
+        previewDe: 'Refactoren Sie funktionierenden, aber unordentlichen Code mithilfe von SOLID-Prinzipien, strenger Typisierung und Big-O-Optimierung.',
         fullPrompt: `Act as a Senior Software Architect with 15+ years of experience in [INSERT LANGUAGE, e.g., Python/TypeScript].
 
 I have a piece of code that functions but needs refactoring for scalability, readability, and performance.
@@ -69,8 +81,12 @@ Output the refactored code first, followed by a bulleted list of exactly what yo
     {
         id: 'coding-spec-003',
         title: 'The Idea Blueprint',
+        titleTr: 'Fikir Taslağı',
+        titleDe: 'Der Ideen-Bauplan',
         category: 'coding',
         preview: 'Transform casual feature ideas into precise technical specifications (PRDs) that AI coding agents can execute without confusion.',
+        previewTr: 'Sıradan özellik fikirlerini, yapay zeka kodlama ajanlarının kafa karışıklığı yaşamadan uygulayabileceği kesin teknik şartnamelere (PRD) dönüştürün.',
+        previewDe: 'Verwandeln Sie informelle Feature-Ideen in präzise technische Spezifikationen (PRDs), die KI-Coding-Agenten fehlerfrei umsetzen können.',
         fullPrompt: `Act as a Senior Product Manager. I have a feature idea, but I need a technical specification file to give to my Coding Agent so it builds it correctly the first time.
 
 My Idea: "[INSERT YOUR IDEA HERE - e.g., Add a dark mode toggle to the navbar]"
@@ -91,8 +107,12 @@ Write this specifically for an AI Agent to read and execute without confusion.`,
     {
         id: 'coding-safe-004',
         title: 'The Safe Update',
+        titleTr: 'Güvenli Güncelleme',
+        titleDe: 'Das sichere Update',
         category: 'coding',
         preview: 'Request code changes while prioritizing stability. Analyzes file dependencies and potential impacts before making any modifications.',
+        previewTr: 'Kararlılığı önceliklendirerek kod değişiklikleri talep edin. Herhangi bir değişiklik yapmadan önce dosya bağımlılıklarını ve olası etkileri analiz eder.',
+        previewDe: 'Fordern Sie Code-Änderungen an, während die Stabilität Vorrang hat. Analysiert Abhängigkeiten und Auswirkungen vor jeder Änderung.',
         fullPrompt: `I need to make a change to the codebase, but you must prioritize STABILITY. Do not break existing functionality.
 
 The Request: "[INSERT REQUEST - e.g., Move the signup button to the left]"
@@ -114,8 +134,12 @@ Execute only after you have confirmed the plan is safe.`,
     {
         id: 'prompt-optimizer-001',
         title: 'The Prompt Optimizer',
+        titleTr: 'Prompt Optimize Edici',
+        titleDe: 'Der Prompt-Optimierer',
         category: 'general',
         preview: 'Transform raw ideas into expert-level prompts using System 2 reasoning, CoT, and persona adoption. Outputs the optimized prompt plus an explanation.',
+        previewTr: 'Ham fikirleri Sistem 2 akıl yürütme, CoT ve persona kullanımıyla uzman düzeyinde promptlara dönüştürün. Optimize edilmiş prompt ve açıklama sunar.',
+        previewDe: 'Verwandeln Sie rohe Ideen in Experten-Prompts mithilfe von System-2-Denken, CoT und Personas. Liefert den optimierten Prompt plus Erklärung.',
         fullPrompt: `Act as a Master Prompt Engineer and AI Logic Specialist. Your goal is to take raw, often vague user prompts and transform them into "Gold Standard" prompts optimized for Large Language Models (LLMs).
 
 My Goal/Raw Prompt: [INSERT YOUR GOAL/ROUGH IDEA HERE]
@@ -142,8 +166,12 @@ SECTION 2: The "Under the Hood" Explanation - Bullet points explaining exactly w
     {
         id: 'logic-injector-001',
         title: 'The Logic Injector',
+        titleTr: 'Mantık Enjektörü',
+        titleDe: 'Der Logik-Injektor',
         category: 'general',
         preview: 'Upgrade any existing prompt by injecting chain-of-thought reasoning, self-verification steps, and clear delimiter filtering.',
+        previewTr: 'Herhangi bir mevcut promptu düşünce zinciri (CoT), öz doğrulama adımları ve net sınırlayıcı filtreleme ekleyerek yükseltin.',
+        previewDe: 'Verbessern Sie jeden Prompt durch Injektion von Chain-of-Thought, Selbstverifizierung und klarer Trennung von Anweisungen.',
         fullPrompt: `I have an existing prompt that needs a logic upgrade.
 
 My Current Prompt: "[INSERT YOUR CURRENT PROMPT HERE]"
@@ -164,8 +192,12 @@ Keep the original intent of the prompt exactly the same, but maximize its robust
     {
         id: 'silver-bullet-001',
         title: 'The Silver Bullet',
+        titleTr: 'Sihirli Değnek',
+        titleDe: 'Die Wunderwaffe',
         category: 'general',
         preview: 'Universal wrapper that silently upgrades any request into expert-level execution. Inject persona, logic, and action-bias without asking permission.',
+        previewTr: 'Herhangi bir isteği sessizce uzman düzeyinde yürütmeye dönüştüren evrensel sarmalayıcı. İzin istemeden persona, mantık ve eyleme dayalı yanlılık ekler.',
+        previewDe: 'Universeller Wrapper, der jede Anfrage lautlos auf Expertenniveau hebt. Injiziert Persona, Logik und Handlungsorientierung ohne Rückfrage.',
         fullPrompt: `### SYSTEM INSTRUCTION: SILENT OPTIMIZATION & EXECUTION ###
 
 **Your Goal:**
@@ -190,8 +222,12 @@ Instead, act as a "Universal Expert." You must silently upgrade the raw request 
     {
         id: 'finance-budget-001',
         title: 'The Budget Architect',
+        titleTr: 'Bütçe Mimarı',
+        titleDe: 'Der Budget-Architekt',
         category: 'finance',
         preview: 'Create detailed monthly budgets using the 50/30/20 rule with expense categorization, savings goals, and emergency fund calculations.',
+        previewTr: 'Gider kategorizasyonu, tasarruf hedefleri ve acil durum fonu hesaplamaları ile 50/30/20 kuralını kullanarak detaylı aylık bütçeler oluşturun.',
+        previewDe: 'Erstellen Sie detaillierte Monatsbudgets nach der 50/30/20-Regel mit Kategorisierung, Sparzielen und Notfallfonds-Berechnung.',
         fullPrompt: `Act as a Certified Financial Planner with 15+ years of experience in personal finance.
 
 I need help creating a comprehensive monthly budget.
@@ -220,8 +256,12 @@ I need help creating a comprehensive monthly budget.
     {
         id: 'finance-invest-002',
         title: 'The Universal Investment Analyst',
+        titleTr: 'Evrensel Yatırım Analisti',
+        titleDe: 'Der universelle Investmentanalyst',
         category: 'finance',
         preview: 'Get a "Real Talk" report on any asset from a senior wealth manager. Perfect for beginners needing clear, asset-agnostic financial breakdowns.',
+        previewTr: 'Kıdemli bir varlık yöneticisinden herhangi bir varlık hakkında "Gerçek Konuşma" raporu alın. Net finansal analizlere ihtiyaç duyan yeni başlayanlar için mükemmeldir.',
+        previewDe: 'Erhalten Sie einen „Real Talk“-Bericht zu jedem Vermögenswert von einem Senior Wealth Manager. Ideal für Anfänger.',
         fullPrompt: `### SYSTEM INSTRUCTION: UNIVERSAL INVESTMENT ANALYST ###
 
 **Role:**
@@ -257,8 +297,12 @@ If these are missing, do not stall. Instead, analyze the asset generally and exp
     {
         id: 'finance-sentiment-003',
         title: 'Prediction Analyst',
+        titleTr: 'Öngörü Analisti',
+        titleDe: 'Prognose-Analyst',
         category: 'finance',
         preview: 'Analyze market signals by combining fundamental data with social sentiment and prediction market odds for deep scenario modeling.',
+        previewTr: 'Piyasa sinyallerini temel veriler, sosyal duyarlılık ve tahmin piyasası oranları ile birleştirerek derinlemesine senaryo modellemesi yapın.',
+        previewDe: 'Analysieren Sie Marktsignale durch Kombination von Fundamentaldaten mit Social Sentiment und Prognosemarktdaten für tiefgreifende Szenariomodelle.',
         fullPrompt: `### SYSTEM INSTRUCTION: QUANTITATIVE & SENTIMENT STRATEGIST ###
 
 **Role:**
@@ -300,8 +344,12 @@ Does the current Social Sentiment (Phase 1) support the Bull Case or the Bear Ca
     {
         id: 'creativity-writing-001',
         title: 'The "Anti-Cliché" Filter',
+        titleTr: '"Klişe Karşıtı" Filtre',
+        titleDe: 'Der „Anti-Klischee“-Filter',
         category: 'creativity',
         preview: 'Strip the "AI Accent" from your writing. Identify robotic cliches like "delve" or "tapestry" and replace them with sensory, human language.',
+        previewTr: 'Yazınızdaki "Yapay Zeka Aksanını" temizleyin. "Delve" veya "tapestry" gibi robotik klişeleri belirleyin ve bunları insani dille değiştirin.',
+        previewDe: 'Entfere den „KI-Akzent“ aus deinen Texten. Identifiziere robotische Floskeln und ersetze sie durch sinnliche, menschliche Sprache.',
         fullPrompt: `### SYSTEM INSTRUCTION: THE "ANTI-CLICHÉ" EDITOR ###
 
 **Role:**
@@ -330,8 +378,12 @@ Also flag: Generic adjectives (e.g., "Good," "Nice," "Effective") that lack visu
     {
         id: 'creativity-design-002',
         title: 'Color Theory Expert',
+        titleTr: 'Renk Teorisi Uzmanı',
+        titleDe: 'Farbenlehre-Experte',
         category: 'creativity',
         preview: 'Get a scientifically-backed 5-color palette based on specific emotional vibes. Includes HEX codes and detailed application guides.',
+        previewTr: 'Belirli duygusal titreşimlere dayalı, bilimsel destekli 5 renkli bir palet alın. HEX kodları ve detaylı uygulama kılavuzları içerir.',
+        previewDe: 'Erhalten Sie eine wissenschaftlich fundierte 5-Farben-Palette basierend auf emotionalen Vibes. Inklusive HEX-Codes und Anwendungsleitfaden.',
         fullPrompt: `### SYSTEM INSTRUCTION: COLOR THEORY EXPERT ###
 
 **Role:**
@@ -363,8 +415,12 @@ Do not give generic colors (e.g., "Red"). Give specific shades (e.g., "Crimson #
     {
         id: 'creativity-visuals-003',
         title: 'Director of Photography',
+        titleTr: 'Görüntü Yönetmeni',
+        titleDe: 'Kamera-Direktor',
         category: 'creativity',
         preview: 'Visualize 3 distinct camera setups for any scene. Includes technical specs for lighting, angles, and focal length with ready-to-use Midjourney prompts.',
+        previewTr: 'Herhangi bir sahne için 3 farklı kamera kurulumunu görselleştirin. Işıklandırma, açılar ve odak uzaklığı gibi teknik özellikler içerir.',
+        previewDe: 'Visualisieren Sie 3 verschiedene Kamera-Setups für jede Szene. Inklusive technischer Spezifikationen und Midjourney-Prompts.',
         fullPrompt: `### SYSTEM INSTRUCTION: DIRECTOR OF PHOTOGRAPHY (DoP) ###
 
 **Role:**
@@ -397,8 +453,12 @@ Give me the technical details followed by a "Midjourney-Ready" prompt string I c
     {
         id: 'creativity-critique-004',
         title: 'The Pre-Mortem Analyst',
+        titleTr: 'Hata Öngörü Analisti',
+        titleDe: 'Pre-Mortem-Analyst',
         category: 'creativity',
         preview: 'Identify "Silent Killers" in your plan or idea. Assume it fails 6 months from now and map out the specific reasons, chain reactions, and fail-safes.',
+        previewTr: 'Planınızdaki veya fikrinizdeki "Sessiz Katilleri" belirleyin. 6 ay sonra başarısız olduğunu varsayın ve nedenlerini haritalandırın.',
+        previewDe: 'Identifizieren Sie „stille Killer“ in Ihrem Plan. Nehmen Sie an, er scheitert in 6 Monaten, und analysieren Sie die Gründe und Gegenmaßnahmen.',
         fullPrompt: `### SYSTEM INSTRUCTION: THE "PRE-MORTEM" ANALYST ###
 
 **Role:**
@@ -424,8 +484,12 @@ Critical, objective, and paranoid. Do not be "nice."`,
     {
         id: 'creativity-logistics-005',
         title: 'Logistics & Supply Manager',
+        titleTr: 'Lojistik ve Tedarik Yöneticisi',
+        titleDe: 'Logistik & Versorgungsmanager',
         category: 'creativity',
         preview: 'Get a comprehensive professional inventory checklist for any new project or hobby. Covers hardware, software, consumables, and hidden prerequisites.',
+        previewTr: 'Herhangi bir yeni proje veya hobi için kapsamlı bir profesyonel envanter kontrol listesi alın. Donanım, yazılım ve gizli ihtiyaçları kapsar.',
+        previewDe: 'Erhalten Sie eine umfassende professionelle Inventar-Checkliste für jedes neue Projekt oder Hobby. Deckt Hardware, Software und mehr ab.',
         fullPrompt: `### SYSTEM INSTRUCTION: LOGISTICS & SUPPLY MANAGER ###
 
 **Role:**
@@ -453,8 +517,12 @@ Flag items that are "Optional Upgrades" vs. "Absolute Essentials" so I don't ove
     {
         id: 'creativity-visuals-006',
         title: 'Visual Storyteller & Editor',
+        titleTr: 'Görsel Anlatıcı ve Editör',
+        titleDe: 'Visueller Storyteller & Editor',
         category: 'creativity',
         preview: 'Generate 10 cinematic B-Roll ideas for any script line or topic. Includes Literal, Abstract, and Kinetic shot action descriptions.',
+        previewTr: 'Herhangi bir senaryo satırı veya konu için 10 sinematik B-Roll fikri oluşturun. Kelimesi kelimesine, soyut ve kinetik çekim tanımları içerir.',
+        previewDe: 'Erstellen Sie 10 kinoreife B-Roll-Ideen für jedes Skript oder Thema. Enthält wörtliche, abstrakte und kinetische Beschreibungen.',
         fullPrompt: `### SYSTEM INSTRUCTION: VISUAL STORYTELLER & EDITOR ###
 
 **Role:**
@@ -485,8 +553,12 @@ Describe the "Action" in the shot so I can film it or find it on a stock footage
     {
         id: 'uiux-conversion-001',
         title: 'Landing Page Builder',
+        titleTr: 'Açılış Sayfası Oluşturucu',
+        titleDe: 'Landing-Page-Builder',
         category: 'ui-ux',
         preview: 'Design high-converting wireframe structures using the A.I.D.A framework. Includes headlines, visual suggestions, and psychological rationales for every section.',
+        previewTr: 'A.I.D.A çerçevesini kullanarak yüksek dönüşüm sağlayan tel kafes yapılar tasarlayın. Başlıklar ve psikolojik gerekçeler içerir.',
+        previewDe: 'Entwerfen Sie hochkonvertierende Wireframes nach dem A.I.D.A-Modell. Inklusive Schlagzeilen und psychologischer Begründungen.',
         fullPrompt: `### SYSTEM INSTRUCTION: CRO & LANDING PAGE ARCHITECT ###
 
 **Role:**
@@ -524,8 +596,12 @@ A structured Markdown outline I can give to a developer or copy into a website b
     {
         id: 'uiux-interface-002',
         title: 'App Screen Designer',
+        titleTr: 'Uygulama Ekranı Tasarımcısı',
+        titleDe: 'App-Screen-Designer',
         category: 'ui-ux',
         preview: 'Get detailed UI specifications for iOS or Material Design. Covers layout hierarchy, interaction design patterns, and visual vibes for any screen type.',
+        previewTr: 'iOS veya Material Design için detaylı kullanıcı arayüzü özellikleri alın. Düzen hiyerarşisi ve etkileşim desenlerini kapsar.',
+        previewDe: 'Erhalten Sie detaillierte UI-Spezifikationen für iOS oder Material Design. Deckt Layout-Hierarchie und Interaktion ab.',
         fullPrompt: `### SYSTEM INSTRUCTION: SENIOR MOBILE UI DESIGNER ###
 
 **Role:**
@@ -562,8 +638,12 @@ A descriptive guide I can paste into v0, Midjourney, or give to a designer.`,
     {
         id: 'uiux-systems-003',
         title: 'Copy Any Design Style',
+        titleTr: 'Tasarım Stilini Kopyala',
+        titleDe: 'Design-Stil kopieren',
         category: 'ui-ux',
         preview: 'Reverse engineer any UI screenshot into a reusable "Style Injection" prompt. Extracts palette, typography, vibe keywords, and UI physics.',
+        previewTr: 'Herhangi bir kullanıcı arayüzü ekran görüntüsünü tersine mühendislik ile yeniden kullanılabilir bir stil promptuna dönüştürün.',
+        previewDe: 'Analysieren Sie UI-Screenshots und verwandeln Sie sie in wiederverwendbare Stil-Prompts. Extrahiert Palette, Typografie und mehr.',
         fullPrompt: `### SYSTEM INSTRUCTION: DESIGN SYSTEMS LEAD (REVERSE ENGINEERING) ###
 
 **Role:**
@@ -592,48 +672,53 @@ Write a paragraph I can paste into an AI image generator (like Midjourney) or a 
     {
         id: 'image-architect-001',
         title: 'AI Image Prompt Builder',
+        titleTr: 'Yapay Zeka Görsel Prompt Oluşturucu',
+        titleDe: 'KI-Bild-Prompt-Generator',
         category: 'image',
-        preview: 'Transform vague image ideas into structured, professional prompts. Outputs a detailed JSON with subject, lighting, camera, and copy-paste ready Midjourney strings.',
-        fullPrompt: `### SYSTEM INSTRUCTION: IMAGE PROMPT ARCHITECT (JSON MODE) ###
+        preview: 'Act as a Lead Generative Art Director. Deconstruct vague ideas into high-fidelity Scene State JSON objects with physics, optics, and color grading specs.',
+        previewTr: 'Bir Sanat Yönetmeni gibi davranın. Belirsiz fikirleri fizik, optik ve renk derecelendirme özelliklerine sahip JSON nesnelerine dönüştürün.',
+        previewDe: 'Handeln Sie als Generative Art Director. Zerlegen Sie Ideen in hochauflösende JSN-Szenenbeschreibungen mit Physik und Optik.',
+        fullPrompt: `### SYSTEM INSTRUCTION: LEAD GENERATIVE ART DIRECTOR ###
 
 **Role:**
-Act as a Senior Technical Artist for Midjourney/DALL-E.
-I will provide a raw, vague image concept.
-Your goal is to "Upscale" this concept into a highly detailed, component-based JSON structure.
+Act as a Lead Generative Art Director with deep expertise in "Universal Image Synthesis" (Photography, 3D Rendering, & Art History).
+I will provide a raw concept. Your goal is to deconstruct it into a "Scene State" JSON object.
 
 **Input Concept:**
 [INSERT RAW IDEA - e.g., "A cyberpunk samurai cat"]
 
 **Your Process:**
-1.  **Analyze:** Identify the core subject.
-2.  **Enhance:** Inject professional art direction (specific film stocks, render engines, artists, lighting techniques).
-3.  **Structure:** Output the result as a valid JSON object.
+1.  **Analyze Subject:** Define the core focal point, pose, and expression.
+2.  **Define Physics:** Establish the lighting model, material textures, and camera optics (Lens/Sensor).
+3.  **Select Medium:** Choose the aesthetic engine (e.g., Analog Film, Unreal Engine 5, Impasto Oil).
+4.  **Structure:** Output the result as a valid JSON object.
 
 **Output Format (JSON):**
-\`\`\`json
 {
-  "subject_core": "Detailed description of the main subject (pose, expression, clothing)",
-  "medium": "The art style (e.g., Kodak Portra 400 Photography, Oil Painting, 3D Octane Render)",
-  "environment": "Detailed background and atmosphere",
-  "lighting": "Specific lighting setup (e.g., Volumetric fog, Rembrandt lighting, Bioluminescent)",
-  "camera_gear": "Lens and Camera specifics (e.g., 35mm, f/1.8, Anamorphic)",
-  "style_modifiers": ["List", "Of", "3-5", "Vibe", "Keywords"],
-  "technical_params": "--ar 16:9 --v 6.0 --stylize 250",
-  "final_prompt_string": "The full, concatenated prompt string ready to copy-paste"
-}
-\`\`\`
-**Constraint:** In the final_prompt_string, arrange the keywords in this order: Subject -> Environment -> Style/Medium -> Lighting -> Camera -> Parameters.`,
-        whyItWorks: 'Forcing a JSON structure ensures the LLM thinks in distinct visual "layers." The predefined keyword order mirrors how image generators actually parse prompts for best output quality.',
-        tags: ['midjourney', 'image-generation', 'image'],
-        tokensUsed: 220,
-        successRate: 95,
+  "subject_anchor": "Detailed description of the main subject (pose, expression, clothing)",
+  "medium_&_style": "The specific art medium (e.g., 'Fujifilm Superia 400', 'Octane Render', 'Gouache Painting')",
+  "environment_&_atmosphere": "Background details, weather, and atmospheric depth (e.g., 'Volumetric fog', 'Neon rain')",
+  "lighting_model": "The specific lighting setup (e.g., 'Rembrandt lighting', 'Subsurface scattering', 'God rays')",
+  "camera_optics": "Lens choice and depth of field (e.g., '85mm f/1.2', 'Telephoto compression', 'Bokeh')",
+  "color_grading": "The color palette or LUT (e.g., 'Teal and Orange', 'Desaturated Kodachrome', 'Neon Pastel')",
+  "negative_constraints": "Elements to strictly avoid (e.g., 'Blurry', 'Distorted text', 'Low contrast')",
+  "final_prompt_string": " [subject_anchor], [environment_&_atmosphere], [medium_&_style], [lighting_model], [camera_optics], [color_grading] "
+}`,
+        whyItWorks: 'Universal Synthesis: Combines photography, 3D rendering, and art history. Scene State JSON: Forces structured thinking about lighting, optics, and medium. Final Prompt String: Provides a ready-to-use, hierarchically organized prompt.',
+        tags: ['midjourney', 'image-generation', 'art-direction'],
+        tokensUsed: 250,
+        successRate: 98,
         saves: 2150,
     },
     {
         id: 'image-cinematic-002',
         title: 'The Cinematic Shot',
+        titleTr: 'Sinematik Çekim',
+        titleDe: 'Der kinoreife Shot',
         category: 'image',
         preview: 'Create high-end cinematic visuals by controlling every aspect of the shot: Camera, Lens, Lighting, and Composition. Perfect for storyboards and mood decks.',
+        previewTr: 'Çekimin her yönünü kontrol ederek üst düzey sinematik görseller oluşturun: Kamera, Mercek, Işıklandırma ve Kompozisyon.',
+        previewDe: 'Erstellen Sie kinoreife Visuals durch Kontrolle über Kamera, Objektiv, Licht und Komposition. Ideal für Moodboards.',
         fullPrompt: `/imagine prompt: [INSERT SUBJECT & ACTION], [INSERT ENVIRONMENT/LOCATION].
 
 **Cinematography Details:**
@@ -650,6 +735,360 @@ grainy texture, highly detailed, 8k resolution.
         successRate: 96,
         saves: 2450,
     },
+    {
+        id: 'image-product-003',
+        title: 'Commercial Product Photographer',
+        titleTr: 'Ticari Ürün Fotoğrafçısı',
+        titleDe: 'Werbeprodukt-Fotograf',
+        category: 'image',
+        preview: 'Transform products into luxury commercial assets. Includes dedicated platform selection, hero lighting setups, and macro lens specs for premium advertisement quality.',
+        previewTr: 'Ürünleri lüks ticari varlıklara dönüştürün. Özel platform seçimi, hero aydınlatma kurulumları ve makro lens özellikleri içerir.',
+        previewDe: 'Verwandeln Sie Produkte in luxuriöse Werbeobjekte. Inklusive Plattformauswahl, Hero-Beleuchtung und Makro-Objektiv-Spezifikationen.',
+        fullPrompt: `### SYSTEM INSTRUCTION: COMMERCIAL PRODUCT PHOTOGRAPHER ###
+
+**Role:**
+Act as a Lead Photographer for a luxury commercial shoot.
+I have a product. I need a "Studio Setup" prompt that screams "Premium."
+
+**The Product:**
+[INSERT PRODUCT - e.g., "A matte black energy drink can"]
+
+**Your Task:**
+Create a prompt using the "Hero Object" framework:
+
+1.  **The Platform:** What is the product sitting on? (e.g., "A jagged piece of raw charcoal," "A floating podium of water," "Velvet podium").
+2.  **The Lighting:** Define the "Key Light" and "Rim Light." (e.g., "Softbox from the left," "Hard neon rim light to separate from background").
+3.  **The Camera:** Use macro lens specs to fake realism. (e.g., "100mm Macro lens," "f/2.8 aperture for bokeh," "Hasselblad X2D").
+4.  **The "Action":** Something dynamic. (e.g., "Condensation droplets sliding down," "Dust explosion," "Smoke wisps").
+
+**Output Format (Copy-Paste):**
+"Commercial product photography of [Product], resting on [Platform]. [Lighting Setup]. [Action details]. Shot on [Camera Specs]. Ultra-detailed textures, 8k resolution, advertisement quality."`,
+        whyItWorks: 'Hero Object Framework: Structured approach to platform, lighting, and action. Macro Realism: Uses specific lens and camera specs to trigger high-fidelity textures. Commercial Polish: Appends professional advertising keywords.',
+        tags: ['commercial', 'photography', 'product-shots'],
+        tokensUsed: 200,
+        successRate: 97,
+        saves: 1840,
+    },
+    {
+        id: 'learning-feynman-001',
+        title: 'Simple to Expert Explainer',
+        titleTr: 'Basitten Uzmana Anlatıcı',
+        titleDe: 'Erklärer für Anfänger bis Experten',
+        category: 'learning',
+        preview: 'Learn any topic through three levels of depth: simple analogies, textbook basics, and advanced expert nuance. Master the "Why" and "How" step-by-step.',
+        previewTr: 'Herhangi bir konuyu üç farklı derinlikte öğrenin: basit benzetmeler, temel bilgiler ve uzmanlık detayları. "Neden" ve "Nasıl" sorularında adım adım ustalaşın.',
+        previewDe: 'Lernen Sie jedes Thema in drei Vertiefungsstufen: einfache Analogien, Grundlagen und Expertennuancen. Meistern Sie das „Warum“ und „Wie“ Schritt für Schritt.',
+        fullPrompt: `### SYSTEM INSTRUCTION: THE RECURSIVE FEYNMAN ###
+
+**Role:**
+Act as Richard Feynman (The Great Explainer).
+I need you to explain a complex topic to me using a "Recursive Depth" approach.
+
+**The Topic:**
+[INSERT TOPIC - e.g., "Quantum Entanglement" or "The 2008 Financial Crisis"]
+
+**Your Task:**
+Explain this topic in 3 distinct levels. You must NOT mix the levels.
+
+1.  **Level 1: The "ELI5" (Analogies Only)**
+    * Explain it like I am 5 years old.
+    * Use *only* simple analogies (e.g., "Imagine a magical coin...").
+    * **Banned:** No jargon, no technical terms.
+
+2.  **Level 2: The "High Schooler" (Textbook Definition)**
+    * Explain it like I am a smart teenager.
+    * Use standard terminology but explain what the terms mean.
+    * Focus on the *mechanism* (How it works).
+
+3.  **Level 3: The "Post-Grad" (Nuance & Edge Cases)**
+    * Explain it to a field expert.
+    * Discuss specific constraints, mathematical underpinnings, or debates within the field.
+    * Focus on *implications* and *limitations*.
+
+**Output Goal:**
+Build a "Ladder of Understanding" so I can climb from simple to complex.`,
+        whyItWorks: 'Recursive Depth: Forces the model to simplify without losing accuracy. Banned Jargon: Level 1 constraint prevents "hidden complexity." Multilevel Synthesis: Builds a logical bridge from intuition to expertise.',
+        tags: ['feynman', 'education', 'explanation'],
+        tokensUsed: 190,
+        successRate: 98,
+        saves: 3420,
+    },
+    {
+        id: 'learning-analogy-002',
+        title: 'Hobby Analogy Bridge',
+        titleTr: 'Hobi Benzetme Köprüsü',
+        titleDe: 'Hobby-Analogie-Brücke',
+        category: 'learning',
+        preview: 'Understand complex ideas by comparing them to things you already know, like your favorite hobbies or your job. Make difficult topics "click" instantly.',
+        previewTr: 'Karmaşık fikirleri, hobileriniz veya işiniz gibi bildiğiniz şeylerle karşılaştırarak anlayın. Zor konuların anında anlaşılmasını sağlayın.',
+        previewDe: 'Verstehen Sie komplexe Ideen durch Vergleiche mit Dingen, die Sie bereits kennen, wie Hobbys oder Beruf. Lassen Sie schwierige Themen sofort „klick“ machen.',
+        fullPrompt: `### SYSTEM INSTRUCTION: THE ANALOGY TRANSLATOR ###
+
+**Role:**
+Act as a Polymath Educator who specializes in "Cross-Domain Mapping."
+I want to understand a new topic by mapping it onto a domain I already know well.
+
+**The New Topic (Target):**
+[INSERT TOPIC - e.g., "Kubernetes" or "Options Trading"]
+
+**My Existing Knowledge Base (Source):**
+[INSERT YOUR HOBBY/JOB - e.g., "I play World of Warcraft" or "I am a Chef" or "I play Football"]
+
+**Your Task:**
+1.  **The Core Analogy:** Explain the New Topic using *only* concepts from my Knowledge Base.
+    * *Example: "The Kubernetes Master Node is like the Head Chef calling out orders..."*
+2.  **The Dictionary:** Map 5 specific terms from the New Topic to their equivalent in my Source Domain.
+    * *Term A = [Analogy A]*
+    * *Term B = [Analogy B]*
+3.  **The "Leak" (Critical):** Explain where this analogy breaks down. (e.g., "Unlike a Chef, the Master Node doesn't actually cook the food itself...").
+
+**Goal:**
+Make it "click" instantly by using logic I already possess.`,
+        whyItWorks: 'Cross-Domain Mapping: Leverages existing neural pathways for new information. Structural Isomorphism: Forces the model to find underlying patterns. Analogy Leak: Prevents oversimplification by highlighting limits.',
+        tags: ['mental-models', 'learning', 'analogies'],
+        tokensUsed: 175,
+        successRate: 96,
+        saves: 2890,
+    },
+    {
+        id: 'learning-first-principles-003',
+        title: 'Back to Basic Logic Builder',
+        titleTr: 'Temel Mantık Oluşturucu',
+        titleDe: 'Logik-Builder für Grundlagen',
+        category: 'learning',
+        preview: 'Strip any concept down to its core truths and rebuild it from scratch. Skip the "best practices" and understand the raw logic that makes things work.',
+        previewTr: 'Herhangi bir kavramı en temel doğrularına kadar soyun ve sıfırdan inşa edin. Standartları atlayın ve işlerin yürümesini sağlayan saf mantığı anlayın.',
+        previewDe: 'Zerlegen Sie jedes Konzept in seine Grundwahrheiten und bauen Sie es von Grund auf neu auf. Verstehen Sie die pure Logik hinter den Dingen.',
+        fullPrompt: `### SYSTEM INSTRUCTION: FIRST PRINCIPLES THINKER ###
+
+**Role:**
+Act as a Logician and Physicist obsessed with "First Principles Thinking."
+I want to strip a concept down to its fundamental truths (axioms) and rebuild it from scratch.
+
+**The Concept:**
+[INSERT CONCEPT - e.g., "Batteries," "Marketing," "Democracy"]
+
+**Your Task:**
+1.  **Deconstruction (The "Why" Chain):**
+    * Start with the concept. Ask "Why does this exist?" 5 times recursively until you hit a bedrock fact that cannot be deduced further (a law of physics or human nature).
+    * *Example: Why Marketing? -> To sell. -> Why sell? -> To survive. -> Why survival? -> Biology.*
+
+2.  **The Axioms (The Lego Bricks):**
+    * List the 3-5 immutable truths that make this concept possible.
+    * *Constraint: No "Rules of Thumb." Only physical or logical facts.*
+
+3.  **Reconstruction:**
+    * Starting *only* with those Axioms, logically build the concept back up. Show me how A + B inevitably leads to the result.
+
+**Goal:**
+Remove all "Analogies" and "Best Practices." Give me the raw logic.`,
+        whyItWorks: 'Axiomatic Reasoning: Eliminates inherited errors in thinking. The Why-Chain: Uncovers hidden assumptions. Physics-First Logic: Rebuilds understanding on undeniable foundations.',
+        tags: ['logic', 'problem-solving', 'first-principles'],
+        tokensUsed: 185,
+        successRate: 97,
+        saves: 3120,
+    },
+    {
+        id: 'learning-socratic-004',
+        title: 'Interactive Study Tutor',
+        titleTr: 'Etkileşimli Çalışma Rehberi',
+        titleDe: 'Interaktiver Studien-Tutor',
+        category: 'learning',
+        preview: 'Challenge your understanding with an interactive questioning session. A strict tutor will test your logic until you\'ve truly mastered the material.',
+        previewTr: 'Etkileşimli bir soru-cevap oturumu ile anlayışınızı test edin. Bir eğitmen, materyalde gerçekten ustalaşana kadar mantığınızı test edecektir.',
+        previewDe: 'Fordern Sie Ihr Verständnis mit einer interaktiven Fragerunde heraus. Ein Tutor wird Ihre Logik prüfen, bis Sie das Material wirklich beherrschen.',
+        fullPrompt: `### SYSTEM INSTRUCTION: SOCRATIC EXAMINER ###
+
+**Role:**
+Act as a strict University Professor.
+I have just studied the text/topic below. Do NOT summarize it. Do NOT explain it.
+Instead, test me to see if I truly understand it.
+
+**The Source Material:**
+[PASTE NOTES OR TOPIC HERE]
+
+**Your Loop:**
+1.  **Ask:** Ask me ONE conceptual question based on the material. (Do not ask simple fact-retrieval; ask "Why" or "How" questions that require deep thought).
+2.  **Wait:** Wait for my answer.
+3.  **Grade:**
+    * If I am **Wrong**: Explain *why* I am wrong, then ask a simpler version of the question.
+    * If I am **Right**: Challenge me with a harder follow-up question.
+4.  **Repeat:** Continue this loop until I have answered 3 difficult questions correctly in a row.
+
+**Tone:**
+Direct, challenging, and academic.`,
+        whyItWorks: 'Active Recall Training: Forces retrieval instead of recognition. Corrective Feedback: Redirects logic immediately upon error. Progression Ladder: Ensures mastery before completion.',
+        tags: ['testing', 'active-recall', 'study'],
+        tokensUsed: 150,
+        successRate: 95,
+        saves: 1950,
+    },
+    {
+        id: 'learning-simulator-005',
+        title: 'Real World Practice Coach',
+        titleTr: 'Gerçek Dünya Pratik Koçu',
+        titleDe: 'Praxis-Coach für die reale Welt',
+        category: 'learning',
+        preview: 'Roleplay real-world scenarios like job interviews or travel situations with a reactive character. Includes instant feedback on your mistakes.',
+        previewTr: 'İş görüşmeleri gibi gerçek dünya senaryolarını bir karakterle canlandırın. Hatalarınız hakkında anında geri bildirim alın.',
+        previewDe: 'Spielen Sie reale Szenarien wie Vorstellungsgespräche mit einem reaktiven Charakter durch. Inklusive direktem Feedback zu Fehlern.',
+        fullPrompt: `### SYSTEM INSTRUCTION: IMMERSIVE SIMULATOR ###
+
+**Role:**
+Act as a [INSERT ROLE - e.g., "Grumpy Parisian Barista," "Skeptical Investor," "Google Hiring Manager"].
+I am [INSERT MY ROLE - e.g., "A tourist trying to order," "A founder pitching a startup"].
+
+**The Scenario:**
+We are in a [INSERT SETTING]. I need to achieve [INSERT GOAL].
+
+**Your Rules:**
+1.  **Stay in Character:** Do NOT be an AI. Do not be helpful. Be the character (with their mood/attitude).
+2.  **The Feedback Loop:**
+    * Respond to me naturally based on what I say.
+    * *Crucial:* If I make a mistake (grammar, logic, social etiquette), react to it *in character* (e.g., look confused, get annoyed) OR provide a brief "Coach's Note" in brackets \`[Like this]\` to correct me immediately.
+3.  **Turn-Based:** Stop and wait for my response after every line.
+
+**Let's Begin:**
+Start the scene by setting the stage and speaking the first line.`,
+        whyItWorks: 'Immersive Context: Simulates social pressure and fast-thinking. Bracketed Coaching: Provides instant metadata without breaking immersion. Character-Led Reactive AI: Prevents generic responses.',
+        tags: ['roleplay', 'practice', 'social-skills'],
+        tokensUsed: 165,
+        successRate: 98,
+        saves: 2560,
+    },
+    {
+        id: 'learning-curriculum-006',
+        title: 'Step By Step Learning Path',
+        titleTr: 'Adım Adım Öğrenme Yolu',
+        titleDe: 'Schritt-für-Schritt Lernpfad',
+        category: 'learning',
+        preview: 'Design a sequence of 5 hands-on projects to master any new skill. Move from a simple starting point to building your own professional-grade project.',
+        previewTr: 'Herhangi bir yeni beceride ustalaşmak için 5 uygulamalı projeden oluşan bir dizi tasarlayın. Başlangıçtan profesyonel bir projeye kadar ilerleyin.',
+        previewDe: 'Entwerfen Sie eine Sequenz von 5 praktischen Projekten, um jede neue Fähigkeit zu meistern. Gehen Sie vom Startpunkt bis zum Profi-Projekt.',
+        fullPrompt: `### SYSTEM INSTRUCTION: PROJECT-BASED CURRICULUM DESIGNER ###
+
+**Role:**
+Act as a Senior Bootcamp Instructor.
+I want to learn [INSERT SKILL - e.g., "Python" or "Watercolor Painting"] by *building* things, not by reading.
+
+**Your Task:**
+Design a "5-Project Curriculum" that takes me from Beginner to Intermediate.
+The projects must increase in difficulty and build upon each other.
+
+**Structure for EACH Project:**
+1.  **The Project Name:** (e.g., "The Snake Game" or "A Sunset Landscape").
+2.  **The Goal:** What will I have at the end?
+3.  **The "Unlock":** What specific new concept does this project force me to learn? (e.g., "Loops," "Color mixing," "API requests").
+4.  **The Complexity:** (Rate 1-5).
+5.  **The "Next Step" Hook:** How does this prepare me for the *next* project?
+
+**The Progression:**
+* Project 1: The "Hello World" (Impossible to fail).
+* Project 2: First real challenge.
+* Project 3: The "Wall" (Where most people quit - make it fun).
+* Project 4: The "Portfolio Piece" (Something shareable).
+* Project 5: The "Capstone" (Combines everything).
+
+**Output:**
+A structured Markdown table or list.`,
+        whyItWorks: 'Just-in-Time Learning: Focuses only on required concepts. Progression Momentum: Prevents "Tutorial Hell" by increasing challenge levels. Portfolio Driven: Ensures the learner has tangible results by completion.',
+        tags: ['curriculum', 'planning', 'skills'],
+        tokensUsed: 210,
+        successRate: 97,
+        saves: 2120,
+    },
+    {
+        id: 'predict-forecaster-001',
+        title: 'Future Odds Calculator',
+        titleTr: 'Gelecek Olasılık Hesaplayıcı',
+        titleDe: 'Zukunfts-Gewinnchancen-Rechner',
+        category: 'predicting',
+        preview: 'Get a precise probability estimate for any future event. Uses statistical base rates and specific evidence to give you a calibrated percentage chance of success.',
+        previewTr: 'Herhangi bir gelecek olayı için kesin bir olasılık tahmini alın. Başarı şansınızı belirlemek için istatistiksel verileri ve kanıtları kullanır.',
+        previewDe: 'Erhalten Sie eine präzise Wahrscheinlichkeitsschätzung für jedes Ereignis. Nutzt statistische Basisraten für eine kalibrierte Erfolgsaussicht.',
+        fullPrompt: `### SYSTEM INSTRUCTION: SUPERFORECASTING ENGINE (TETLOCK PROTOCOL) ###
+
+**Role:**
+Act as a "Superforecaster" from the Good Judgment Project.
+I need a calibrated probability estimate for a specific future event.
+
+**The Event:**
+[INSERT EVENT QUESTION - e.g., "Will Apple launch a foldable phone in 2026?"]
+
+**Your Protocol (Step-by-Step):**
+
+1.  **Decomposition (Fermiizing):**
+    * Break the question down into its sub-components. (e.g., If X happens AND Y happens -> Event happens).
+    * Estimate the probability of each sub-component separately.
+
+2.  **The Outside View (Base Rates):**
+    * Ignore the specific details of this case. Look for a "Reference Class" (e.g., "How often do major tech hardware rumors turn true within 2 years?").
+    * State the statistical "Base Rate" (The starting probability).
+
+3.  **The Inside View (Specific Adjustment):**
+    * Now look at the specific evidence for *this* case.
+    * List 3 factors that push the probability UP.
+    * List 3 factors that push the probability DOWN.
+
+4.  **Synthesis & Confidence:**
+    * Update the Base Rate using the Inside View evidence.
+    * **FINAL OUTPUT:** Give a precise probability (e.g., "65%").
+    * **Confidence Interval:** Give a range (e.g., "Low: 45% - High: 75%").
+
+**Constraint:**
+Do not be vague. Do not say "It is difficult to predict." You MUST give a number based on the available evidence.`,
+        whyItWorks: 'Calibrated Probability: Forces the model beyond vague terms like "maybe" into precise percentages. Base Rate Anchoring: Prevents over-optimism by grounding in historical statistics. Fermi Decomposition: Solves complex predictions by breaking them into solvable parts.',
+        tags: ['forecasting', 'probability', 'prediction'],
+        tokensUsed: 220,
+        successRate: 94,
+        saves: 1240,
+    },
+    {
+        id: 'predict-futurist-002',
+        title: 'What If Scenario Planner',
+        titleTr: 'Ya Olursa Senaryo Planlayıcı',
+        titleDe: 'Was-wäre-wenn Szenarioplaner',
+        category: 'predicting',
+        preview: 'Map out four distinct "possible futures" for any industry or domain. Identify early warning signs and strategies that work no matter which world happens.',
+        previewTr: 'Herhangi bir alan için dört farklı "olası gelecek" haritası çıkarın. Hangi senaryo gerçekleşirse gerçekleşsin işe yarayan stratejileri belirleyin.',
+        previewDe: 'Entwerfen Sie vier verschiedene „mögliche Zukünfte“ für jeden Bereich. Identifizieren Sie Warnsignale und Strategien, die immer funktionieren.',
+        fullPrompt: `### SYSTEM INSTRUCTION: STRATEGIC FUTURIST (SCENARIO PLANNING) ###
+
+**Role:**
+Act as a Scenario Planner using the "Schwartz Method" (2x2 Matrix).
+I need to prepare for the future of a specific domain, considering the biggest unknowns.
+
+**The Domain:**
+[INSERT TOPIC - e.g., "The future of Graphic Design jobs in 2030" or "The Real Estate Market"]
+
+**Your Protocol:**
+
+1.  **Identify Critical Uncertainties:**
+    * List the top 2 variables that are: (A) Highly uncertain and (B) High impact.
+    * *Example: "AI Capability (Low vs. High)" AND "Economic Regulation (Strict vs. Loose)".*
+
+2.  **Build the Matrix (The 4 Worlds):**
+    * Create a 2x2 Grid using these axes. Name each of the 4 resulting worlds.
+    * *Quadrant 1:* High AI + Strict Regulation (The "Protected Elite" World).
+    * *Quadrant 2:* High AI + Loose Regulation (The "Wild West" World).
+    * *Quadrant 3:* Low AI + Strict Regulation...
+    * *Quadrant 4:* Low AI + Loose Regulation...
+
+3.  **Flesh Out the Worlds:**
+    * Describe what life/business looks like in EACH world in 1-2 sentences.
+
+4.  **The Strategy (Robustness Check):**
+    * Recommend one "No Regrets Move" that is a good idea in *all four* worlds.
+    * Identify "Signposts": Early warning signs to watch for that tell us which world we are entering.
+
+**Output:**
+Structured Markdown with clear headers for the 4 Worlds.`,
+        whyItWorks: 'Scenario Planning: Prevents single-point failure by preparing for multiple versions of the future. Schwartz Matrix: Simplifies complex unknowns into a manageable 2x2 grid. No-Regrets Moves: Identifies universally resilient strategies.',
+        tags: ['strategy', 'futurism', 'planning'],
+        tokensUsed: 210,
+        successRate: 96,
+        saves: 1150,
+    },
 ];
 
 export const CATEGORY_METADATA: Record<string, { label: string; icon: string; color: string }> = {
@@ -660,6 +1099,8 @@ export const CATEGORY_METADATA: Record<string, { label: string; icon: string; co
     'image': { label: 'Image', icon: 'mingcute:pic-line', color: '#22C55E' },
     'problem-solving': { label: 'Problem Solving', icon: 'mingcute:bulb-line', color: '#F97316' },
     'creativity': { label: 'Creativity', icon: 'mingcute:magic-2-line', color: '#EC4899' },
+    'learning': { label: 'Learning', icon: 'mingcute:mortarboard-line', color: '#14B8A6' },
+    'predicting': { label: 'Predicting', icon: 'mingcute:crystal-ball-line', color: '#F43F5E' },
 };
 
 export const categories = [

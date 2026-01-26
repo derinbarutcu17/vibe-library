@@ -168,12 +168,12 @@ export default function Home() {
   }, [isCrafterOpen]);
 
   const categoryPills = [
-    { id: 'general', text: 'Prompt Engineering' },
-    { id: 'coding', text: 'Coding' },
-    { id: 'ui-ux', text: 'UI/UX' },
-    { id: 'image', text: 'Image' },
-    { id: 'problem-solving', text: 'Problem Solving' },
-    { id: 'creativity', text: 'Creativity' },
+    { id: 'general' },
+    { id: 'coding' },
+    { id: 'ui-ux' },
+    { id: 'image' },
+    { id: 'problem-solving' },
+    { id: 'creativity' },
   ];
 
   return (
@@ -189,12 +189,12 @@ export default function Home() {
                 className={styles.stickyPill}
               >
                 <Icon icon={CATEGORY_METADATA[cat.id]?.icon} style={{ color: CATEGORY_METADATA[cat.id]?.color }} />
-                {cat.text}
+                {t(`categories.${cat.id}`)}
               </button>
             ))}
           </div>
           <button className={styles.stickyCta} onClick={handleCraftPrompt}>
-            Craft Prompt
+            {t('hero.ctaPrimary')}
           </button>
         </div>
       </nav>
@@ -229,7 +229,7 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['general']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['general']?.color }} />
-                    {t('categories.general')}
+                    {t('hero.heroPills.general') !== 'hero.heroPills.general' ? t('hero.heroPills.general') : t('categories.general')}
                   </button>
                   {t('hero.tagline.comma1')}
                   <button
@@ -239,19 +239,9 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['coding']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['coding']?.color }} />
-                    {t('categories.coding')}
+                    {t('hero.heroPills.coding') !== 'hero.heroPills.coding' ? t('hero.heroPills.coding') : t('categories.coding')}
                   </button>
                   {t('hero.tagline.comma2')}
-                  <button
-                    onClick={() => handleCategoryClick('finance')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['finance']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['finance']?.color }} />
-                    {t('categories.finance')}
-                  </button>
-                  {t('hero.tagline.comma3')}
                   <button
                     onClick={() => handleCategoryClick('ui-ux')}
                     className={styles.navPill}
@@ -259,7 +249,17 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['ui-ux']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['ui-ux']?.color }} />
-                    {t('categories.ui-ux')}
+                    {t('hero.heroPills.ui-ux') !== 'hero.heroPills.ui-ux' ? t('hero.heroPills.ui-ux') : t('categories.ui-ux')}
+                  </button>
+                  {t('hero.tagline.comma3')}
+                  <button
+                    onClick={() => handleCategoryClick('finance')}
+                    className={styles.navPill}
+                    onMouseMove={handlePillMouseMove}
+                    onMouseLeave={handlePillMouseLeave}
+                  >
+                    <Icon icon={CATEGORY_METADATA['finance']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['finance']?.color }} />
+                    {t('hero.heroPills.finance') !== 'hero.heroPills.finance' ? t('hero.heroPills.finance') : t('categories.finance')}
                   </button>
                   {t('hero.tagline.comma4')}
                   <button
@@ -269,7 +269,7 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['image']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['image']?.color }} />
-                    {t('categories.image')}
+                    {t('hero.heroPills.image') !== 'hero.heroPills.image' ? t('hero.heroPills.image') : t('categories.image')}
                   </button>
                   {t('hero.tagline.assets')}
                   <button
@@ -279,8 +279,9 @@ export default function Home() {
                     onMouseLeave={handlePillMouseLeave}
                   >
                     <Icon icon={CATEGORY_METADATA['creativity']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['creativity']?.color }} />
-                    {t('categories.creativity')}
+                    {t('hero.heroPills.creativity') !== 'hero.heroPills.creativity' ? t('hero.heroPills.creativity') : t('categories.creativity')}
                   </button>
+                  {t('hero.tagline.andMore')}
                 </p>
 
                 <div className={styles.ctaButtons} ref={ctaRef}>
