@@ -31,6 +31,10 @@ export const metadata: Metadata = {
     description: "A Digital Athenaeum for AI Coding Patterns",
     type: "website",
   },
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 // Viewport configuration for iOS safe area support
