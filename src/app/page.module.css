@@ -782,3 +782,59 @@
         font-size: 1.1em;
     }
 }
+
+/* ========== SCROLL TO TOP OF PROMPTS ========== */
+.scrollTopBtn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    color: white;
+    font-family: var(--font-narrative);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 900;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateY(150%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.02em;
+}
+
+.scrollTopVisible {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scrollTopBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.scrollTopBtn:active {
+    transform: translateY(-2px) scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .scrollTopBtn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 0.7rem 1.1rem;
+        font-size: 0.75rem;
+    }
+}

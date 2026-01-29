@@ -38,12 +38,10 @@ export default function PromptCrafter({ onClose }: PromptCrafterProps) {
     }, [category]);
 
     const handleGenerate = () => {
-        const categoryLabel = t(`categories.${category}`) || category;
-        const prompt = `${categoryLabel} konusunda uzman olarak davran. ${vision ? `Hedefim: ${vision}.` : ''} ${context ? `Bağlam: ${context}` : ''}`.trim();
-        // Fallback or more generic English prompt if locale is not TR
-        const englishPrompt = `Act as an expert in ${categoryLabel}. ${vision ? `My goal is: ${vision}.` : ''} ${context ? `Context: ${context}` : ''}`.trim();
+        const contextLabel = locale === 'tr' ? 'Bağlam' : 'Context';
+        const prompt = `${vision}${context ? `\n\n${contextLabel}: ${context}` : ''}`.trim();
 
-        setGeneratedPrompt(locale === 'tr' ? prompt : englishPrompt);
+        setGeneratedPrompt(prompt);
     };
 
     const handleTemplateSelect = (template: PromptProduct) => {

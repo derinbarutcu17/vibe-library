@@ -8,6 +8,7 @@ import PromptCrafter from '@/components/PromptCrafter';
 import ShootingStars from '@/components/ShootingStars';
 import GreenPrompting from '@/components/GreenPrompting';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import UserManual from '@/components/UserManual';
 import GalaxyScene from '@/components/galaxy/GalaxyScene';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -33,15 +34,30 @@ export default function Home() {
   const [isCrafterOpen, setIsCrafterOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Detect mobile on mount
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+
+    const handleScroll = () => {
+      // Show button when scrolled past hero (approx 800px or when #shop is visible)
+      if (window.scrollY > window.innerHeight * 0.8) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleCategoryClick = (category: string) => {
@@ -213,6 +229,13 @@ export default function Home() {
                   <LanguageSwitcher />
                 </div>
 
+                <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100 }}>
+                  <LanguageSwitcher />
+                </div>
+
+                {/* User Manual Button - Centered Top */}
+                <UserManual />
+
                 <div className={styles.announcementPill}>
                   <span className={styles.announcementDot}></span>
                   <span>{t('hero.announcement')}</span>
@@ -307,6 +330,16 @@ export default function Home() {
         <div className={`${styles.crafterPanel} ${isCrafterOpen ? styles.crafterVisible : ''}`}>
           <PromptCrafter onClose={handleCloseCrafter} />
         </div>
+
+        {/* Go to Top of Prompts Button */}
+        <button
+          className={`${styles.scrollTopBtn} ${showScrollTop ? styles.scrollTopVisible : ''}`}
+          onClick={handleViewGallery}
+          aria-label="Scroll to top of prompts"
+        >
+          <Icon icon="mingcute:arrow-up-line" />
+          <span>Top of Library</span>
+        </button>
       </main>
     </>
   );

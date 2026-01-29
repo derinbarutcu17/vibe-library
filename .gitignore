@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# remotion
+remotion/
+.remotion/
+*.mp4
+*.webm
