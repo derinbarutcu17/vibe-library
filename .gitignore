@@ -45,3 +45,6 @@ remotion/
 .remotion/
 *.mp4
 *.webm
+
+# npm cache (accidentally committed — 135MB)
+.npm-cache/

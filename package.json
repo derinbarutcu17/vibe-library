@@ -1,7 +1,15 @@
 {
   "name": "vibe-library",
   "version": "0.1.0",
+  "description": "Visual prompt library built with Next.js — catalog prompt engineering patterns, prompt products, and related content.",
   "private": true,
+  "author": "Derin Barutçu <derinbarutcu@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://derinbarutcu17.github.io/VibeLibrary/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/derinbarutcu17/VibeLibrary.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
