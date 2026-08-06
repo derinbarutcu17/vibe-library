@@ -19,76 +19,75 @@ export interface PromptProduct {
 
 export const promptProducts: PromptProduct[] = [
     {
-        id: 'coding-root-cause-001',
-        title: 'The Root Cause Investigator',
-        titleTr: 'Kök Neden Araştırmacısı',
-        titleDe: 'Ursachen-Ermittler',
+        id: 'coding-bug-autopsy-006',
+        title: 'The Bug Autopsy',
         category: 'coding',
-        preview: 'Identify complex bugs by mapping the data flow from input to point of failure. Brainstorm 5 root causes with confidence scores and specific investigation steps.',
-        previewTr: 'Girdiden hata noktasına kadar veri akışını haritalandırarak karmaşık hataları tanımlayın. Güven puanları ve araştırma adımları ile 5 kök neden belirleyin.',
-        previewDe: 'Identifizieren Sie komplexe Bugs durch Datenfluss-Mapping. Brainstorming von 5 Ursachen mit Vertrauenswerten und Untersuchungsschritten.',
-        fullPrompt: `### INTERNAL REASONING (THINK SILENTLY) ###
-1. Trace the data flow journey from initial input to the reported error.
-2. Identify dependencies that could cause silent failures.
+        preview: 'Diff-first debugging: start from what changed, map the data flow, rank 3 hypotheses, and get one probe that confirms the cause in under 5 minutes.',
+        fullPrompt: `### DEBUGGING PROTOCOL ###
 
-### SYSTEM INSTRUCTION: SYSTEMS DETECTIVE ###
-Act as a Principal Software Engineer and Systems Detective. 
+I have a bug. Help me find the root cause.
 
 **The Symptom:**
-[INSERT SYMPTOM HERE]
+[INSERT SYMPTOM]
+**What Changed Recently:**
+[INSERT RECENT CHANGES - deploys, refactors, dependency updates]
+**The Code / Logs:**
+[INSERT CODE OR LOGS]
 
-**The Context:**
-[INSERT CODE OR LOGS HERE]
-
-**Task Protocol:**
-1. **Architectural Trace:** Map out the journey of the data. Where could it be corrupted or dropped?
-2. **Hypothesis Generation:** Brainstorm the **Top 5 Potential Causes** (Race conditions, environmental drift, memory leaks, etc.).
-3. **Evidence Ranking:** Assign a **Confidence Score (0-100%)** to each cause.
-4. **The Probe:** For the #1 cause, provide a specific **CLI command or log insertion point** to verify the theory.
+**Protocol:**
+1. **Reproduction:** If a piece is missing, tell me the single thing that would let you reproduce it
+2. **Diff-First:** Start from what changed, not from the whole codebase
+3. **Data Flow Map:** Trace the data from input to failure point
+4. **Hypotheses:** List the top 3 causes, ranked, each with a one-line reason
+5. **The Probe:** For the top hypothesis, give the exact command, log line, or breakpoint to confirm it in under 5 minutes
 
 **Output:**
-A "Data Flow Map" in Markdown, followed by the Evidence Table.`,
-        whyItWorks: 'Architectural Trace: Forcing the model to trace the data flow prevents "lucky guessing" and ensures deep infrastructure analysis. Evidence Ranking: Quantifies probability.',
-        tags: ['debugging', 'root-cause', 'analysis'],
-        tokensUsed: 175,
-        successRate: 99,
-        saves: 4850,
-    },
-    {
-        id: 'coding-architect-002',
-        title: 'The Code Cleaner',
-        titleTr: 'Kod Temizleyici',
-        titleDe: 'Der Code-Reiniger',
-        category: 'coding',
-        preview: 'Refactor messy code into production-grade software. Uses a test-driven approach to ensure logic remains intact while applying SOLID and strict typing.',
-        previewTr: 'Karmaşık kodları profesyonel yazılıma dönüştürün. SOLID ve katı tipleme uygularken mantığın bozulmamasını sağlamak için test odaklı bir yaklaşım kullanır.',
-        previewDe: 'Refactoren Sie unordentlichen Code mithilfe von SOLID-Prinzipien und strenger Typisierung. Nutzt einen testgetriebenen Ansatz zur Qualitätssicherung.',
-        fullPrompt: `### INTERNAL REASONING (THINK SILENTLY) ###
-1. Analyze the existing code for hidden logic and edge cases.
-2. Outline the SOLID violations and optimization opportunities.
+Data flow map -> ranked hypotheses -> the probe.
 
-### SYSTEM INSTRUCTION: SENIOR SOFTWARE ARCHITECT ###
-Act as a Senior Software Architect with 15+ years of experience. Your goal is a high-fidelity refactor.
+Rules:
+- Everything must be specific to my code. No generic checklists.
+- If the probe confirms the top hypothesis, stop there.`,
+        whyItWorks: 'Diff-first debugging beats full-system tracing: most bugs come from recent changes. The probe step forces a falsifiable test instead of a lecture, and the stop rule prevents analysis paralysis.',
+        tags: ['debugging', 'root-cause', 'analysis'],
+        tokensUsed: 165,
+        successRate: 97,
+        saves: 460,
+    },
+
+    {
+        id: 'coding-minimal-refactor-007',
+        title: 'The Minimal Refactorer',
+        category: 'coding',
+        preview: 'Test-first refactoring with a diff budget. Pin the behavior, change only what the problem demands, and get a receipt of what was touched.',
+        fullPrompt: `### REFACTOR PROTOCOL ###
+
+Refactor this code with one constraint: the smallest diff that improves it.
 
 **My Code:**
-[INSERT CODE HERE]
+[INSERT CODE]
+**The Problem:**
+[INSERT WHAT BOTHERS YOU]
 
-**Refactor Protocol:**
-1. **Verification Phase:** Before refactoring, generate 3-5 unit tests (using the standard library for the language) that describe the *current* expected behavior of this code.
-2. **SOLID Refactor:** Rewrite the code ensuring single responsibility and interface segregation.
-3. **Type Safety:** Inject strict typing and handle all null/undefined edge cases.
-4. **Optimization:** Reduce Big O complexity where possible.
+**Protocol:**
+1. **Behavior Lock:** Write 3-5 tests (stdlib of the language) that pin the current behavior before touching anything
+2. **Diff Budget:** State the target: how many lines you plan to change and why
+3. **The Refactor:** Change only what addresses the stated problem. No opportunistic rewrites.
+4. **Regression Run:** Run the tests; they must pass with the same behavior
+5. **The Receipt:** List exactly what changed and what you deliberately left alone
 
 **Output:**
-1. The **Unit Tests** for the original logic.
-2. The **Refactored Code**.
-3. A breakdown of exactly why the new version is more stable.`,
-        whyItWorks: 'Test-Driven Refactor: Generating tests before rewriting code prevents logic regressions. Internal Reasoning: Forces the AI to identify violations before attempting to fix them.',
+Tests -> the diff -> the receipt.
+
+Rules:
+- If a change is not needed for the stated problem, do not make it.
+- Show the change, not the theory.`,
+        whyItWorks: 'Modern models refactor well; their failure mode is rewriting everything. The diff budget and receipt turn a rewrite into a surgical change, and the behavior lock makes regressions visible.',
         tags: ['refactoring', 'clean-code', 'test-driven'],
-        tokensUsed: 145,
-        successRate: 98,
-        saves: 4250,
+        tokensUsed: 155,
+        successRate: 97,
+        saves: 410,
     },
+
     {
         id: 'coding-spec-003',
         title: 'The Idea Blueprint',
@@ -116,37 +115,35 @@ Write this specifically for an AI Agent to read and execute without confusion.`,
         saves: 4901,
     },
     {
-        id: 'coding-safe-004',
-        title: 'The Safe Update',
-        titleTr: 'Güvenli Güncelleme',
-        titleDe: 'Das sichere Update',
+        id: 'coding-ship-safe-008',
+        title: 'The Ship-Safe Change',
         category: 'coding',
-        preview: 'Request code changes while prioritizing stability. Includes impact analysis of file dependencies and a mandatory emergency rollback strategy.',
-        previewTr: 'Kararlılığı önceliklendirerek kod değişiklikleri yapın. Dosya bağımlılıklarının etki analizini ve acil geri alma stratejisini içerir.',
-        previewDe: 'Code-Änderungen mit Fokus auf Stabilität. Beinhaltet Abhängigkeitsanalyse und eine verbindliche Rollback-Strategie.',
-        fullPrompt: `### INTERNAL REASONING (THINK SILENTLY) ###
-1. Map out all potential points of failure for the requested change.
-2. Identify cross-file dependencies that could be affected.
+        preview: 'Ship code changes with git as the safety net: impact scan, smallest diff, verification commands, and a one-command rollback.',
+        fullPrompt: `### SHIP-SAFE CHANGE PROTOCOL ###
 
-### SYSTEM INSTRUCTION: STABILITY ENGINEER ###
-I need a code change, but **STABILITY** is the primary constraint. 
+I need this code change without breaking what works.
 
-**The Request:** 
-[INSERT REQUEST HERE]
+**The Request:**
+[INSERT REQUEST]
+**The Repo:**
+[INSERT REPO PATH / CONTEXT]
 
 **Protocol:**
-1. **Impact Analysis:** List every file and function that will be touched or indirectly affected.
-2. **Implementation:** Rewrite the logic ensuring zero regression.
-3. **Emergency Rollback:** Provide a set of clear steps (CLI or manual) to instantly revert this change if production health drops.
-4. **Verification:** Add a specific test case to run after implementation.
+1. **Impact Scan:** List every file and exported symbol the change touches
+2. **The Change:** Implement it with the smallest diff that satisfies the request
+3. **The Safety Net:** Show the exact git commands to preview, revert, or stash this change (assume a feature branch + commit before starting)
+4. **Verification:** The minimal command(s) to confirm the change works AND nothing else broke (tests, typecheck, build)
+5. **Rollback Plan:** One command to get back to the pre-change state
 
-Execute only if the Impact Analysis shows no critical risks.`,
-        whyItWorks: 'Emergency Rollback: Ensuring an exit plan reduces deployment anxiety. Impact Analysis: Forces the AI to "look before it leaps" across the file structure.',
+**Output:**
+Impact scan -> the change -> verification commands -> one-command rollback.`,
+        whyItWorks: 'Version control replaced emergency rollback scripts. The protocol makes git the safety net, keeps the diff small, and makes verification explicit, which is how changes ship safely in the agent era.',
         tags: ['stability', 'safe-updates', 'rollback'],
-        tokensUsed: 125,
-        successRate: 98,
-        saves: 4120,
+        tokensUsed: 150,
+        successRate: 96,
+        saves: 390,
     },
+
     {
         id: 'coding-automator-005',
         title: 'The Purpose-Preserving Automator',
@@ -195,92 +192,97 @@ Rules:
     },
 
     {
-        id: 'prompt-optimizer-001',
-        title: 'The Prompt Optimizer',
-        titleTr: 'Prompt Optimize Edici',
-        titleDe: 'Der Prompt-Optimierer',
+        id: 'general-context-packager-008',
+        title: 'The Context Packager',
         category: 'general',
-        preview: 'Transform raw ideas into gold-standard prompts using CoT, persona adoption, and negative constraint injection to prevent robotic cliches.',
-        previewTr: 'Ham fikirleri CoT, persona ve robotik klişeleri önlemek için negatif kısıtlama enjeksiyonu kullanarak altın standartta promptlara dönüştürün.',
-        previewDe: 'Verwandeln Sie rohe Ideen in Gold-Standard-Prompts mithilfe von CoT und negativen Constraints zur Vermeidung von KI-Floskeln.',
-        fullPrompt: `### SYSTEM INSTRUCTION: MASTER PROMPT ENGINEER ###
-Transform raw ideas into expert-level prompts optimized for 2026 reasoning models.
+        preview: 'Stop optimizing wording. Assemble the minimal context envelope a model needs: goal, constraints, output contract, and a verification check.',
+        fullPrompt: `### CONTEXT ENGINEERING BRIEF ###
 
-**Raw Goal:** [INSERT GOAL]
-**Target Audience:** [INSERT AUDIENCE]
+Do NOT rewrite my request wording. Help me assemble the context an AI needs to execute it well.
 
-**Optimization Protocol:**
-1. **Internal Reasoning Scratchpad:** Add instructions for the model to "think silently" before answering.
-2. **Negative Constraints (Banned List):** Identify 5 robotic words or behaviors (e.g., "Delve," "In today's fast-paced world," preamble fluff) to strictly avoid.
-3. **Chain-of-Thought:** Outline the logical steps the AI must follow.
-4. **Few-Shot Examples:** If applicable, create a [Placeholder] for examples to guide the model.
+**The Task:**
+[INSERT TASK]
+
+**Context Assembly Protocol:**
+1. Identify what the model actually needs to know vs. what is noise
+2. List the 3-5 pieces of context that would most change output quality (environment, constraints, examples, definitions, failure modes)
+3. Define the Output Contract: exact format, fields, and validation rules the result must satisfy
+4. Define the Failure Criteria: what would make the output wrong, and how to check it
+5. Write the final "Context Envelope": Goal -> Context -> Constraints -> Output Contract -> Check
 
 **Output:**
-1. The **Optimized Prompt** (Code block).
-2. The **Banned List** for this specific task.
-3. A brief explanation of the logic improvements.`,
-        whyItWorks: 'Negative Constraint Injection: By explicitly banning low-quality "AI-isms," the resulting prompt forces the model to find more creative and human-sounding paths.',
-        tags: ['meta-prompting', 'optimization', 'logic-injection'],
-        tokensUsed: 220,
-        successRate: 98,
-        saves: 10250,
-    },
-    {
-        id: 'logic-injector-001',
-        title: 'The Logic Injector',
-        titleTr: 'Mantık Enjektörü',
-        titleDe: 'Der Logik-Injektor',
-        category: 'general',
-        preview: 'Upgrade any existing prompt by injecting chain-of-thought reasoning, self-verification steps, and clear delimiter filtering.',
-        previewTr: 'Herhangi bir mevcut promptu düşünce zinciri (CoT), öz doğrulama adımları ve net sınırlayıcı filtreleme ekleyerek yükseltin.',
-        previewDe: 'Verbessern Sie jeden Prompt durch Injektion von Chain-of-Thought, Selbstverifizierung und klarer Trennung von Anweisungen.',
-        fullPrompt: `I have an existing prompt that needs a logic upgrade.
-
-My Current Prompt: "[INSERT YOUR CURRENT PROMPT HERE]"
-
-Rewrite this prompt to include the following advanced logic protocols:
-1. **Chain-of-Thought (CoT):** Add instructions for the model to "think silently" or "outline logic" before generating the final answer.
-2. **Chain-of-Verification:** Add a final step where the model must critique its own output for errors before finalizing.
-3. **Delimiters:** Use ### or --- to clearly separate instruction sections from data.
-
-Keep the original intent of the prompt exactly the same, but maximize its robustness and reasoning capability.`,
-        whyItWorks: 'Chain-of-Verification reduces hallucinations by forcing self-review. "Silent thought" triggers System 2 deliberate reasoning. Delimiters (###) prevent instruction/data confusion.',
-        tags: ['chain-of-thought', 'verification', 'anti-hallucination'],
-        tokensUsed: 132,
-        successRate: 93,
-        saves: 3892,
+1. The Context Envelope (ready to paste)
+2. The Noise Audit: what I should NOT include
+3. The Check: a 3-step verification to run on the result`,
+        whyItWorks: 'Wording tricks are absorbed by modern models; context is the remaining lever. This forces minimal, high-signal context plus an explicit verification contract, which is what actually moves output quality in 2026.',
+        tags: ['context-engineering', 'workflow', 'optimization'],
+        tokensUsed: 190,
+        successRate: 97,
+        saves: 420,
     },
 
     {
-        id: 'silver-bullet-001',
-        title: 'The Silver Bullet',
-        titleTr: 'Sihirli Değnek',
-        titleDe: 'Die Wunderwaffe',
+        id: 'general-eval-builder-009',
+        title: 'The Eval Builder',
         category: 'general',
-        preview: 'Universal wrapper that silently upgrades any request into expert-level execution. Inject persona, logic, and action-bias without asking permission.',
-        previewTr: 'Herhangi bir isteği sessizce uzman düzeyinde yürütmeye dönüştüren evrensel sarmalayıcı. İzin istemeden persona, mantık ve eyleme dayalı yanlılık ekler.',
-        previewDe: 'Universeller Wrapper, der jede Anfrage lautlos auf Expertenniveau hebt. Injiziert Persona, Logik und Handlungsorientierung ohne Rückfrage.',
-        fullPrompt: `### SYSTEM INSTRUCTION: SILENT OPTIMIZATION & EXECUTION ###
+        preview: 'Build a tiny evaluation harness for any repeated AI task. Pass/fail criteria, edge cases, and a verdict rule instead of hoping the output is good.',
+        fullPrompt: `### EVAL-FIRST PROMPT DESIGNER ###
 
-**Your Goal:**
-I am providing a raw request below. Do NOT rewrite the prompt for me.
-Instead, act as a "Universal Expert." You must silently upgrade the raw request into a "God-Tier" prompt in your internal processing, and **IMMEDIATELY EXECUTE** the optimized task.
+I have a task I will repeat with AI. I need a small evaluation harness so I can measure whether the output is good.
 
-**Your Internal Process (Silent):**
-1. **Persona Injection:** Instantly adopt the highest-level expert persona relevant to the specific task (e.g., "Senior Security Engineer" for code, "Direct Response Copywriter" for text).
-2. **Logic Upgrade:** Apply step-by-step reasoning (Chain-of-Thought) and remove ambiguity *before* generating output.
-3. **Signal-to-Noise Enforcement:** Output ONLY the high-quality result. Do not include preambles like "Here is your improved version." Remove all fluff.
-4. **Action Bias:** Ensure the result is actionable, specific, and dense with value (Operator-Grade).
+**The Task:**
+[INSERT TASK]
+**Sample Inputs:**
+[INSERT 2-3 SAMPLE INPUTS]
 
----
-**MY RAW REQUEST:**
-[INSERT YOUR RAW REQUEST HERE]`,
-        whyItWorks: 'The "Silent Optimization" instruction prevents the AI from explaining what it will do and forces immediate execution. Signal-to-Noise enforcement eliminates bloated responses.',
-        tags: ['universal', 'wrapper', 'silent-execution'],
-        tokensUsed: 165,
-        successRate: 98,
-        saves: 6123,
+**Protocol:**
+1. Define 3-5 concrete pass/fail criteria for a good output (specific and checkable, not vibes)
+2. Write one edge-case input that would likely break the model
+3. Create the eval table: Input | Expected Output | Pass Criteria
+4. Recommend the cheapest way to run this eval (a script, a checklist, or manual review)
+
+**Output:**
+1. The Criteria List
+2. The Eval Table
+3. The Edge Case
+4. The Verdict Rule: how many criteria must pass to call it done`,
+        whyItWorks: 'In-prompt self-verification was a band-aid; evals moved verification outside the model. This builds the minimal harness that tells you if your prompt is actually good, the real successor to chain-of-verification.',
+        tags: ['evals', 'verification', 'testing'],
+        tokensUsed: 185,
+        successRate: 96,
+        saves: 380,
     },
+
+
+    {
+        id: 'general-agent-brief-010',
+        title: 'The Agent Brief',
+        category: 'general',
+        preview: 'Turn any raw request into an execution brief an AI agent can run end-to-end: goal, scope, checkpoints, verification, and stop conditions.',
+        fullPrompt: `### AGENT BRIEF TEMPLATE ###
+
+Write an execution brief for this task so an AI agent can run it end-to-end without asking questions.
+
+**The Task:**
+[INSERT RAW REQUEST]
+
+**Brief Protocol:**
+1. **Goal:** One sentence describing the done state
+2. **Scope:** What is in and what is explicitly out
+3. **Context:** The minimum background the agent needs (tools, files, constraints)
+4. **Plan:** The ordered steps, with a checkpoint after each risky step
+5. **Verification:** How to confirm each step worked
+6. **Stop Conditions:** When the agent must stop and ask instead of guessing
+
+**Output:**
+A brief in this exact structure, ready to paste into any agent interface.`,
+        whyItWorks: 'The 2026 equivalent of a universal wrapper is a brief that gives an agent goal, scope, checkpoints, and stop conditions. Explicit stop conditions matter more than clever wording: agents guess less when they know when to ask.',
+        tags: ['agents', 'specs', 'execution'],
+        tokensUsed: 170,
+        successRate: 97,
+        saves: 350,
+    },
+
     {
         id: 'general-modeler-004',
         title: 'The Rough Modeler',
@@ -907,63 +909,63 @@ A single block of text optimized for semantic understanding. No JSON, no commas,
         saves: 2420,
     },
     {
-        id: 'image-cinematic-002',
-        title: 'The Cinematic Shot',
-        titleTr: 'Sinematik Çekim',
-        titleDe: 'Der kinoreife Shot',
+        id: 'image-modern-director-004',
+        title: 'The Modern Image Director',
         category: 'image',
-        preview: 'Create high-end cinematic visuals by controlling every aspect of the shot: Camera, Lens, Lighting, and Composition. Perfect for storyboards and mood decks.',
-        previewTr: 'Çekimin her yönünü kontrol ederek üst düzey sinematik görseller oluşturun: Kamera, Mercek, Işıklandırma ve Kompozisyon.',
-        previewDe: 'Erstellen Sie kinoreife Visuals durch Kontrolle über Kamera, Objektiv, Licht und Komposition. Ideal für Moodboards.',
-        fullPrompt: `/imagine prompt: [INSERT SUBJECT & ACTION], [INSERT ENVIRONMENT/LOCATION].
+        preview: 'Natural-language visual briefs for 2026 image models: scene, camera feel, mood, a do-not list, and an edit pass for the first failure.',
+        fullPrompt: `### IMAGE BRIEF PROTOCOL ###
 
-**Cinematography Details:**
-Shot on [INSERT CAMERA - e.g., Kodak Portra 400 film, Arri Alexa Mini],
-[INSERT LENS - e.g., 35mm wide angle, 85mm anamorphic lens],
-[INSERT LIGHTING - e.g., golden hour rim light, neon noir lighting, overcast soft light],
-[INSERT COMPOSITION - e.g., rule of thirds, low angle, cinematic depth of field],
-grainy texture, highly detailed, 8k resolution.
+Create a visual brief for this image, written for modern image models that follow natural language instructions (no flag syntax, no negative weights).
 
-**Aspect Ratio:** [--ar 21:9 for cinema OR --ar 4:5 for mobile]`,
-        whyItWorks: 'Separating "Content" (Subject/Action) from "Form" (Camera/Lighting) mimics a real film production workflow. Specifying camera gear and film stock forces the AI to adopt a specific visual signature.',
-        tags: ['midjourney', 'cinematography', 'photorealism'],
-        tokensUsed: 160,
-        successRate: 96,
-        saves: 2450,
+**The Subject:**
+[INSERT SUBJECT]
+**The Purpose:**
+[INSERT USE - e.g., album cover, product shot, storyboard frame]
+
+**Protocol:**
+1. **The Scene:** One paragraph: subject, action, environment, and what makes it feel real (textures, light behavior, small imperfections)
+2. **The Camera Language:** Lens feel, angle, depth of field, motion, in plain words
+3. **The Color & Mood:** Palette direction and the feeling it must carry
+4. **The Do-Not List:** 2-3 things the image must NOT contain (artifacts, clichés, wrong anatomy)
+5. **The Edit Pass:** One corrective instruction for the most likely first failure (e.g., "check hands and text rendering, then regenerate")
+
+**Output:**
+A single dense paragraph the model can act on directly.`,
+        whyItWorks: 'Modern image models take flowing natural-language direction and support conversational editing passes. The do-not list and the edit pass replace the old flag-based control that no longer exists.',
+        tags: ['image', 'art-direction', 'narrative'],
+        tokensUsed: 175,
+        successRate: 97,
+        saves: 330,
     },
-    {
-        id: 'image-product-003',
-        title: 'Commercial Product Photographer',
-        titleTr: 'Ticari Ürün Fotoğrafçısı',
-        titleDe: 'Werbeprodukt-Fotograf',
-        category: 'image',
-        preview: 'Transform products into luxury commercial assets. Includes dedicated platform selection, hero lighting setups, and macro lens specs for premium advertisement quality.',
-        previewTr: 'Ürünleri lüks ticari varlıklara dönüştürün. Özel platform seçimi, hero aydınlatma kurulumları ve makro lens özellikleri içerir.',
-        previewDe: 'Verwandeln Sie Produkte in luxuriöse Werbeobjekte. Inklusive Plattformauswahl, Hero-Beleuchtung und Makro-Objektiv-Spezifikationen.',
-        fullPrompt: `### SYSTEM INSTRUCTION: COMMERCIAL PRODUCT PHOTOGRAPHER ###
 
-**Role:**
-Act as a Lead Photographer for a luxury commercial shoot.
-I have a product. I need a "Studio Setup" prompt that screams "Premium."
+    {
+        id: 'image-product-hero-005',
+        title: 'The Product Hero Shot',
+        category: 'image',
+        preview: 'Premium commercial product imagery for 2026 models: hero setup, lighting script, texture detail, a style anchor, and platform constraints.',
+        fullPrompt: `### PRODUCT HERO SHOT BRIEF ###
+
+I need a premium commercial image of my product.
 
 **The Product:**
-[INSERT PRODUCT - e.g., "A matte black energy drink can"]
+[INSERT PRODUCT DESCRIPTION]
+**The Platform:**
+[INSERT WHERE IT WILL BE SEEN - e.g., landing page, ad, packaging]
 
-**Your Task:**
-Create a prompt using the "Hero Object" framework:
+**Protocol:**
+1. **The Hero Setup:** The product's position, scale, and the surface/environment it sits on
+2. **Lighting Script:** Key light, rim light, and background mood in plain language
+3. **Texture & Detail:** What the image must show to feel premium (material feel, reflections, condensation, etc.)
+4. **The Style Anchor:** One reference direction (e.g., "Apple-style minimal," "editorial studio," "natural light")
+5. **Constraints:** Aspect ratio suggestion for the platform + what to avoid (oversaturation, floating edges, wrong proportions)
 
-1.  **The Platform:** What is the product sitting on? (e.g., "A jagged piece of raw charcoal," "A floating podium of water," "Velvet podium").
-2.  **The Lighting:** Define the "Key Light" and "Rim Light." (e.g., "Softbox from the left," "Hard neon rim light to separate from background").
-3.  **The Camera:** Use macro lens specs to fake realism. (e.g., "100mm Macro lens," "f/2.8 aperture for bokeh," "Hasselblad X2D").
-4.  **The "Action":** Something dynamic. (e.g., "Condensation droplets sliding down," "Dust explosion," "Smoke wisps").
-
-**Output Format (Copy-Paste):**
-"Commercial product photography of [Product], resting on [Platform]. [Lighting Setup]. [Action details]. Shot on [Camera Specs]. Ultra-detailed textures, 8k resolution, advertisement quality."`,
-        whyItWorks: 'Hero Object Framework: Structured approach to platform, lighting, and action. Macro Realism: Uses specific lens and camera specs to trigger high-fidelity textures. Commercial Polish: Appends professional advertising keywords.',
+**Output:**
+A copy-paste natural-language brief.`,
+        whyItWorks: 'The hero-object framework still works, but 2026 image models take plain-language direction. Framing the brief around the platform and a style anchor beats fake camera specs.',
         tags: ['commercial', 'photography', 'product-shots'],
-        tokensUsed: 200,
-        successRate: 97,
-        saves: 1840,
+        tokensUsed: 170,
+        successRate: 96,
+        saves: 310,
     },
     {
         id: 'learning-feynman-001',

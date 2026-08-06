@@ -155,7 +155,7 @@ export default function UserManual() {
 
                     {/* Logic 1 - Constraints */}
                     <div className={styles.bentoCard + ' ' + styles.logicCard}>
-                        <Icon icon="mingcute:lock-line" className={styles.cardIcon} style={{ color: '#3b82f6' }} />
+                        <Icon icon="mingcute:lock-line" className={styles.cardIcon} />
                         <span className={styles.cardTitle}>{locale === 'tr' ? 'Kısıtlamalar' : locale === 'de' ? 'Constraints' : 'Constraints'}</span>
                         <p className={styles.cardText}>
                             {locale === 'tr' ? 'Kalite şans eseri değil, negatif kısıtlamalarla elde edilir.' : locale === 'de' ? 'Qualität wird durch Einschränkungen erzwungen.' : 'Quality is forced via strict negative constraints, not hoped for.'}
@@ -164,7 +164,7 @@ export default function UserManual() {
 
                     {/* Logic 2 - Style */}
                     <div className={styles.bentoCard + ' ' + styles.logicCard}>
-                        <Icon icon="mingcute:palette-line" className={styles.cardIcon} style={{ color: '#a855f7' }} />
+                        <Icon icon="mingcute:palette-line" className={styles.cardIcon} />
                         <span className={styles.cardTitle}>{locale === 'tr' ? 'Stil' : locale === 'de' ? 'Stil' : 'Style'}</span>
                         <p className={styles.cardText}>
                             {locale === 'tr' ? 'Sıradan çıktılar yetersiz stil tanımından kaynaklanır.' : locale === 'de' ? 'Generische Antworten bedeuten ungenaue Definitionen.' : 'Generic outputs mean the Tone/Style parameters were too vague.'}
@@ -173,7 +173,7 @@ export default function UserManual() {
 
                     {/* Logic 3 - Context */}
                     <div className={styles.bentoCard + ' ' + styles.logicCard}>
-                        <Icon icon="mingcute:database-line" className={styles.cardIcon} style={{ color: '#22c55e' }} />
+                        <Icon icon="mingcute:database-line" className={styles.cardIcon} />
                         <span className={styles.cardTitle}>{locale === 'tr' ? 'Bağlam' : locale === 'de' ? 'Kontext' : 'Context'}</span>
                         <p className={styles.cardText}>
                             {locale === 'tr' ? 'Girdi veri yoğunluğu doğrudan çıktı kalitesini belirler.' : locale === 'de' ? 'Input-Dichte = Output-Qualität.' : 'Model has zero external context. Input density = Output quality.'}

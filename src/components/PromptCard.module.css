@@ -1,8 +1,8 @@
 .promptCard {
-    background: rgba(15, 15, 20, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 1.5rem;
+    background: #0f1011;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -12,35 +12,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.875rem;
 }
 
 .label {
-    font-family: var(--font-narrative);
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #A855F7;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ghost-grey);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
 
 .model {
     font-family: var(--font-code);
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    color: #62666d;
 }
 
 .text {
-    font-family: var(--font-narrative);
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
+    font-family: var(--font-code);
+    font-size: 13px;
+    color: #d0d6e0;
+    line-height: 1.7;
     flex: 1;
 }
 
 .highlight {
-    background: rgba(168, 85, 247, 0.3);
-    color: #D8B4FE;
+    background: rgba(113, 112, 255, 0.18);
+    color: #c7c9ff;
     padding: 0.1rem 0.3rem;
     border-radius: 3px;
 }
@@ -53,6 +53,6 @@
 
 .tokens {
     font-family: var(--font-code);
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    color: #62666d;
 }

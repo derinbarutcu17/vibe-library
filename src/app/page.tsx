@@ -1,77 +1,35 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import TopNav from '@/components/TopNav';
 import FrequencyFooter from '@/components/FrequencyFooter';
 import PromptShop from '@/components/PromptShop';
 import PromptCrafter from '@/components/PromptCrafter';
-import ShootingStars from '@/components/ShootingStars';
-import GreenPrompting from '@/components/GreenPrompting';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
-import UserManual from '@/components/UserManual';
-import GalaxyScene from '@/components/galaxy/GalaxyScene';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import { ThinkingOrb } from 'thinking-orbs';
 import styles from './page.module.css';
-import { Icon } from '@iconify/react';
-import { CATEGORY_METADATA } from '@/data/prompt-products';
 import { useTranslation } from '@/i18n';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const GLOW_STATE_COLUMNS = 5;
-const GLOW_STATE_ROWS = 4;
-const TOTAL_GLOW_STATES = GLOW_STATE_COLUMNS * GLOW_STATE_ROWS;
-
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const stickyNavRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const { t } = useTranslation();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isCrafterOpen, setIsCrafterOpen] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Detect mobile on mount
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    const handleScroll = () => {
-      // Show button when scrolled past hero (approx 800px or when #shop is visible)
-      if (window.scrollY > window.innerHeight * 0.8) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
+      setIsMobile(window.innerWidth < 768);
     };
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('resize', checkMobile);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-    document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleViewGallery = () => {
-    document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const handleCraftPrompt = () => {
     // On mobile, navigate to dedicated crafter page
@@ -87,265 +45,29 @@ export default function Home() {
     setIsCrafterOpen(false);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const x = (e.clientX / window.innerWidth) * 2 - 1;
-    const y = (e.clientY / window.innerHeight) * 2 - 1;
-    setMousePos({ x, y });
-  };
-
-  // ============ MAGNETIC HOVER EFFECT ============
-  const handlePillMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    const pill = e.currentTarget;
-    const rect = pill.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    gsap.to(pill, {
-      x: x * 0.3,
-      y: y * 0.3,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
-  }, []);
-
-  const handlePillMouseLeave = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    const pill = e.currentTarget;
-    gsap.to(pill, {
-      x: 0,
-      y: 0,
-      duration: 0.5,
-      ease: 'elastic.out(1, 0.3)',
-    });
-  }, []);
-
-  // ============ GSAP ANIMATIONS ============
-  useGSAP(() => {
-    // Skip animations if crafter is open
-    if (isCrafterOpen) return;
-
-    const ctx = gsap.context(() => {
-      // ============ 1. TEXT REVEAL ANIMATION ============
-      if (titleRef.current) {
-        const titleText = titleRef.current.textContent || '';
-        titleRef.current.innerHTML = titleText
-          .split('')
-          .map(char => char === ' ' ? ' ' : `<span class="${styles.titleChar}">${char}</span>`)
-          .join('');
-
-        gsap.from(`.${styles.titleChar}`, {
-          y: 100,
-          opacity: 0,
-          rotationX: -90,
-          stagger: 0.05,
-          duration: 0.8,
-          ease: 'power4.out',
-          delay: 0.2,
-        });
-      }
-
-      if (taglineRef.current) {
-        gsap.set(taglineRef.current, { opacity: 1 });
-        gsap.fromTo(taglineRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.6 }
-        );
-      }
-
-      if (ctaRef.current) {
-        gsap.fromTo(ctaRef.current.children,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: 'power3.out', delay: 0.9 }
-        );
-      }
-
-      // ============ 5. SCROLL-TRIGGERED STICKY NAV ============
-      if (heroRef.current && stickyNavRef.current) {
-        ScrollTrigger.create({
-          trigger: heroRef.current,
-          start: 'bottom top+=100',
-          end: 'bottom top',
-          onEnter: () => {
-            gsap.to(stickyNavRef.current, {
-              y: 0,
-              opacity: 1,
-              duration: 0.4,
-              ease: 'power2.out',
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(stickyNavRef.current, {
-              y: -100,
-              opacity: 0,
-              duration: 0.3,
-              ease: 'power2.in',
-            });
-          },
-        });
-      }
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, [isCrafterOpen]);
-
-  const categoryPills = [
-    { id: 'general' },
-    { id: 'coding' },
-    { id: 'ui-ux' },
-    { id: 'image' },
-    { id: 'problem-solving' },
-    { id: 'creativity' },
-  ];
-
-  const mouseNormX = (mousePos.x + 1) / 2;
-  const mouseNormY = (mousePos.y + 1) / 2;
-  const glowColumn = Math.min(GLOW_STATE_COLUMNS - 1, Math.max(0, Math.floor(mouseNormX * GLOW_STATE_COLUMNS)));
-  const glowRow = Math.min(GLOW_STATE_ROWS - 1, Math.max(0, Math.floor(mouseNormY * GLOW_STATE_ROWS)));
-  const glowState = Math.min(TOTAL_GLOW_STATES - 1, glowRow * GLOW_STATE_COLUMNS + glowColumn);
-  const ctaGlowStyle = {
-    '--cta-glow-x': `${(mouseNormX * 100).toFixed(2)}%`,
-    '--cta-glow-y': `${(mouseNormY * 100).toFixed(2)}%`,
-  } as React.CSSProperties;
-
   return (
     <>
-      <nav ref={stickyNavRef} className={styles.stickyNav}>
-        <div className={styles.stickyNavContent}>
-          <span className={styles.stickyLogo}>Vibe Library</span>
-          <div className={styles.stickyPills}>
-            {categoryPills.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryClick(cat.id)}
-                className={styles.stickyPill}
-              >
-                <Icon icon={CATEGORY_METADATA[cat.id]?.icon} style={{ color: CATEGORY_METADATA[cat.id]?.color }} />
-                {t(`categories.${cat.id}`)}
-              </button>
-            ))}
-          </div>
-          <button
-            className={styles.stickyCta}
-            data-glow-state={glowState}
-            style={ctaGlowStyle}
-            onClick={handleCraftPrompt}
-          >
-            {t('hero.ctaPrimary')}
-          </button>
-        </div>
-      </nav>
+      <TopNav
+        isCrafterOpen={isCrafterOpen}
+        onCraft={handleCraftPrompt}
+      />
 
-      <main className={`${styles.main} ${isCrafterOpen ? styles.crafterActive : ''}`} onMouseMove={handleMouseMove}>
-        <div className={`${styles.mainContent} ${isCrafterOpen ? styles.slideLeft : ''}`}>
-          <div className={styles.heroWrapper}>
-            <div className={styles.mainContainer}>
-              <GalaxyScene warpMode={isCrafterOpen} />
-
-              <section className={styles.heroSection} ref={heroRef}>
-                {/* Header elements move with hero */}
-                <GreenPrompting onOpenCrafter={handleCraftPrompt} />
-
-                <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100 }}>
-                  <LanguageSwitcher />
-                </div>
-
-                <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 100 }}>
-                  <LanguageSwitcher />
-                </div>
-
-                {/* User Manual Button - Centered Top */}
-                <UserManual />
-
-                <div className={styles.announcementPill}>
-                  <span className={styles.announcementDot}></span>
-                  <span>{t('hero.announcement')}</span>
-                  <span style={{ marginLeft: '0.5rem', opacity: 0.5, fontSize: '0.7rem' }}>v1.3</span>
-                </div>
-
-                <h1 className={styles.mainTitle} ref={titleRef}>{t('hero.title')}</h1>
-                <p className={styles.tagline} ref={taglineRef}>
-                  {t('hero.tagline.master')}
-                  <button
-                    onClick={() => handleCategoryClick('general')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['general']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['general']?.color }} />
-                    {t('hero.heroPills.general') !== 'hero.heroPills.general' ? t('hero.heroPills.general') : t('categories.general')}
-                  </button>
-                  {t('hero.tagline.comma1')}
-                  <button
-                    onClick={() => handleCategoryClick('coding')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['coding']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['coding']?.color }} />
-                    {t('hero.heroPills.coding') !== 'hero.heroPills.coding' ? t('hero.heroPills.coding') : t('categories.coding')}
-                  </button>
-                  {t('hero.tagline.comma2')}
-                  <button
-                    onClick={() => handleCategoryClick('ui-ux')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['ui-ux']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['ui-ux']?.color }} />
-                    {t('hero.heroPills.ui-ux') !== 'hero.heroPills.ui-ux' ? t('hero.heroPills.ui-ux') : t('categories.ui-ux')}
-                  </button>
-                  {t('hero.tagline.comma3')}
-                  <button
-                    onClick={() => handleCategoryClick('finance')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['finance']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['finance']?.color }} />
-                    {t('hero.heroPills.finance') !== 'hero.heroPills.finance' ? t('hero.heroPills.finance') : t('categories.finance')}
-                  </button>
-                  {t('hero.tagline.comma4')}
-                  <button
-                    onClick={() => handleCategoryClick('image')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['image']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['image']?.color }} />
-                    {t('hero.heroPills.image') !== 'hero.heroPills.image' ? t('hero.heroPills.image') : t('categories.image')}
-                  </button>
-                  {t('hero.tagline.assets')}
-                  <button
-                    onClick={() => handleCategoryClick('creativity')}
-                    className={styles.navPill}
-                    onMouseMove={handlePillMouseMove}
-                    onMouseLeave={handlePillMouseLeave}
-                  >
-                    <Icon icon={CATEGORY_METADATA['creativity']?.icon} className={styles.pillIcon} style={{ color: CATEGORY_METADATA['creativity']?.color }} />
-                    {t('hero.heroPills.creativity') !== 'hero.heroPills.creativity' ? t('hero.heroPills.creativity') : t('categories.creativity')}
-                  </button>
-                  {t('hero.tagline.andMore')}
-                </p>
-
-                <div className={styles.ctaButtons} ref={ctaRef}>
-                  <button
-                    className={styles.primaryCta}
-                    data-glow-state={glowState}
-                    style={ctaGlowStyle}
-                    onClick={handleCraftPrompt}
-                  >
-                    {t('hero.ctaPrimary')}
-                    <span className={styles.ctaArrow}>→</span>
-                  </button>
-                  <button className={styles.secondaryCta} onClick={handleViewGallery}>
-                    {t('hero.ctaSecondary')}
-                  </button>
-                </div>
-              </section>
+      <main className={`${styles.main} ${isCrafterOpen ? styles.crafterActive : ''}`}>
+        <div className={styles.mainContent}>
+          <section className={styles.landing}>
+            <div className={styles.landingTitleRow}>
+              <span className={styles.orbWrap}>
+                <ThinkingOrb state="connecting" size={64} />
+              </span>
+              <h1 className={styles.landingTitle}>{t('hero.title')}</h1>
             </div>
-          </div>
+            <p className={styles.landingText}>
+              {t('hero.landing')}
+            </p>
+          </section>
 
           <section className={styles.shopSection} id="shop">
-            <PromptShop initialCategory={selectedCategory} />
+            <PromptShop initialCategory="all" />
           </section>
 
           <FrequencyFooter />
@@ -354,16 +76,6 @@ export default function Home() {
         <div className={`${styles.crafterPanel} ${isCrafterOpen ? styles.crafterVisible : ''}`}>
           <PromptCrafter onClose={handleCloseCrafter} />
         </div>
-
-        {/* Go to Top of Prompts Button */}
-        <button
-          className={`${styles.scrollTopBtn} ${showScrollTop ? styles.scrollTopVisible : ''}`}
-          onClick={handleViewGallery}
-          aria-label="Scroll to top of prompts"
-        >
-          <Icon icon="mingcute:arrow-up-line" />
-          <span>Top of Library</span>
-        </button>
       </main>
     </>
   );

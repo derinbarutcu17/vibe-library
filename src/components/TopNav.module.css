@@ -1,0 +1,73 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(8, 9, 10, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mainRowInner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+  min-height: 48px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.craftButton {
+  padding: 0.375rem 0.875rem;
+  background: #5e6ad2;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-family: var(--font-narrative);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-feature-settings: 'cv01', 'ss03';
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+
+.craftButton:hover {
+  background: #7170ff;
+}
+
+.craftLabel {
+  display: inline;
+}
+
+/* ========== ACCESSIBILITY ========== */
+.craftButton:focus-visible {
+  outline: 2px solid #7170ff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .craftButton {
+    transition: none;
+  }
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 767.98px) {
+  .mainRowInner {
+    padding: 0.5rem 1rem;
+  }
+
+  .craftButton {
+    min-height: 36px;
+  }
+}

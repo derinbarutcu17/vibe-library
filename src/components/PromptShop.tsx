@@ -3,9 +3,10 @@
 import { useDeferredValue, useEffect, useState } from 'react';
 import styles from './PromptShop.module.css';
 import PromptProductCard from './PromptProductCard';
-import { promptProducts, categories } from '@/data/prompt-products';
+import { promptProducts, categories, CATEGORY_METADATA, type PromptProduct } from '@/data/prompt-products';
 import { Icon } from '@iconify/react';
 import { useI18n } from '@/i18n';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 interface PromptShopProps {
     initialCategory?: string;
@@ -19,10 +20,62 @@ function normalizeSearchText(value: string) {
         .trim();
 }
 
+function PromptListRow({ prompt }: { prompt: PromptProduct }) {
+    const [copied, setCopied] = useState(false);
+    const [hovered, setHovered] = useState(false);
+    const { locale, t } = useI18n();
+    const meta = CATEGORY_METADATA[prompt.category];
+
+    const preview =
+        locale === 'tr' && prompt.previewTr
+            ? prompt.previewTr
+            : locale === 'de' && prompt.previewDe
+                ? prompt.previewDe
+                : prompt.preview;
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(prompt.fullPrompt);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const { typed, isTyping } = useTypewriter(prompt.fullPrompt, hovered);
+
+    return (
+        <div
+            className={`${styles.listRow} ${hovered ? styles.listRowHovered : ''}`}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            <div className={styles.listRowMain}>
+                <Icon icon={meta.icon} className={styles.listRowIcon} style={{ color: meta.color }} />
+                <div className={styles.listRowBody}>
+                    <span className={styles.listRowTitle}>{prompt.title}</span>
+                    <span className={styles.listRowPreview}>{preview}</span>
+                </div>
+                <button
+                    type="button"
+                    className={styles.listRowCopy}
+                    onClick={handleCopy}
+                    aria-label={copied ? t('common.copied') : t('common.copy')}
+                >
+                    <Icon icon={copied ? 'mingcute:check-line' : 'mingcute:copy-2-line'} />
+                </button>
+            </div>
+            {hovered && (
+                <pre className={styles.listRowPrompt}>
+                    {typed}
+                    {isTyping && <span className={styles.listRowCaret} aria-hidden="true" />}
+                </pre>
+            )}
+        </div>
+    );
+}
+
 export default function PromptShop({ initialCategory = 'all' }: PromptShopProps) {
     const [activeCategory, setActiveCategory] = useState(initialCategory);
     const [searchQuery, setSearchQuery] = useState('');
-    const [gridCols, setGridCols] = useState<3 | 4>(3);
+    const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const sortBy: 'saves' | 'successRate' | 'tokensUsed' = 'saves';
     const deferredSearchQuery = useDeferredValue(searchQuery);
     const { t } = useI18n();
@@ -78,7 +131,7 @@ export default function PromptShop({ initialCategory = 'all' }: PromptShopProps)
                             className={`${styles.categoryBtn} ${activeCategory === cat.id ? styles.active : ''}`}
                             onClick={() => setActiveCategory(cat.id)}
                         >
-                            <Icon icon={cat.icon} className={styles.categoryIcon} />
+                            <Icon icon={cat.icon} className={styles.categoryIcon} style={{ color: CATEGORY_METADATA[cat.id]?.color }} />
                             <span className={styles.categoryLabel}>{t(`categories.${cat.id}`)}</span>
                         </button>
                     ))}
@@ -123,27 +176,39 @@ export default function PromptShop({ initialCategory = 'all' }: PromptShopProps)
                 </span>
                 <div className={styles.viewToggle}>
                     <span className={styles.viewLabel}>{t('promptShop.view') || 'VIEW'}</span>
-                    {[3, 4].map((cols) => (
-                        <button
-                            key={cols}
-                            className={`${styles.viewBtn} ${gridCols === cols ? styles.viewBtnActive : ''}`}
-                            onClick={() => setGridCols(cols as 3 | 4)}
-                        >
-                            {cols}
-                        </button>
-                    ))}
+                    <button
+                        type="button"
+                        className={`${styles.viewBtn} ${viewMode === 'grid' ? styles.viewBtnActive : ''}`}
+                        onClick={() => setViewMode('grid')}
+                        aria-label="Grid view"
+                    >
+                        <Icon icon="mingcute:grid-2-line" />
+                    </button>
+                    <button
+                        type="button"
+                        className={`${styles.viewBtn} ${viewMode === 'list' ? styles.viewBtnActive : ''}`}
+                        onClick={() => setViewMode('list')}
+                        aria-label="List view"
+                    >
+                        <Icon icon="mingcute:list-line" />
+                    </button>
                 </div>
             </div>
 
-            {/* Product Grid */}
-            <div
-                className={styles.productGrid}
-                style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
-            >
-                {filteredProducts.map((prompt) => (
-                    <PromptProductCard key={prompt.id} prompt={prompt} />
-                ))}
-            </div>
+            {/* Product Grid / List */}
+            {viewMode === 'grid' ? (
+                <div className={styles.productGrid}>
+                    {filteredProducts.map((prompt) => (
+                        <PromptProductCard key={prompt.id} prompt={prompt} />
+                    ))}
+                </div>
+            ) : (
+                <div className={styles.listView}>
+                    {filteredProducts.map((prompt) => (
+                        <PromptListRow key={prompt.id} prompt={prompt} />
+                    ))}
+                </div>
+            )}
 
             {filteredProducts.length === 0 && (
                 <div className={styles.emptyState}>

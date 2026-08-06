@@ -93,7 +93,6 @@ export default function BlueprintCard({ template }: BlueprintCardProps) {
                         Copy Pattern
                     </>
                 )}
-                {copied && <span className={styles.scanLine} />}
             </button>
         </div>
     );

@@ -89,11 +89,6 @@ export default function OmniSearch({ isOpen, onClose, onFilterSelect }: OmniSear
     return (
         <div className={styles.overlay} onClick={onClose}>
             <div className={styles.lens} onClick={e => e.stopPropagation()}>
-                <div className={styles.crosshairs}>
-                    <span className={styles.crosshairH} />
-                    <span className={styles.crosshairV} />
-                </div>
-
                 <input
                     ref={inputRef}
                     id="omni-search-input"
@@ -115,9 +110,8 @@ export default function OmniSearch({ isOpen, onClose, onFilterSelect }: OmniSear
                             className={`${styles.chip} ${focusedIndex === index ? styles.focused : ''
                                 } ${selectedFilters.includes(chip.id) ? styles.selected : ''}`}
                             onClick={() => toggleFilter(chip.id)}
-                            style={{ '--chip-color': chip.color } as React.CSSProperties}
                         >
-                            <span className={styles.chipDot} />
+                            <span className={styles.chipDot} style={{ background: selectedFilters.includes(chip.id) ? undefined : chip.color }} />
                             <span className={styles.chipLabel}>{chip.label}</span>
                             <span className={styles.chipType}>{chip.type}</span>
                         </button>

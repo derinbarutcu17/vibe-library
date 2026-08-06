@@ -28,6 +28,7 @@ export default function LanguageSwitcher() {
                 {locales.map((loc) => (
                     <button
                         key={loc}
+                        type="button"
                         className={`${styles.option} ${locale === loc ? styles.active : ''}`}
                         onClick={() => setLocale(loc)}
                         title={t(`languageSwitcher.${loc}`)}

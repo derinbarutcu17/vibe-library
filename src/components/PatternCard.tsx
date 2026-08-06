@@ -43,7 +43,6 @@ export default function PatternCard({ card }: PatternCardProps) {
                 ) : (
                     <>⎘ Copy Pattern</>
                 )}
-                {copied && <span className={styles.scanLine} />}
             </button>
         </div>
     );

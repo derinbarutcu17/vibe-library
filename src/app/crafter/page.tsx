@@ -10,5 +10,9 @@ export default function CrafterPage() {
         router.back();
     };
 
-    return <PromptCrafter onClose={handleClose} />;
+    return (
+        <div style={{ background: '#08090a', minHeight: '100dvh' }}>
+            <PromptCrafter onClose={handleClose} />
+        </div>
+    );
 }

@@ -8,8 +8,8 @@
     justify-content: center;
     gap: var(--space-3);
     padding: var(--space-4);
-    background: linear-gradient(90deg, rgba(255, 184, 108, 0.1), rgba(0, 212, 255, 0.1));
-    border: 1px solid rgba(255, 184, 108, 0.2);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--hairline-border);
     border-radius: var(--card-radius);
     margin-bottom: var(--space-8);
 }
@@ -21,7 +21,7 @@
 .betaText {
     font-family: var(--font-code);
     font-size: var(--text-sm);
-    color: var(--neon-amber);
+    color: var(--paper-white-muted);
     letter-spacing: 0.05em;
 }
 

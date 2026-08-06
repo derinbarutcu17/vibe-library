@@ -8,38 +8,39 @@
 
 :root {
   /* ========== THE SUBSTRATE ========== */
-  --void-black: #050505;
-  --obsidian: #0F0F12;
-  --obsidian-lighter: #15151A;
+  --void-black: #08090a;
+  --obsidian: #0f1011;
+  --obsidian-lighter: #191a1b;
   --hairline-border: rgba(255, 255, 255, 0.08);
   --hairline-border-strong: rgba(255, 255, 255, 0.12);
 
   /* ========== BRAND COLORS ========== */
-  --brand-black: #050505;
-  --brand-dark: #0a0a0f;
-  --brand-purple: #3B82F6;
+  --brand-black: #08090a;
+  --brand-dark: #0b0c0d;
+  --brand-purple: #5e6ad2;
   /* Changed to Cool Blue */
-  --brand-blue: #1E40AF;
+  --brand-blue: #4c5fd5;
   /* Darker Shade */
 
   /* ========== TEXT COLORS ========== */
-  --paper-white: #EDEDED;
-  --paper-white-muted: rgba(237, 237, 237, 0.7);
-  --ghost-grey: #4A4A52;
-  --ghost-grey-light: rgba(74, 74, 82, 0.5);
+  --paper-white: #f7f8f8;
+  --paper-white-muted: #d0d6e0;
+  --ghost-grey: #62666d;
+  --ghost-grey-light: rgba(98, 102, 109, 0.5);
+  --muted: #8a8f98;
 
   /* ========== ACCENT COLORS ========== */
-  --neon-blue: #00D4FF;
-  --neon-blue-glow: rgba(0, 212, 255, 0.3);
-  --neon-green: #50FA7B;
-  --neon-green-glow: rgba(80, 250, 123, 0.2);
-  --neon-amber: #FFB86C;
-  --neon-red: #FF5555;
-  --neon-red-glow: rgba(255, 85, 85, 0.2);
+  --neon-blue: #7170ff;
+  --neon-blue-glow: rgba(113, 112, 255, 0.25);
+  --neon-green: #10b981;
+  --neon-green-glow: rgba(16, 185, 129, 0.2);
+  --neon-amber: #d9a95e;
+  --neon-red: #e5534b;
+  --neon-red-glow: rgba(229, 83, 75, 0.2);
 
   /* ========== TYPOGRAPHY ========== */
-  --font-narrative: var(--font-lato), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-accent: var(--font-newsreader), serif;
+  --font-narrative: var(--font-inter), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-code: 'JetBrains Mono', var(--font-geist-mono), monospace;
 
   /* Font Sizes */
@@ -90,8 +91,8 @@
   --stream-max-width: 1200px;
   /* Fluid padding */
   --stream-padding: clamp(var(--space-4), 5vw, var(--space-8));
-  --card-radius: 12px;
-  --card-radius-lg: 16px;
+  --card-radius: 8px;
+  --card-radius-lg: 12px;
 
   /* Column widths */
   --col-prompt: 35%;
@@ -109,15 +110,21 @@
   --grid-size: 40px;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --shadow-elevated: 0 8px 48px rgba(0, 0, 0, 0.5);
-  --shadow-glow-blue: 0 0 20px var(--neon-blue-glow);
-  --shadow-glow-green: 0 0 20px var(--neon-green-glow);
+  --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-glow-blue: 0 0 12px rgba(113, 112, 255, 0.12);
+  --shadow-glow-green: 0 0 12px rgba(16, 185, 129, 0.1);
 
   /* Blur */
   --blur-sm: 8px;
   --blur-md: 16px;
   --blur-lg: 32px;
+
+  /* ========== CATEGORY COLORS (BlueprintCards) ========== */
+  --cat-foundation: #EAB308;
+  --cat-refactor: #00D4FF;
+  --cat-logic: #F97316;
+  --cat-ui: #A855F7;
 }
 
 /* ========== RESET & BASE ========== */
@@ -142,12 +149,24 @@ body {
 
 body {
   font-family: var(--font-narrative);
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  letter-spacing: -0.011em;
   color: var(--paper-white);
   background: var(--void-black);
+  font-feature-settings: "cv01", "ss03";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.011em;
+  font-feature-settings: "cv01", "ss03";
 }
 
 /* ========== TYPOGRAPHY UTILITIES ========== */
@@ -192,18 +211,18 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--obsidian-lighter);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ghost-grey);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* ========== SELECTION ========== */
 ::selection {
-  background: var(--neon-blue);
-  color: var(--void-black);
+  background: var(--brand-purple);
+  color: var(--paper-white);
 }
 
 /* ========== FOCUS STYLES ========== */
@@ -229,7 +248,7 @@ a:hover {
 
 /* ========== MAGIC WORDS HIGHLIGHT ========== */
 .magic-word {
-  background: rgba(0, 212, 255, 0.15);
+  background: rgba(113, 112, 255, 0.12);
   padding: 0.1em 0.4em;
   border-radius: 4px;
   color: var(--neon-blue);
@@ -238,12 +257,12 @@ a:hover {
 
 /* ========== DIFF HIGHLIGHTING ========== */
 .diff-added {
-  background: rgba(80, 250, 123, 0.15);
+  background: rgba(16, 185, 129, 0.12);
   border-left: 3px solid var(--neon-green);
 }
 
 .diff-removed {
-  background: rgba(255, 85, 85, 0.1);
+  background: rgba(229, 83, 75, 0.08);
   border-left: 3px solid var(--neon-red);
   text-decoration: line-through;
   opacity: 0.6;
@@ -469,7 +488,7 @@ code {
   content: '';
   position: absolute;
   inset: 0;
-  background: white;
+  background: rgba(247, 248, 248, 0.8);
   animation: flash 0.3s ease-out forwards;
   pointer-events: none;
 }
@@ -491,5 +510,5 @@ code {
 .text-accent {
   font-family: var(--font-accent);
   font-weight: 500;
-  font-style: italic;
+  font-style: normal;
 }

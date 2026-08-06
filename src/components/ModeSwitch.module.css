@@ -24,10 +24,9 @@
     left: 0;
     width: 50%;
     height: 100%;
-    background: var(--neon-blue);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 999px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 20px var(--neon-blue-glow);
 }
 
 .pill.right {
@@ -50,7 +49,7 @@
 }
 
 .option.active {
-    color: var(--void-black);
+    color: #f7f8f8;
 }
 
 .mouseGlow {
@@ -62,7 +61,7 @@
     pointer-events: none;
     z-index: 1;
     background: radial-gradient(100px circle at var(--mouse-x, -100px) var(--mouse-y, -100px),
-            rgba(0, 212, 255, 0.15),
+            rgba(255, 255, 255, 0.05),
             transparent 80%);
 }
 

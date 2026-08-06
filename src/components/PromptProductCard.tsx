@@ -6,6 +6,7 @@ import type { PromptProduct } from '@/data/prompt-products';
 import { Icon } from '@iconify/react';
 import { CATEGORY_METADATA } from '@/data/prompt-products';
 import { useI18n } from '@/i18n';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 interface PromptProductCardProps {
     prompt: PromptProduct;
@@ -19,15 +20,26 @@ function truncateWords(text: string, maxWords: number): string {
 }
 
 export default function PromptProductCard({ prompt }: PromptProductCardProps) {
-    const [isFlipped, setIsFlipped] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [copied, setCopied] = useState(false);
     const { locale, t } = useI18n();
+
+    // Flip driven by hover only
+    const flipped = isHovered;
+
+    const { typed, isTyping } = useTypewriter(prompt.fullPrompt, flipped);
 
     const handleCopy = (e: React.MouseEvent) => {
         e.stopPropagation();
         navigator.clipboard.writeText(prompt.fullPrompt);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+    };
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty('--px', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        e.currentTarget.style.setProperty('--py', `${((e.clientY - rect.top) / rect.height) * 100}%`);
     };
 
     const meta = CATEGORY_METADATA[prompt.category];
@@ -39,9 +51,11 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
     return (
         <div
             className={styles.cardContainer}
-            onClick={() => setIsFlipped(!isFlipped)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onMouseMove={handleMouseMove}
         >
-            <div className={`${styles.card} ${isFlipped ? styles.flipped : ''}`}>
+            <div className={`${styles.card} ${flipped ? styles.flipped : ''}`}>
                 {/* Front of card */}
                 <div className={styles.cardFront}>
                     {/* Header with Category and Specialized Tag */}
@@ -115,14 +129,21 @@ export default function PromptProductCard({ prompt }: PromptProductCardProps) {
                         <span className={styles.flipBackHint}>{t('promptShop.flipBack')}</span>
                     </div>
 
-                    <div className={styles.fullPromptSection}>
-                        <p className={styles.fullPrompt}>{prompt.fullPrompt}</p>
+                    <div className={styles.fullPromptWrap}>
+                        <button
+                            className={styles.copyIconBtn}
+                            onClick={handleCopy}
+                            aria-label={copied ? t('common.copied') : t('common.copy')}
+                        >
+                            <Icon icon={copied ? "mingcute:check-line" : "mingcute:copy-2-line"} />
+                        </button>
+                        <div className={styles.fullPromptSection}>
+                            <p className={styles.fullPrompt}>
+                                {typed}
+                                {isTyping && <span className={styles.caret} aria-hidden="true" />}
+                            </p>
+                        </div>
                     </div>
-
-                    <button className={styles.copyBtn} onClick={handleCopy}>
-                        <Icon icon={copied ? "mingcute:check-line" : "mingcute:copy-2-line"} />
-                        {copied ? t('common.copied') : t('common.copyPromptShort')}
-                    </button>
                 </div>
             </div>
         </div>

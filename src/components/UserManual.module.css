@@ -11,59 +11,28 @@
 
 .manualBtn {
     position: relative;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 1.4rem;
+    border: 1px solid var(--hairline-border);
+    color: var(--paper-white-muted);
+    font-size: 1.15rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
     overflow: hidden;
     will-change: transform;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .manualBtn:hover {
-    color: white;
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.manualBtn::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg,
-            transparent 45%,
-            rgba(255, 255, 255, 0.4) 50%,
-            transparent 55%);
-    transform: rotate(30deg) translateY(-100%);
-    animation: glimmer 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* No scale on hover per user request */
-
-@keyframes glimmer {
-    0% {
-        transform: rotate(30deg) translateY(-100%);
-    }
-
-    25% {
-        transform: rotate(30deg) translateY(100%);
-    }
-
-    100% {
-        transform: rotate(30deg) translateY(100%);
-    }
+    color: var(--paper-white);
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Floating Particles */
@@ -86,7 +55,6 @@
     opacity: 0;
     animation: floatText 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     pointer-events: none;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 @keyframes floatText {
@@ -115,9 +83,9 @@
 .modalOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(4, 4, 6, 0.82);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(8, 9, 10, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 2000;
     display: flex;
     align-items: center;
@@ -130,48 +98,47 @@
 .modalContent {
     width: 95%;
     max-width: 950px;
-    background: #0d0d10;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
+    background: #0f1011;
+    border: 1px solid var(--hairline-border);
+    border-radius: 12px;
     padding: 2rem;
     position: relative;
     will-change: transform;
     max-height: 98vh;
     overflow: hidden;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
 }
 
 .closeBtn {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--hairline-border);
+    color: var(--paper-white-muted);
     cursor: pointer;
     width: 36px;
     height: 36px;
-    border-radius: 50%;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
     z-index: 10;
 }
 
 .closeBtn:hover {
     background: rgba(255, 255, 255, 0.08);
-    color: white;
-    transform: rotate(90deg);
+    color: var(--paper-white);
 }
 
 .title {
     font-family: var(--font-narrative);
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 1.625rem;
+    font-weight: 590;
+    font-feature-settings: 'cv01', 'ss03';
     margin-bottom: 2rem;
-    color: #ffffff;
-    letter-spacing: -0.02em;
+    color: var(--paper-white);
+    letter-spacing: -0.015em;
     text-align: center;
 }
 
@@ -184,24 +151,18 @@
 }
 
 .bentoCard {
-    background: linear-gradient(180deg,
-            rgba(32, 32, 38, 0.98) 0%,
-            rgba(18, 18, 22, 1) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
+    background: var(--obsidian-lighter);
+    border: 1px solid var(--hairline-border);
+    border-radius: 8px;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.04),
-        0 2px 4px rgba(0, 0, 0, 0.15),
-        0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .bentoCard:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.14);
 }
 
 /* Definition Card - Full Width Top */
@@ -224,19 +185,17 @@
 
 .cardIcon {
     font-size: 1.5rem;
-    color: #3b82f6;
+    color: #7170ff;
     margin-bottom: 1rem;
-    opacity: 0.8;
 }
 
 .cardTitle {
     font-family: var(--font-narrative);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #3b82f6;
-    /* site primary blue */
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #828fff;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     margin-bottom: 0.85rem;
 }
 
@@ -265,9 +224,8 @@
 .protocolNumber {
     font-family: var(--font-accent);
     font-size: 1rem;
-    font-weight: 800;
-    color: #3b82f6;
-    opacity: 0.8;
+    font-weight: 590;
+    color: #7170ff;
 }
 
 .protocolLabel {
@@ -285,7 +243,7 @@
 }
 
 .highlight {
-    color: #fff;
+    color: var(--paper-white);
     font-weight: 600;
 }
 

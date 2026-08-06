@@ -3,15 +3,19 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--card-radius);
+    box-shadow: none;
 }
 
 .windowBar {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    background: var(--obsidian-lighter);
-    border-bottom: 1px solid var(--hairline-border);
+    padding: 0.625rem 0.875rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .dots {
@@ -20,41 +24,25 @@
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: var(--ghost-grey);
-    opacity: 0.5;
-}
-
-.dot:nth-child(1) {
-    background: #FF5F56;
-    opacity: 0.8;
-}
-
-.dot:nth-child(2) {
-    background: #FFBD2E;
-    opacity: 0.8;
-}
-
-.dot:nth-child(3) {
-    background: #27C93F;
-    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .filename {
     font-family: var(--font-code);
-    font-size: var(--text-xs);
-    color: var(--paper-white-muted);
+    font-size: 11px;
+    color: #8a8f98;
     flex: 1;
 }
 
 .language {
     font-family: var(--font-code);
-    font-size: var(--text-xs);
-    color: var(--ghost-grey);
+    font-size: 10px;
+    color: #62666d;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
 }
 
 .codeContainer {
@@ -68,6 +56,7 @@
     margin: 0;
     background: transparent;
     border-radius: 0;
+    font-size: 13px;
 }
 
 .line {
@@ -80,9 +69,10 @@
     width: 32px;
     text-align: right;
     padding-right: var(--space-4);
-    color: var(--ghost-grey);
+    color: #62666d;
     user-select: none;
     flex-shrink: 0;
+    font-size: 12px;
 }
 
 .lineContent {
@@ -91,14 +81,14 @@
 }
 
 .footer {
-    padding: var(--space-3) var(--space-4);
-    border-top: 1px solid var(--hairline-border);
+    padding: 0.625rem 0.875rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     font-family: var(--font-code);
-    font-size: var(--text-xs);
+    font-size: 10px;
 }
 
 .label {
-    color: var(--ghost-grey);
+    color: #62666d;
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
